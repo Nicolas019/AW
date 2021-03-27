@@ -12,7 +12,7 @@
 <div id="contenedor">
 	<?php 
 		require 'cabecera.php';
-		require 'nav.php';
+		require 'menu.php';
 	 ?>
 <main id="contenido">
 	
