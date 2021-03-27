@@ -1,9 +1,15 @@
-<?php 
-
-
-
- ?>
 	<nav id="menuPpal">
-		<h3>Menu</h3>
-		<p> <a href="foro.php">Inicio </a> <a href="venta.php">Ver contenido </a> <a href="retos.php">Administrar</a>  </p>
+		
+		<ul id="NavHorizontal">
+			<li>
+				<select>   
+					<option value="Fantasia"> Fantasia </option>
+					<option value="Novela"> Novela </option>
+					<option value="Infantil"> Infantil </option>
+				</select>
+			</li>
+			<li> <a href="foro.php">Inicio </a> </li> 
+			<li> <a href="venta.php">Ver contenido </a> </li>
+			<li> <a href="retos.php">Administrar</a>  </li>
+		</ul>   
 	</nav>
