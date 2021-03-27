@@ -3,6 +3,11 @@ body {
 	background-color: #CDCDCD;
 }
 
+ul#NavHorizontal li {
+  display: inline;
+  padding-right: 0.5em;
+}
+
 div#contenedor {
 	width: 900px;
 	margin: auto;
