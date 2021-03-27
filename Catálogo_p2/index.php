@@ -16,7 +16,7 @@
 	 ?>
 <main id="contenido">
 	
-	?>
+	
 </main>
 
 
