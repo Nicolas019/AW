@@ -3,28 +3,23 @@
 class catalogo{
 	
 	private $arrayLibros;
-	private $BD;
+	private $BaseDatos;
 
 	public function __construct($BD){
 		//$opcionesPorDefecto = array()
 		
-		 if ($BD->connect_error) {
-		 	echo "menuda mierda";
-		 }
-		$this->arrayLibros = array(
-			'El camino de los reyes' => new libro("El camino de los reyes","BS",9,"Fantasia"),
-		);
+		$this->BaseDatos = $BD;
+		$this->arrayLibros = array();
 		$sql = "SELECT * FROM libro";
         $consulta = $BD->query($sql);
 
-        if($consulta == null){
-        	echo "menuda mierda1";
-        }
 
         if($consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	echo $fila['titulo'];
-	            $arrayLibros[$fila['titulo']]= new libro($fila['titulo'], $fila['id_Autor'], $fila['valoracion'], $fila['id_Genero']);
+	        	
+	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['valoracion'], $fila['id_Genero']);
+	            $this->arrayLibros[$fila['titulo']]= $libro;
+	            
 	        }
     	}
     	else{
@@ -47,6 +42,26 @@ class catalogo{
 
 	public function ordenarPorVentas(){
 
+
+
+	}
+
+	public function ordenarPorAutor(){
+
+		$sql = "SELECT titulo, A.descripcionA FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor ASC";
+        $consulta = $this->BaseDatos->query($sql);
+
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo $fila['titulo'], " ", $fila['descripcionA'], "</br>";
+	            
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
 
 
 	}
@@ -75,17 +90,32 @@ class catalogo{
 	public function ordenarPorValoracion(){
 
 
+
 	}
 
-	public function ordenarPorGenero($genero){
+	public function ordenarPorGenero(){
 
+		$sql = "SELECT titulo, G.descripcionG FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero ORDER BY L.id_Genero ASC";
+        $consulta = $this->BaseDatos->query($sql);
+
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo $fila['titulo'], " ", $fila['descripcionG'], "</br>";
+	            
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
 
 	}
 
 	public function mostrarArray(){
 
 		foreach ($this->arrayLibros as $clave => $valor) {
-			echo $valor->valoracion," ", $valor->titulo;
+			echo $valor->valoracion," ", $valor->titulo, " </br>";
 		}
 
 	}
