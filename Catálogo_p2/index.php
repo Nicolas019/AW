@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilo.css" />
+<link rel="stylesheet" type="text/css" href="estilos.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Catálogo</title>
 </head>
