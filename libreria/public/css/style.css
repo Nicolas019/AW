@@ -1,0 +1,15 @@
+
+.contenido-acciones-formulario-libros{
+    display: flex;
+    justify-content: space-between;
+}
+
+.barra-opciones{
+    background-color:burlywood;
+    display: flex;
+}
+
+.container-fluid{
+    background-color:rgb(233, 165, 144);
+    
+}
