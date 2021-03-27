@@ -11,8 +11,17 @@
 
 <div id="contenedor">
 	<?php 
-		require 'cabecera.php';
+		//require 'cabecera.php';
+		require 'BD.php';
 		require 'menu.php';
+		require 'libro.php';
+		require 'catalogo.php';
+
+		$BD = new BD('localhost', 'prueba', '1234', 'prueba');
+		$db = $BD->conectar();
+
+		$catalogo = new catalogo($db);
+		echo $catalogo->mostrarArray();
 	 ?>
 <main id="contenido">
 	
@@ -22,10 +31,10 @@
 
 <?php 
 
-require 'pie.php';
+//require 'pie.php';
 
 
- ?>
+?>
 
 	
 
