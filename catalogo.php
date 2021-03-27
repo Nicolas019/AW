@@ -3,12 +3,34 @@
 class catalogo{
 	
 	private $arrayLibros;
+	private $BD;
 
-	public function __construct(){
+	public function __construct($BD){
 		//$opcionesPorDefecto = array()
+		
+		 if ($BD->connect_error) {
+		 	echo "menuda mierda";
+		 }
 		$this->arrayLibros = array(
 			'El camino de los reyes' => new libro("El camino de los reyes","BS",9,"Fantasia"),
 		);
+		$sql = "SELECT * FROM libro";
+        $consulta = $BD->query($sql);
+
+        if($consulta == null){
+        	echo "menuda mierda1";
+        }
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	echo $fila['titulo'];
+	            $arrayLibros[$fila['titulo']]= new libro($fila['titulo'], $fila['id_Autor'], $fila['valoracion'], $fila['id_Genero']);
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
 	}
 
 	public function __get($property){
@@ -24,6 +46,7 @@ class catalogo{
 	}
 
 	public function ordenarPorVentas(){
+
 
 
 	}
