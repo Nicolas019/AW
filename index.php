@@ -29,58 +29,15 @@
 		$catalogo = new catalogo($db);
 
 
-		
-		$username = isset($_GET["opcion"]) ? $_GET["opcion"] : null;
+		$num=3;
+		echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
+		$catalogo->mostrarNovedades($num);
 
-		switch ($username) {
-			case 'Sin Ordenar':
-				$num=3;
-				echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
-				$catalogo->ordenarPorValoracion($num);
-				break;
+		echo "<h3>  LIBROS MAS VENDIDOS</h3>";
+		$catalogo->mostrarNovedades($num);
 
-			case 'Ciencia Ficcion':
-				echo "<h3>GENERO CIENCIA FICCION</h3>";
-				$catalogo->buscarGenero(1);
-				break;
-
-			case 'Fantasia':
-				echo "<h3>GENERO FANTASIA</h3>";
-				$catalogo->buscarGenero(2);
-				break;
-			case 'Romance':
-				echo "<h3>GENERO ROMANCE</h3>";
-				$catalogo->buscarGenero(3);
-				break;
-
-			case 'Novela Policiaca':
-				echo "<h3>GENERO NOVELA POLICIACA</h3>";
-				$catalogo->buscarGenero(4);
-				break;
-			
-			case 'Terror':
-				echo "<h3>GENERO TERROR</h3>";
-				$catalogo->buscarGenero(5);
-				break;
-
-			case 'Novela':
-				echo "<h3>GENERO NOVELA</h3>";
-				$catalogo->buscarGenero(6);
-				break;
-
-			case 'Novela Historica':
-				echo "<h3>GENERO NOVELA HISTORICA</h3>";
-				$catalogo->buscarGenero(7);
-				break;
-			
-			default:
-				$num=3;
-				echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
-				$catalogo->ordenarPorValoracion($num);
-				break;
-		}
-
-
+		echo "<h3>  ULTIMAS NOVEDADES</h3>";
+		$catalogo->mostrarNovedades($num);
 
 
 	?>
