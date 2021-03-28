@@ -40,15 +40,10 @@ class catalogo{
 	    }
 	}
 
-	public function ordenarPorVentas(){
 
+	public function ordenarPorVentas($numero, $sentido ){ //Ordena por nº de ventas el numero es para sacar x libros
 
-
-	}
-
-	public function buscaVentas($numero ){
-
-		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY NumVentas DESC";
+		$sql = ($sentido == TRUE) ?  "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY NumVentas DESC" : "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY NumVentas ASC";
         $consulta = $this->BaseDatos->query($sql);
 
         if($consulta->num_rows > 0){
@@ -66,9 +61,9 @@ class catalogo{
 
 	}
 
-	public function buscaPaginas($numero ){
+	public function ordenarPorPaginas($numero, $sentido){ //Ordena por nº paginas el numero es para sacar x libros
 
-		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY numero_Paginas DESC";
+		$sql = ($sentido == TRUE) ? "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY numero_Paginas DESC": "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY numero_Paginas ASC";
         $consulta = $this->BaseDatos->query($sql);
 
         if($consulta->num_rows > 0){
@@ -87,17 +82,18 @@ class catalogo{
 	}
 
 
-	public function ordenarPorAutor(){
+	public function ordenarPorAutor($numero, $sentido){
 
-		$sql = "SELECT titulo, A.descripcionA FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor ASC";
+		$sql = ($sentido == TRUE) ? "SELECT titulo, A.descripcionA, ruta_imagen FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor DESC" : "SELECT titulo, A.descripcionA, ruta_imagen FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor ASC";
         $consulta = $this->BaseDatos->query($sql);
 
 
-        if($consulta->num_rows > 0){
+        if($numero > 0 && $consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo $fila['titulo'], " ", $fila['descripcionA'], "</br>";
-	            
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
 	        }
     	}
     	else{
@@ -107,6 +103,50 @@ class catalogo{
 
 	}
 
+
+	public function ordenarPorValoracion($numero, $sentido){
+		$sql = ($sentido == TRUE) ? "SELECT titulo, valoracion, ruta_imagen FROM libro L  ORDER BY L.valoracion DESC" : "SELECT titulo, valoracion, ruta_imagen FROM libro L  ORDER BY L.valoracion ASC";
+		        
+
+		$consulta = $this->BaseDatos->query($sql);
+
+		if($consulta->num_rows > 0){
+
+		  while ($numero>0 && $fila = mysqli_fetch_assoc($consulta) ) {
+		        	
+		  	$numero--;
+		  	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+		       
+		  }
+	    }
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
+
+
+	public function ordenarPorGenero($numero, $sentido){
+
+		$sql = ($sentido == TRUE) ? "SELECT titulo, G.descripcionG, ruta_imagen FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero ORDER BY L.id_Genero DESC": "SELECT titulo, G.descripcionG, ruta_imagen FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero ORDER BY L.id_Genero ASC";
+        $consulta = $this->BaseDatos->query($sql);
+
+
+        if($consulta->num_rows > 0){
+
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+	}
 
 	public function buscaAutor($Autor){
 
@@ -150,45 +190,6 @@ class catalogo{
 
 	}
 
-
-	public function ordenarPorValoracion($numero){
-		$sql = "SELECT titulo, valoracion, ruta_imagen FROM libro L  ORDER BY L.valoracion DESC";
-		        $consulta = $this->BaseDatos->query($sql);
-	if($consulta->num_rows > 0){
-
-	  while ($numero>0 && $fila = mysqli_fetch_assoc($consulta) ) {
-	        	
-	   	//echo $fila['titulo'], " ", $fila['valoracion'], "</br>";  
-	  	$numero--;
-	  	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
-	       
-	  }
-    }
-    else{
-    		echo "No hay ningún libro";
-    	}
-
-
-	}
-
-	public function ordenarPorGenero(){
-
-		$sql = "SELECT titulo, G.descripcionG FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero ORDER BY L.id_Genero ASC";
-        $consulta = $this->BaseDatos->query($sql);
-
-
-        if($consulta->num_rows > 0){
-	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	
-	        	echo $fila['titulo'], " ", $fila['descripcionG'], "</br>";
-	            
-	        }
-    	}
-    	else{
-    		echo "No hay ningún libro";
-    	}
-
-	}
 
 		public function buscarGenero($genero){
 
