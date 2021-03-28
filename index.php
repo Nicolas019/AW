@@ -17,15 +17,21 @@
 		require 'libro.php';
 		require 'catalogo.php';
 
+
+	 ?>
+<main id="contenido">
+	
+	<?php 
+
 		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
 		$db = $BD->conectar();
 
 		$catalogo = new catalogo($db);
 		echo $catalogo->mostrarArray();
 		$catalogo->ordenarPorAutor();
-	 ?>
-<main id="contenido">
-	
+
+
+	?>
 	
 </main>
 
