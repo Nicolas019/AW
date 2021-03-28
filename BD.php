@@ -4,7 +4,7 @@
  */
 class BD 
 {	
-	
+	private $db;
 	private $host;
 	private $usuario;
 	private $contrasenia;
@@ -15,22 +15,23 @@ class BD
 		$this->usuario =$usuario;
 		$this->contrasenia =$contrasenia;
 		$this->nombreBD =$nombreBD;
+		$this->db = null;
 
 	}
 
-	public function conectar () {
-           $db = new mysqli( $this->host,$this->usuario, $this->contrasenia, $this->nombreBD) ;
-            if (!$db->connect_error) {
+	public function conectar ( ) {
+           $this->db = mysqli_connect ( $host,$usuario, $contrasenia, $nombreBD) ;
+            if (  $this->db ) {
                 echo 'Conexion realizada correctamente.<br/>';
-                echo 'Informacion sobre el servidor :' .    mysqli_get_host_info ( $db). '<br/>' ;
-                echo 'Version del servidor' . mysqli_get_server_info ( $db) . '<br/>' ;
+                echo 'Informacion sobre el servidor :' .    mysqli_get_host_info ( $this->db). '<br/>' ;
+                echo 'Version del servidor' . mysqli_get_server_info ( $this->db) . '<br/>' ;
             } 
             else{
                 printf (
                 'Error %d : %s .<br /> ' ,
                 mysqli_connect_errno( ) , mysqli_connect_error( ) ) ;
             }
-            return  $db ;
+            return  $this->db ;
         }
             // Cerrar BD
     public function desconectar( $conexion ) {
@@ -46,14 +47,10 @@ class BD
             else {
                 echo 'Conexion no abierta .<b r /> ' ;
             }
-    }
-
-    public function __get($property){
+             }
+       	public function __get($property){
     		if(property_exists($this, $property)) {
         	return $this->$property;
-            }
     }
 
-
-}
  ?>

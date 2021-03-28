@@ -3,29 +3,12 @@
 class catalogo{
 	
 	private $arrayLibros;
-	private $BaseDatos;
 
-	public function __construct($BD){
+	public function __construct(){
 		//$opcionesPorDefecto = array()
-		
-		$this->BaseDatos = $BD;
-		$this->arrayLibros = array();
-		$sql = "SELECT * FROM libro";
-        $consulta = $BD->query($sql);
-
-
-        if($consulta->num_rows > 0){
-	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	
-	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['valoracion'], $fila['id_Genero']);
-	            $this->arrayLibros[$fila['titulo']]= $libro;
-	            
-	        }
-    	}
-    	else{
-    		echo "No hay ningún libro";
-    	}
-
+		$this->arrayLibros = array(
+			'El camino de los reyes' => new libro("El camino de los reyes","BS",9,"Fantasia"),
+		);
 	}
 
 	public function __get($property){
@@ -41,27 +24,6 @@ class catalogo{
 	}
 
 	public function ordenarPorVentas(){
-
-
-
-	}
-
-	public function ordenarPorAutor(){
-
-		$sql = "SELECT titulo, A.descripcionA FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor ASC";
-        $consulta = $this->BaseDatos->query($sql);
-
-
-        if($consulta->num_rows > 0){
-	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	
-	        	echo $fila['titulo'], " ", $fila['descripcionA'], "</br>";
-	            
-	        }
-    	}
-    	else{
-    		echo "No hay ningún libro";
-    	}
 
 
 	}
@@ -90,32 +52,17 @@ class catalogo{
 	public function ordenarPorValoracion(){
 
 
-
 	}
 
-	public function ordenarPorGenero(){
+	public function ordenarPorGenero($genero){
 
-		$sql = "SELECT titulo, G.descripcionG FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero ORDER BY L.id_Genero ASC";
-        $consulta = $this->BaseDatos->query($sql);
-
-
-        if($consulta->num_rows > 0){
-	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	
-	        	echo $fila['titulo'], " ", $fila['descripcionG'], "</br>";
-	            
-	        }
-    	}
-    	else{
-    		echo "No hay ningún libro";
-    	}
 
 	}
 
 	public function mostrarArray(){
 
 		foreach ($this->arrayLibros as $clave => $valor) {
-			echo $valor->valoracion," ", $valor->titulo, " </br>";
+			echo $valor->valoracion," ", $valor->titulo;
 		}
 
 	}
