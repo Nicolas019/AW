@@ -46,6 +46,47 @@ class catalogo{
 
 	}
 
+	public function buscaVentas($numero ){
+
+		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY NumVentas DESC";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
+	public function buscaPaginas($numero ){
+
+		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY numero_Paginas DESC";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
+
 	public function ordenarPorAutor(){
 
 		$sql = "SELECT titulo, A.descripcionA FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor ORDER BY L.id_Autor ASC";
@@ -65,6 +106,29 @@ class catalogo{
 
 
 	}
+
+
+	public function buscaAutor($Autor){
+
+		$sql = "SELECT titulo, A.descripcionA, L.ruta_imagen FROM libro L JOIN autor A ON L.id_Autor = A.id_Autor WHERE L.id_Autor = $Autor";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
+
 
 	public function mostrarPorAutor($Autor){
 
@@ -145,6 +209,27 @@ class catalogo{
     	}
 
 	}
+
+	public function mostrarNovedades($numero){
+
+		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY fecha_Lanzamiento DESC";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
 
 	public function mostrarArray(){
 
