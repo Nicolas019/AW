@@ -33,11 +33,11 @@ class libro{
     }
 	}
 	public function suma_ventas($num){
-		$this->ventas = this->ventas +num;
+		$this->ventas = $this->ventas +num;
 	}
 	public function valorar($valoracion){
 		$op1= ($this->valoracion* $num_valoracion + $valoracion)/($num_valoracion +1);
-		this->valoracion=$op1;
+		$this->valoracion=$op1;
 		$num_valoracion ++;
 	}
 }
