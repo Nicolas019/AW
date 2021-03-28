@@ -12,7 +12,17 @@
 <div id="contenedor">
 	<?php 
 		require 'cabecera.php';
+		require 'BD.php';
 		require 'menu.php';
+		require 'libro.php';
+		require 'catalogo.php';
+
+		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
+		$db = $BD->conectar();
+
+		$catalogo = new catalogo($db);
+		echo $catalogo->mostrarArray();
+		$catalogo->ordenarPorAutor();
 	 ?>
 <main id="contenido">
 	
@@ -25,7 +35,7 @@
 require 'pie.php';
 
 
- ?>
+?>
 
 	
 
