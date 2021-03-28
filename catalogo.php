@@ -40,6 +40,47 @@ class catalogo{
 	    }
 	}
 
+	public function ordenarPorTitulo($numero, $sentido ){ //Ordena por nº de ventas el numero es para sacar x libros
+
+		$sql = ($sentido == TRUE) ?  "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY titulo DESC" : "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY titulo ASC";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
+
+	public function ordenarPorFecha($numero, $sentido ){ //Ordena por nº de ventas el numero es para sacar x libros
+
+		$sql = ($sentido == TRUE) ?  "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY fecha_Lanzamiento DESC" : "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY fecha_Lanzamiento ASC";
+        $consulta = $this->BaseDatos->query($sql);
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
 
 	public function ordenarPorVentas($numero, $sentido ){ //Ordena por nº de ventas el numero es para sacar x libros
 
