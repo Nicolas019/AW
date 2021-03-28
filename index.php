@@ -23,12 +23,13 @@
 	
 	<?php 
 
-		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
+		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
 		$db = $BD->conectar();
 
 		$catalogo = new catalogo($db);
-		echo $catalogo->mostrarArray();
-		$catalogo->ordenarPorAutor();
+		$num=3;
+		echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
+		$catalogo->ordenarPorValoracion($num);
 
 
 	?>

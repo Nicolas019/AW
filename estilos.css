@@ -110,3 +110,8 @@ label {
 button {
 	margin-left: 100px;
 } 
+img#libro{
+	width: 100px;
+	height:125px;
+	border:black 2px solid;
+}

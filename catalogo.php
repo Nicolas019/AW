@@ -87,8 +87,22 @@ class catalogo{
 	}
 
 
-	public function ordenarPorValoracion(){
+	public function ordenarPorValoracion($numero){
+		$sql = "SELECT titulo, valoracion, ruta_imagen FROM libro L  ORDER BY L.valoracion DESC";
+		        $consulta = $this->BaseDatos->query($sql);
+	if($consulta->num_rows > 0){
 
+	  while ($numero>0 && $fila = mysqli_fetch_assoc($consulta) ) {
+	        	
+	   	//echo $fila['titulo'], " ", $fila['valoracion'], "</br>";  
+	  	$numero--;
+	  	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	       
+	  }
+    }
+    else{
+    		echo "No hay ningún libro";
+    	}
 
 
 	}
