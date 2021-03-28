@@ -1,4 +1,4 @@
-	<nav id="menuPpal">
+	<nav id="menuPortada">
 		
 		<ul id="NavHorizontal">
 			<li>
@@ -18,6 +18,7 @@
 					</button>
 				</form>
 			</li>
+			<li> <a href="biblioteca.php">Biblioteca </a> </li> 
 			<li> <a href="foro.php">Foro </a> </li> 
 			<li> <a href="venta.php">Venta</a> </li>
 			<li> <a href="retos.php">Retos</a>  </li>
