@@ -126,6 +126,26 @@ class catalogo{
 
 	}
 
+		public function buscarGenero($genero){
+
+		$sql = "SELECT titulo, ruta_imagen FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero WHERE G.id_Genero = $genero";
+        $consulta = $this->BaseDatos->query($sql);
+
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+	}
+
 	public function mostrarArray(){
 
 		foreach ($this->arrayLibros as $clave => $valor) {

@@ -1,3 +1,17 @@
+/* Cabecera */
+
+titulo{
+	font-size: 50px;
+	text-align: center;
+}
+
+eslogan{
+	font-size: 20px;
+	font-style: italic;
+	float: right;
+}
+
+
 
 body {
 	background-color: #CDCDCD;
@@ -7,6 +21,12 @@ ul#NavHorizontal li {
   display: inline;
   padding-right: 0.5em;
 }
+ul#NavHorizontal li form {
+	display: inline;
+  	width: 300px;
+}
+
+
 
 div#contenedor {
 	width: 900px;
@@ -108,10 +128,11 @@ label {
 }
 
 button {
-	margin-left: 100px;
+	
 } 
 img#libro{
 	width: 100px;
 	height:125px;
 	border:black 2px solid;
+	margin-right: 10px;
 }
