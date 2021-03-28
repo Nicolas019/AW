@@ -12,7 +12,7 @@ div#contenedor {
 	width: 900px;
 	margin: auto;
 	border: 1px solid black;
-	background-color: #aaaaaa;
+	background-color: #dab979;
 	margin-top: 30px;
 }
 
@@ -36,12 +36,9 @@ header a:hover {
 } 
 
 
-nav {
-	padding: 10px;
-	
-
-	height: 50px;
-	background-color: #dddddd;
+nav#menuPpal{
+	height: 30px;
+	background-color: #dab979;
 }
 
 nav a, nav a:visited {
@@ -66,9 +63,13 @@ aside {
 
 main {
 	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 	float: left;
 	min-height: 600px;
-	width: 500px;
+	width: 870px;
 	background-color: white;
 }
 
