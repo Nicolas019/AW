@@ -23,10 +23,8 @@
 	
 	<?php 
 		//Se hace siempre
-		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
-		$db = $BD->conectar();
 
-		$catalogo = new catalogo($db);
+		$catalogo = catalogo::getInstance();
 
 
 		$num=3;

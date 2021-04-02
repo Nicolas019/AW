@@ -2,23 +2,30 @@
 
 class catalogo{
 	
+	private static $singletonCatalogo = null;
 	private $arrayLibros;
 	private $BaseDatos;
+	private $numeroLibros_A_Mostrar; //Numeros de libros que queremos mostrar en una página
+	private $posicionArray;
 
-	public function __construct($BD){
-		//$opcionesPorDefecto = array()
+	private function __construct(){
 		
-		$this->BaseDatos = $BD;
+
+		//echo "Entro en el constructor de catalogo";
+		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $BD->conectar();
+
+		$this->numeroLibros_A_Mostrar=1;
 		$this->arrayLibros = array();
 		$sql = "SELECT * FROM libro";
-        $consulta = $BD->query($sql);
+        $consulta = $this->BaseDatos->query($sql);
 
 
         if($consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['valoracion'], $fila['id_Genero']);
-	            $this->arrayLibros[$fila['titulo']]= $libro;
+	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['id_Genero'],  $fila['id_Editorial'],  $fila['precio'],  $fila['numero_Paginas'], $fila['sinopsis'], $fila['valoracion'], $fila['ruta_imagen'], $fila['NumVentas'], $fila['fecha_Lanzamiento']);
+	            $this->arrayLibros[$fila['id_Libro']]= $libro;
 	            
 	        }
     	}
@@ -40,16 +47,29 @@ class catalogo{
 	    }
 	}
 
-	public function ordenarPorTitulo($numero, $sentido ){ //Ordena por nº de ventas el numero es para sacar x libros
+	public static function getInstance(){
+		if(self::$singletonCatalogo == null){
+			self::$singletonCatalogo = new self();
+		}
+		return self::$singletonCatalogo;
+		
+	}
 
-		$sql = ($sentido == TRUE) ?  "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY titulo DESC" : "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY titulo ASC";
+	public function ordenarPorTitulo($sentido){ //Ordena por nº de ventas el numero es para sacar x libros,
+
+		$sql = ($sentido == TRUE) ?  "SELECT L.* FROM libro L ORDER BY titulo DESC" : "SELECT L.* FROM libro L ORDER BY titulo ASC";
         $consulta = $this->BaseDatos->query($sql);
 
+        $this->guardaArray($consulta);
+        $numero = $this->numeroLibros_A_Mostrar;
+        $i = 0;
+
+
         if($consulta->num_rows > 0){
-	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        while ($this->arrayLibros[$i]!= null && $numero > 0) {
 	        	
-	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
-	        	echo $fila['titulo'], "</br>";
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        	echo $this->arrayLibros[$i]->titulo, "</br>";
 	            $numero--;
 	        }
     	}
@@ -272,6 +292,30 @@ class catalogo{
 
 	}
 
+	public function guardaArray($consulta){ //Guardar la consulta en un array para poder recorrerla
+
+		$this->posicionArray = 0;
+        $posicion = 0;
+        $this->arrayLibros = array();
+
+        if($consulta->num_rows > 0){
+	        while ($fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	
+	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['id_Genero'],  $fila['id_Editorial'],  $fila['precio'],  $fila['numero_Paginas'], $fila['sinopsis'], $fila['valoracion'], $fila['ruta_imagen'], $fila['NumVentas'], $fila['fecha_Lanzamiento']);
+
+	            $this->arrayLibros[$posicion]= $libro;
+	            $posicion++;
+	            
+	            
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+	}
+
 
 	public function mostrarArray(){
 
@@ -279,6 +323,40 @@ class catalogo{
 			echo $valor->valoracion," ", $valor->titulo, " </br>";
 		}
 
+	}
+
+	public function paginaAnterior(){
+		
+		$numero = $this->numeroLibros_A_Mostrar;
+		if(($this->posicionArray - $numero) > 0){
+			$this->posicionArray = $this->posicionArray - $numero;
+		}
+		else{
+			$this->posicionArray = 0;
+		}
+		
+
+		while ($this->arrayLibros[$this->posicionArray]!= null && $numero > 0) {
+	        	
+	        echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        echo $this->arrayLibros[$i]->titulo, "</br>";
+	        $this->posicionArray++;
+	        $numero--;
+	    }
+	}
+
+	public function paginaSiguiente(){
+		
+		
+		$numero = $this->numeroLibros_A_Mostrar;
+
+		while ($this->arrayLibros[$this->posicionArray]!= null && $numero > 0) {
+	        	
+	        echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        echo $this->arrayLibros[$i]->titulo, "</br>";
+	        $this->posicionArray++;
+	        $numero--;
+	    }
 	}
 }
 
