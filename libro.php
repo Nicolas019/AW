@@ -6,13 +6,28 @@ class libro{
 	private $titulo;
 	private $valoracion;
 	private $genero;
+	private $editorial;
+	private $precio;
+	private $numPag;
+	private $sinopsis;
+	private $ruta_img;
+	private $numVentas;
+	private $fecha;
 
-	public function __construct($titulo,$autor,$valoracion,$genero){
+	public function __construct($titulo, $autor, $genero, $editorial, $precio, $numPag, $sinopsis, $valoracion, $ruta_img, $numVentas, $fecha){
 		//$opcionesPorDefecto = array()
 		$this->titulo= $titulo;
 		$this->autor = $autor;
 		$this->valoracion = $valoracion;
 		$this->genero = $genero;
+		$this->editorial= $editorial;
+		$this->precio = $precio;
+		$this->numPag = $numPag;
+		$this->sinopsis = $sinopsis;
+		$this->ruta_img = $ruta_img;
+		$this->numVentas = $numVentas;
+		$this->fecha = $fecha;
+		
 	}
 
 	public function __get($property){
