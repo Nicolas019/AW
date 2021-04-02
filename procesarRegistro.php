@@ -1,13 +1,14 @@
 <?php
 	
 	require 'BD.php';
+	require 'listaUsuarios.php';
+	require 'usuario.php';
 
 	//Se hace siempre
 	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
 	$db = $BD->conectar();
 
-	$sql = "SELECT * FROM usuarios";
-    $consulta = $db->query($sql);
+	$listaUsuarios = new listaUsuarios($db);
 
     //formulario registrar
 	$username = $_POST["usuario"];
@@ -17,6 +18,9 @@
 	$name = $_POST["nombre"];
 	$surname = $_POST["apellidos"];
 	$tipo_usuario = "lector novato";
+
+	$sql = "SELECT * FROM usuarios";
+    $consulta = $db->query($sql);
 
 	// confirmar que no esté registrado
 	$existe_user = false;
@@ -39,14 +43,8 @@
 		}
 		else{
 		    // registrar usuario
-		    $sql2 = "INSERT INTO usuarios VALUES (NULL, '$username', '$email', '$password', '$name', '$surname', '$tipo_usuario')";
-		    if($db->query($sql2) == true){
-		    	//$nuevo_usuario = new usuario($username,$email,$password,$name,$surname,$tipo_usuario);
-				header('Location: /athenea/AW/login.php');
-		    }
-			else{
-			   	
-			}
+		    $listaUsuarios->add_usuario($username,$email,$password,$name,$surname,$tipo_usuario);
+			header('Location: /athenea/AW/login.php');
 		}
 	}
 	

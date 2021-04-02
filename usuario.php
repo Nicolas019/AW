@@ -12,12 +12,12 @@ class usuario{
 
 	public function __construct($usuario,$email,$contrasenia,$nombre,$apellidos,$tipo_usuario){
 		//$opcionesPorDefecto = array()
-		$this->usuario= &usuario;
-		$this->email = &email;
-		$this->contrasenia = &contrasenia;
-		$this->nombre = &nombre;
-		$this->apellidos = &apellidos;
-		$this->tipo_usuario = &tipo_usuario;
+		$this->usuario = $usuario;
+		$this->email = $email;
+		$this->contrasenia = $contrasenia;
+		$this->nombre = $nombre;
+		$this->apellidos = $apellidos;
+		$this->tipo_usuario = $tipo_usuario;
 	}
 
 	public function __get($property){

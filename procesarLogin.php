@@ -6,7 +6,7 @@
 	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
 	$db = $BD->conectar();
 
-	$sql = "SELECT usuario, contrasenia FROM usuarios";
+	$sql = "SELECT id_usuario, usuario, contrasenia, tipo_usuario FROM usuarios";
     $consulta = $db->query($sql);
 
 	session_start();
@@ -18,8 +18,11 @@
     	while($fila = mysqli_fetch_assoc($consulta)){
     		if($username === $fila["usuario"] && $password === $fila["contrasenia"]){	
 				$_SESSION["login"] = true;
+
 				$_SESSION["tipo_usuario"] = $fila["tipo_usuario"];
 				$_SESSION["usuario"] = $fila["usuario"];
+				$_SESSION["id_usuario"] = $fila["id_usuario"];
+
 				header('Location: /athenea/AW/index.php');
 			}
     	}
