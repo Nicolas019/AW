@@ -13,7 +13,7 @@
 	$sql = "INSERT INTO carrito VALUES ('$id_usuario', '$id_libro', '$precio_libro')";
 	if($db->query($sql) === true){
 
-		header('Location: /athenea/AW/carrito.php');
+		header('Location: /athenea/AW/verCarrito.php');
 	}
 	else{
 		echo "fue mal";
