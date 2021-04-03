@@ -274,13 +274,13 @@ class catalogo{
 
 	public function mostrarNovedades($numero){
 
-		$sql = "SELECT titulo, L.ruta_imagen FROM libro L ORDER BY fecha_Lanzamiento DESC";
+		$sql = "SELECT id_Libro, titulo, L.ruta_imagen FROM libro L ORDER BY fecha_Lanzamiento DESC";
         $consulta = $this->BaseDatos->query($sql);
 
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
