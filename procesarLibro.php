@@ -3,7 +3,7 @@
 	require 'BD.php';
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
+	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
 	$db = $BD->conectar();
 
 	$id_usuario = $_POST['id_usuario'];

@@ -19,7 +19,7 @@
 	$id = $_GET["id_Libro"];
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
+	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
 	$db = $BD->conectar();
 
 	$sql = "SELECT * FROM libro L WHERE L.id_Libro=$id";
