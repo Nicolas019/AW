@@ -5,7 +5,7 @@
 	require 'usuario.php';
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria2');
+	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
 	$db = $BD->conectar();
 
 	$listaUsuarios = new listaUsuarios($db);
