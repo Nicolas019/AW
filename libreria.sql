@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2021 a las 12:16:56
+-- Tiempo de generación: 03-04-2021 a las 13:01:55
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -71,17 +71,11 @@ INSERT INTO `autor` (`id_Autor`, `descripcionA`) VALUES
 --
 
 CREATE TABLE `carrito` (
-  `id_usuario` int(11) NOT NULL,
+  `id_carrito` int(11) NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL,
   `id_libro` int(11) NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id_usuario`, `id_libro`, `precio`) VALUES
-(6, 3, 14.25);
 
 -- --------------------------------------------------------
 
@@ -92,6 +86,7 @@ INSERT INTO `carrito` (`id_usuario`, `id_libro`, `precio`) VALUES
 CREATE TABLE `comentario` (
   `id_Comentario` int(11) NOT NULL,
   `id_Libro` int(11) NOT NULL,
+  `id_usuario` int(10) UNSIGNED NOT NULL,
   `descripcionC` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -223,11 +218,20 @@ ALTER TABLE `autor`
   ADD PRIMARY KEY (`id_Autor`);
 
 --
+-- Indices de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id_carrito`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_libro` (`id_libro`);
+
+--
 -- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_Comentario`),
-  ADD KEY `id_Libro` (`id_Libro`);
+  ADD KEY `id_Libro` (`id_Libro`),
+  ADD KEY `id_usuario` (`id_usuario`);
 
 --
 -- Indices de la tabla `editorial`
@@ -267,6 +271,12 @@ ALTER TABLE `autor`
   MODIFY `id_Autor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
@@ -301,10 +311,24 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- Filtros para la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  ADD CONSTRAINT `almacen_ibfk_1` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `carrito_ibfk_2` FOREIGN KEY (`id_libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_Libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_Libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `libro`
