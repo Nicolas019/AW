@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2021 a las 13:01:55
+-- Tiempo de generación: 04-04-2021 a las 17:00:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `libreria2`
+-- Base de datos: `libreria`
 --
 
 -- --------------------------------------------------------
@@ -89,6 +89,13 @@ CREATE TABLE `comentario` (
   `id_usuario` int(10) UNSIGNED NOT NULL,
   `descripcionC` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`id_Comentario`, `id_Libro`, `id_usuario`, `descripcionC`) VALUES
+(4, 3, 2, 'Todo el mundo debería leer este libro, es la Biblia del siglo XXI.');
 
 -- --------------------------------------------------------
 
@@ -280,7 +287,7 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `editorial`

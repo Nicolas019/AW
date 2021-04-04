@@ -138,9 +138,24 @@ label {
 button {
 	
 } 
+
 img#libro{
 	width: 100px;
 	height:125px;
 	border:black 2px solid;
 	margin-right: 10px;
+}
+
+img#ver_libro{
+	width: 285px;
+	height: 400px;
+	margin-right: 10px;
+}
+
+img#valor{
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	margin-top: 10px;
 }
