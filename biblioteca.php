@@ -13,81 +13,84 @@
 		require 'BD.php';
 		require 'libro.php';
 		require 'catalogo.php';
-		require 'navIzquierdo.php';
-		
+			
 
 	  ?>
-<main id="contenido">
-	
+<div id="displayFlex">
 
-	  <?php 	
+    <?php
 
-		$catalogo = catalogo::getInstance();
+        require 'navIzquierdo.php';
+    ?>
+	<main id="contenido">
 		
-		$pagina = isset($_GET["btnPag"]) ? $_GET["btnPag"] : null;
-		$orden = isset($_GET["orden"]) ? $_GET["orden"] : null;
-		$sentido = isset($_GET["sentido"]) ? $_GET["sentido"] : null;
-		$sen=true;
-		if ($sentido== "ASC") {
-			$sen =false;
-		}
 
-		if($pagina != null){
+		  <?php 	
 
-			if($pagina == 'Siguiente'){
-				$catalogo->paginaSiguiente();
+			$catalogo = catalogo::getInstance();
+			
+			$pagina = isset($_GET["btnPag"]) ? $_GET["btnPag"] : null;
+			$orden = isset($_GET["orden"]) ? $_GET["orden"] : "titulo";
+			$sentido = isset($_GET["sentido"]) ? $_GET["sentido"] : null;
+
+			//GET GENEROS
+			$Ciencia_Ficcion = isset($_GET["Ciencia_Ficcion"]) ? $_GET["Ciencia_Ficcion"] : 0;
+			$Fantasia = isset($_GET["Fantasia"]) ? $_GET["Fantasia"] : 0;
+			$Novela = isset($_GET["Novela"]) ? $_GET["Novela"] : 0;	
+			$Novela_Historica = isset($_GET["Novela_Historica"]) ? $_GET["Novela_Historica"] : 0;	
+			$Novela_Policiaca = isset($_GET["Novela_Policiaca"]) ? $_GET["Novela_Policiaca"] : 0;	
+			$Romance = isset($_GET["Romance"]) ? $_GET["Romance"] : 0;	
+			$Terror = isset($_GET["Terror"]) ? $_GET["Terror"] : 0;	
+			
+			$arrayGeneros = array();
+		
+	 				$arrayGeneros[0]= $Ciencia_Ficcion;
+	 				$arrayGeneros[1]= $Fantasia;
+	 				$arrayGeneros[2]= $Novela;
+	 				$arrayGeneros[3]= $Novela_Historica;
+	 				$arrayGeneros[4]= $Novela_Policiaca;
+	 				$arrayGeneros[5]= $Romance;
+	 				$arrayGeneros[6]= $Terror;	      
+
+
+
+
+			//GET PRECIOS
+			$precioMin = isset($_GET["precioMin"]) ? $_GET["precioMin"] : 0;
+			$precioMax = isset($_GET["precioMax"]) ? $_GET["precioMax"] : 1000;
+
+
+			$sen=true;
+			if ($sentido== "ASC") {
+				$sen =false;
 			}
-			else if($pagina == 'Anterior'){
-				$catalogo->paginaAnterior();
+
+			if($pagina != null){
+
+				if($pagina == 'Siguiente'){
+					$catalogo->paginaSiguiente();
+				}
+				else if($pagina == 'Anterior'){
+					$catalogo->paginaAnterior();
+				}
+
 			}
+			else if(!isset($_GET["orden"])){
+					$catalogo->ordenarPorVentas(true);
+			}
+			else{
 
-		}
-		else{
-			switch ($orden) {
-				case 'Sin Ordenar':
-					$num=3;
-					echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
-					$catalogo->ordenarPorValoracion(10,$sen);
-					break;
-
-				case 'Alfabetico':
-					//echo "<h3>GENERO CIENCIA FICCION</h3>";
-					$catalogo->ordenarPorTitulo($sen);
-					break;
-
-				case 'Fecha':
-					//echo "<h3>GENERO FANTASIA</h3>";
-					$catalogo->ordenarPorFecha(10,$sen);
-					break;
-				case 'NumPaginas':
-					//echo "<h3>GENERO ROMANCE</h3>";
-					$catalogo->ordenarPorPaginas(10,$sen);
-					break;
-
-				case 'Valoracion':
-					//echo "<h3>GENERO NOVELA POLICIACA</h3>";
-					$catalogo->ordenarPorValoracion(10,$sen);
-					break;
 				
-				case 'Ventas':
-					//echo "<h3>GENERO TERROR</h3>";
-					$catalogo->ordenarPorVentas(10, $sen);
-					break;			
-				default:
-					$num=3;
-					//echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
-					$catalogo->ordenarPorValoracion(10,$sen);
-					break;
+				$catalogo->filtros($arrayGeneros,$sen,$orden,$precioMin,$precioMax);
 			}
-		}
 
 
-		require 'pasoPagina.php'
-	 ?>
-	
-</main>
+			//require 'pasoPagina.php'
+		 ?>
+		
+	</main>
 
-	
+</div>
 
 <?php 
 
