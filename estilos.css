@@ -3,6 +3,8 @@ body {
 	background-color: #CDCDCD;
 }
 
+
+
 div#contenedor {
 	width: 900px;
 	margin: auto;
@@ -53,13 +55,13 @@ header a:hover {
 } 
 
 nav a, nav a:visited {
-	color: red;
+	color: #303030;
 	font-weight: bold;
 	text-decoration: none;
 } 
 
 nav a:hover {
-	color: red;
+	color: #303030;
 	text-decoration: underline;
 } 
 
@@ -133,8 +135,18 @@ eslogan{
 	font-style: italic;
 	float: right;
 }
+ul#NavHorizontal{
 
+	width: 95%;
+}
+li#alinearDerecha{
+	float: right;
+	text-align: center;
+}
 
+li#alinearDerecha button{
+	background-color: #dab979;
+}
 
 /* PORTADA */
 
