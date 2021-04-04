@@ -30,7 +30,7 @@
     		if($username === $fila["usuario"] || $email === $fila["email"]){	
 				//usuario ya registrado
 				$existe_user = true;
-    			header('Location: /athenea/AW/registrar.php');
+    			header('Location: ./registrar.php');
 			}
     	}
     }
@@ -39,12 +39,12 @@
 		// contraseña coincide
 		if($password2 !== $password){
 		  	//la contraseña no es la misma
-		   	header('Location: /athenea/AW/registrar.php');
+		   	header('Location: ./registrar.php');
 		}
 		else{
 		    // registrar usuario
 		    $listaUsuarios->add_usuario($username,$email,$password,$name,$surname,$tipo_usuario);
-			header('Location: /athenea/AW/login.php');
+			header('Location: ./login.php');
 		}
 	}
 	

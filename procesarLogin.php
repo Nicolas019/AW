@@ -23,16 +23,16 @@
 				$_SESSION["usuario"] = $fila["usuario"];
 				$_SESSION["id_usuario"] = $fila["id_usuario"];
 
-				header('Location: /athenea/AW/index.php');
+				header('Location: ./index.php');
 			}
     	}
     	if($_SESSION["login"] === false){
-    		header('Location: /athenea/AW/login.php');
+    		header('Location: ./login.php');
     		//echo "No existe el usuario ".$username;
     	}
     }
 	else{
-		header('Location: /athenea/AW/login.php');
+		header('Location: ./login.php');
 		//echo "No hay ningún usuario registrado.";
 	}
     
