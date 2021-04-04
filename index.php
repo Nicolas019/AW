@@ -29,10 +29,10 @@
 
 		$num=3;
 		echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
-		$catalogo->mostrarNovedades($num);
+		$catalogo->ordenarPorValoracion(true);
 
 		echo "<h3>  LIBROS MAS VENDIDOS</h3>";
-		$catalogo->mostrarNovedades($num);
+		$catalogo->ordenarPorVentas(true);
 
 		echo "<h3>  ULTIMAS NOVEDADES</h3>";
 		$catalogo->mostrarNovedades($num);

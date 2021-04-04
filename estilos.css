@@ -166,4 +166,10 @@ img#libro{
 	border:black 2px solid;
 	margin-right: 10px;
 }
+img#nofiltro{
+	width:30%;
+	height: 30%;
+	display: block;
+	margin:auto;
+}
 
