@@ -11,9 +11,9 @@
 <?php
 		require 'menuPrincipal.php';
 		require 'BD.php';
-		//require 'menuBiblioteca.php';
 		require 'libro.php';
 		require 'catalogo.php';
+		require 'navIzquierdo.php';
 		
 
 	  ?>
@@ -56,26 +56,26 @@
 					break;
 
 				case 'Fecha':
-					echo "<h3>GENERO FANTASIA</h3>";
+					//echo "<h3>GENERO FANTASIA</h3>";
 					$catalogo->ordenarPorFecha(10,$sen);
 					break;
 				case 'NumPaginas':
-					echo "<h3>GENERO ROMANCE</h3>";
+					//echo "<h3>GENERO ROMANCE</h3>";
 					$catalogo->ordenarPorPaginas(10,$sen);
 					break;
 
 				case 'Valoracion':
-					echo "<h3>GENERO NOVELA POLICIACA</h3>";
+					//echo "<h3>GENERO NOVELA POLICIACA</h3>";
 					$catalogo->ordenarPorValoracion(10,$sen);
 					break;
 				
 				case 'Ventas':
-					echo "<h3>GENERO TERROR</h3>";
+					//echo "<h3>GENERO TERROR</h3>";
 					$catalogo->ordenarPorVentas(10, $sen);
 					break;			
 				default:
 					$num=3;
-					echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
+					//echo "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";
 					$catalogo->ordenarPorValoracion(10,$sen);
 					break;
 			}
