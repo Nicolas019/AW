@@ -24,7 +24,7 @@
     ?>
 	<main id="contenido">
 		
-
+			<h3> Resultados de busqueda: </h3>
 		  <?php 	
 
 			$catalogo = catalogo::getInstance();
@@ -32,6 +32,9 @@
 			$pagina = isset($_GET["btnPag"]) ? $_GET["btnPag"] : null;
 			$orden = isset($_GET["orden"]) ? $_GET["orden"] : "titulo";
 			$sentido = isset($_GET["sentido"]) ? $_GET["sentido"] : null;
+
+			//GET BUSQUEDA
+			$buscar = isset($_GET["buscar"]) ? $_GET["buscar"] : null;
 
 			//GET GENEROS
 			$Ciencia_Ficcion = isset($_GET["Ciencia_Ficcion"]) ? $_GET["Ciencia_Ficcion"] : 0;
@@ -74,6 +77,9 @@
 					$catalogo->paginaAnterior();
 				}
 
+			}
+			else if(isset($_GET["buscar"])){
+				$catalogo->buscar($buscar);
 			}
 			else if(!isset($_GET["orden"])){
 					$catalogo->ordenarPorVentas(true);

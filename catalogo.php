@@ -83,6 +83,28 @@ class catalogo{
 
 	}
 
+	public function buscar($busqueda){ //Ordena por nº paginas el numero es para sacar x libros
+
+		$sql = "SELECT * FROM libro L JOIN autor A ON A.id_Autor = L.id_Autor WHERE L.titulo LIKE \"%$busqueda%\" OR A.descripcionA LIKE \"%$busqueda%\"";
+	
+        $consulta = $this->BaseDatos->query($sql);
+
+        $numero = $this->numeroLibros_A_Mostrar;
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	echo " <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\">";
+	        	echo $fila['titulo'], "</br>";
+	            $numero--;
+	        }
+    	}
+    	else{
+    		echo "No hay ningún libro";
+    	}
+
+
+	}
+
 	public function ordenarPorTitulo($sentido){ //Ordena por nº de ventas el numero es para sacar x libros,
 
 		$sql = ($sentido == TRUE) ?  "SELECT L.* FROM libro L ORDER BY titulo DESC" : "SELECT L.* FROM libro L ORDER BY titulo ASC";
