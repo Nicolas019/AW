@@ -4,12 +4,11 @@
 						Ordenar por:
 					</h4>
 					<select name="orden"> 
-						<option value="Sin Ordenar"> Sin ordenar </option>  
-						<option value="Valoracion"> Valoración </option>
-						<option value="Alfabetico"> Alfabético </option>
-						<option value="Fecha"> Fecha </option>
-						<option value="NumPaginas"> Numero de páginas </option>
-						<option value = "Ventas">Numero de ventas </option>
+						<option value="valoracion"> Valoración </option>
+						<option value="titulo"> Alfabético </option>
+						<option value="fecha_Lanzamiento"> Fecha </option>
+						<option value="numero_Paginas"> Numero de páginas </option>
+						<option value = "NumVentas">Numero de ventas </option>
 					</select>
 					<h4>
 						Sentido: 
@@ -38,7 +37,7 @@
 					<p> <input type="text" name="precioMax"> </p>
 
 					<button type="submit" name ="submit" value ="Enviar_form">
-						Enviar
+						<img src="imagenes/filtro.png" width="30" height="30" background_color="white"> 
 					</button>
 	</form>
 
