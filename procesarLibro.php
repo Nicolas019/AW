@@ -1,6 +1,6 @@
 <?php
 	
-	require 'BD.php';
+	require '../comun/BD.php';
 
 	//Se hace siempre
 	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
@@ -13,7 +13,7 @@
 	$sql = "INSERT INTO carrito VALUES ('$id_usuario', '$id_libro', '$precio_libro')";
 	if($db->query($sql) === true){
 
-		header('Location: ./verCarrito.php');
+		header('Location: ../compra/verCarrito.php');
 	}
 
 ?>

@@ -1,2 +1,2 @@
-<a href='compra.html'>Comprar</a>
-<a href='biblioteca.php'>Seguir mirando</a>
+<a href='../compra/compra.html'>Comprar</a>
+<a href='../catalogo/biblioteca.php'>Seguir mirando</a>

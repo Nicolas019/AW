@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilos.css" />
+<link rel="stylesheet" type="text/css" href="../comun/estilos.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Catálogo</title>
 </head>
@@ -9,9 +9,9 @@
 
 <div id="contenedor">
 <?php
-		require 'menuPrincipal.php';
-		require 'BD.php';
-        require 'libro.php'
+		require '../comun/menuPrincipal.php';
+		require '../comun/BD.php';
+        require '../comun/libro.php'
 ?>
 <main id="contenido">
 
@@ -24,53 +24,25 @@
 	$db = $BD->conectar();
 
     //Mostrar información del libro
-    $sql = "SELECT * FROM libro L WHERE L.id_Libro=$id";
+    $sql = "SELECT L.*, A.descripcionA, G.descripcionG, E.descripcionE FROM libro L JOIN autor A ON L.id_Autor=A.id_Autor JOIN genero G ON G.id_Genero=L.id_Genero JOIN editorial E ON L.id_Editorial=E.id_Editorial WHERE L.id_Libro=$id";
     $consulta = $db->query($sql);
     if($consulta->num_rows > 0){
         while($fila = mysqli_fetch_assoc($consulta)){
 
-            $idA = $fila['id_Autor'];
-            $sql_autor = "SELECT descripcionA FROM autor A WHERE A.id_Autor=$idA";
-            $consulta_autor = $db->query($sql_autor);
-            if($consulta_autor->num_rows > 0){
-                while($fila_autor = mysqli_fetch_assoc($consulta_autor)){
+            $libro = new libro($fila['titulo'], $fila['descripcionA'], $fila['descripcionG'], $fila['descripcionE'], $fila['precio'], $fila['numero_Paginas'], $fila['sinopsis'], $fila['valoracion'], $fila['ruta_imagen'], $fila['NumVentas'], $fila['fecha_Lanzamiento']);
+            $libro->ver_libro();
 
-                    $idG = $fila['id_Genero'];
-                    $sql_genero = "SELECT descripcionG FROM genero G WHERE G.id_Genero=$idG";
-                    $consulta_genero = $db->query($sql_genero);
-                    if($consulta_genero->num_rows > 0){
-                        while($fila_genero = mysqli_fetch_assoc($consulta_genero)){
-
-                            $idE = $fila['id_Editorial'];
-                            $sql_editorial = "SELECT descripcionE FROM editorial E WHERE E.id_Editorial=$idE";
-                            $consulta_editorial = $db->query($sql_editorial);
-                            if($consulta_editorial->num_rows > 0){
-                                while($fila_editorial = mysqli_fetch_assoc($consulta_editorial)){
-
-                                    $libro = new libro($fila['titulo'], $fila_autor['descripcionA'], $fila_genero['descripcionG'], $fila_editorial['descripcionE'], $fila['precio'], $fila['numero_Paginas'], $fila['sinopsis'], $fila['valoracion'], $fila['ruta_imagen'], $fila['NumVentas'], $fila['fecha_Lanzamiento']);
-                                    $libro->ver_libro();
-
-                                }   //cierra fila_editorial
-                            }   //cierra consulta_editorial
-
-                        }   //cierra fila_genero
-                    }   //cierra consulta_genero
-
-                }   //cierra fila_autor
-            }   //cierra consulta_autor
-
-        }   //cierra fila   
-    }   //cierra consulta
+        }   
+    }  
     
     //Comprobar si hay stock y mostrar los diferentes estados
-    $sql2 = "SELECT estado,stock FROM almacen WHERE id_libro=$id";
-    $consulta2 = $db->query($sql2);
-
     $estado_nuevo = false;
     $estado_comonuevo = false;
     $estado_buenestado = false;
     $estado_aceptable = false;
 
+    $sql2 = "SELECT estado,stock FROM almacen WHERE id_libro=$id";
+    $consulta2 = $db->query($sql2);
     if($consulta2->num_rows > 0){
     	while($fila2 = mysqli_fetch_assoc($consulta2)){
     		if($fila2['estado'] === "nuevo" && $fila2['stock'] > 0){
@@ -113,7 +85,7 @@
 
     	?>
         <br>Precios:</br>
-    	<form action ="procesarLibro.php" method="POST">
+    	<form action ="../compra/procesarLibro.php" method="POST">
 					
 			<select name="precio_libro"> 
 			<?php
@@ -146,34 +118,26 @@
     <?php
     }
 
-    $sql_comentario = "SELECT * FROM comentario C WHERE C.id_Libro=$id";
+    $sql_comentario = "SELECT C.descripcionC, U.usuario, U.tipo_usuario FROM comentario C JOIN usuarios U ON C.id_usuario=U.id_usuario WHERE C.id_Libro=$id";
     $consulta_comentario = $db->query($sql_comentario);
     if($consulta_comentario->num_rows > 0){
         echo "<br>Comentarios: </br>";
         while($fila_comentario = mysqli_fetch_assoc($consulta_comentario)){
 
-            $idU = $fila_comentario['id_usuario'];
-            $sql_usuario = "SELECT * FROM usuarios U WHERE U.id_usuario=$idU";
-            $consulta_usuario = $db->query($sql_usuario);
-            if($consulta_usuario->num_rows > 0){
-                while($fila_usuario = mysqli_fetch_assoc($consulta_usuario)){
-                    $libro->ver_comentario($fila_usuario['usuario'], $fila_usuario['tipo_usuario'], $fila_comentario['descripcionC']);   
+            $libro->ver_comentario($fila_comentario['usuario'], $fila_comentario['tipo_usuario'], $fila_comentario['descripcionC']);                                      
 
-                }   //cierra fila_usuario
-            }   //cierra consulta_usuario                                    
-
-        }   //cierra fila_comentario
-    }   //cierra consulta_comentario (if) 
+        }  
+    }   
     else{
         echo "<br>Sin comentarios.</br>";
-    }   //cierra consulta_comentario (else)
+    }  
 
     ?>
 
 </main>
 	
 <?php 
-require 'pie.php';
+require '../comun/pie.php';
 ?>
 
 </div> <!-- Fin del contenedor -->
