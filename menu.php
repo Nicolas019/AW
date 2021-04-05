@@ -10,14 +10,14 @@
 				session_start();
 
 				if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
-					echo "<li id=\"alinearDerecha\"> <a href='login.php'><img src='imagenes/icono_perfil.png' width='30' height='30' /></a> </li>";
+					echo "<li id=\"alinearDerecha\"> <a href='login.php'><img src='imagenes/icono_perfil.png' /></a> </li>";
 					//echo "<li> <a href='login.php'>Iniciar Sesion</a> </li>";
 				}
 				else{
-					echo "<li id=\"alinearDerecha\"><a href='perfil.php'><img src='imagenes/icono_perfil.png' width='30' height='30' /></a> </li>";
+					echo "<li id=\"alinearDerecha\"><a href='perfil.php'><img src='imagenes/icono_perfil.png' /></a> </li>";
 				}
 			?>
-			<li id="alinearDerecha"> <a href='carrito.php'><img src='imagenes/icono_carrito.png'  width='30' height='30' /></a> </li>
+			<li id="alinearDerecha"> <a href='carrito.php'><img src='imagenes/icono_carrito.png' /></a> </li>
 
 			<li id="alinearDerecha"> 
 
@@ -25,7 +25,7 @@
 					
 					<input type="text" name="buscar" value="Busqueda">
 					<button type="submit" name ="submit" value ="Enviar_form">
-						<img src='imagenes/icono_lupa.png' width='30' height='30' />
+						<img src='imagenes/icono_lupa.png'/>
 					</button>
 
 				</form>
