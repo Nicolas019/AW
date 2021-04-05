@@ -68,7 +68,7 @@ class catalogo{
        if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -76,7 +76,7 @@ class catalogo{
     	else{
     		echo "<h3> Ningun libro cumple con los requisitos seleccionados :(</h3>";
     		
-    		echo "<img id=\"nofiltro\" src=\"imagenes\busqueda_fallida.png\">";
+    		echo "<img id=\"nofiltro\" src=\"../comun/imagenes\busqueda_fallida.png\">";
     	}
 
 
@@ -93,7 +93,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -118,7 +118,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($this->arrayLibros[$i]!= null && $numero > 0) {
 	        	
-	        	echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
 	        	echo $this->arrayLibros[$i]->titulo, "</br>";
 	            $numero--;
 	        }
@@ -139,7 +139,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -160,7 +160,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	//echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -180,7 +180,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -202,7 +202,7 @@ class catalogo{
         if($numero > 0 && $consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
@@ -226,7 +226,7 @@ class catalogo{
 		  while ($numero>0 && $fila = mysqli_fetch_assoc($consulta) ) {
 		        	
 		  	$numero--;
-		  	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+		  	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 		       
 		  }
 	    }
@@ -249,7 +249,7 @@ class catalogo{
 
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	            $numero--;
 	        }
     	}
@@ -267,7 +267,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            
 	        }
@@ -311,7 +311,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	        	echo $fila['titulo'], "</br>";
 	            
 	        }
@@ -330,8 +330,7 @@ class catalogo{
         if($consulta->num_rows > 0){
 	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
 	        	
-	        	echo "<a href=\"verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"imagenes","/",$fila['ruta_imagen'],"\"> </a>";
-	        	//echo $fila['titulo'], "</br>";
+	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	            $numero--;
 	        }
     	}
@@ -388,7 +387,7 @@ class catalogo{
 
 		while ($this->arrayLibros[$this->posicionArray]!= null && $numero > 0) {
 	        	
-	        echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        echo " <img id=\"libro\" src=\"../comun/imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
 	        echo $this->arrayLibros[$i]->titulo, "</br>";
 	        $this->posicionArray++;
 	        $numero--;
@@ -402,7 +401,7 @@ class catalogo{
 
 		while ($this->arrayLibros[$this->posicionArray]!= null && $numero > 0) {
 	        	
-	        echo " <img id=\"libro\" src=\"imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
+	        echo " <img id=\"libro\" src=\"../comun/imagenes","/",$this->arrayLibros[$i]->ruta_img,"\">";
 	        echo $this->arrayLibros[$i]->titulo, "</br>";
 	        $this->posicionArray++;
 	        $numero--;

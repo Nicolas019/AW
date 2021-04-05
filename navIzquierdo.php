@@ -1,5 +1,5 @@
 <aside id="filtrosCatalogo">
-	<form action ="biblioteca.php" method="GET">
+	<form action ="../catalogo/biblioteca.php" method="GET">
 					<h4>
 						Ordenar por:
 					</h4>
@@ -37,7 +37,7 @@
 					<p> <input type="text" name="precioMax" value=100> </p>
 
 					<button type="submit" name ="submit" value ="Enviar_form">
-						<img src="imagenes/filtro.png" width="30" height="30" background_color="white"> 
+						<img id=filtro src="../comun/imagenes/filtro.png"> 
 					</button>
 	</form>
 

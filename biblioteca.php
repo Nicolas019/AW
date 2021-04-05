@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilos.css" />
+<link rel="stylesheet" type="text/css" href="../comun/estilos.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Catálogo</title>
 </head>
@@ -9,10 +9,10 @@
 
 <div id="contenedor">
 <?php
-		require 'menuPrincipal.php';
-		require 'BD.php';
-		require 'libro.php';
-		require 'catalogo.php';
+		require '../comun/menuPrincipal.php';
+		require '../comun/BD.php';
+		require '../comun/libro.php';
+		require '../catalogo/catalogo.php';
 			
 
 	  ?>
@@ -20,7 +20,7 @@
 
     <?php
 
-        require 'navIzquierdo.php';
+        require '../catalogo/navIzquierdo.php';
     ?>
 	<main id="contenido">
 		
@@ -100,7 +100,7 @@
 
 <?php 
 
-require 'pie.php';
+require '../comun/pie.php';
 
 
 ?>
