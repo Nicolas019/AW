@@ -25,7 +25,7 @@
 						<p> <input type="checkbox" name="Ciencia_Ficcion" value=1> Ciencia Ficcion </p>
 						<p> <input type="checkbox" name="Fantasia" value=2> Fantasia </p>
 						<p> <input type="checkbox" name="Novela" value=6> Novela </p>
-						<p> <input type="checkbox" name="Novela_Historica" value=7> Novela_Historica </p>
+						<p> <input type="checkbox" name="Novela_Historica" value=7> Novela Historica </p>
 						<p> <input type="checkbox" name="Novela_Policiaca" value=4> Novela Policiaca </p>
 						<p> <input type="checkbox" name="Romance" value=3> Romance </p>
 						<p> <input type="checkbox" name="Terror" value=5> Terror	</p>	
