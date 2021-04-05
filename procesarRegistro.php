@@ -1,8 +1,8 @@
 <?php
 	
-	require 'BD.php';
-	require 'listaUsuarios.php';
-	require 'usuario.php';
+	require '../comun/BD.php';
+	require '../perfil/listaUsuarios.php';
+	require '../perfil/usuario.php';
 
 	//Se hace siempre
 	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
@@ -30,7 +30,7 @@
     		if($username === $fila["usuario"] || $email === $fila["email"]){	
 				//usuario ya registrado
 				$existe_user = true;
-    			header('Location: ./registrar.php');
+    			header('Location: ../perfil/registrar.php');
 			}
     	}
     }
@@ -39,12 +39,12 @@
 		// contraseña coincide
 		if($password2 !== $password){
 		  	//la contraseña no es la misma
-		   	header('Location: ./registrar.php');
+		   	header('Location: ../perfil/registrar.php');
 		}
 		else{
 		    // registrar usuario
 		    $listaUsuarios->add_usuario($username,$email,$password,$name,$surname,$tipo_usuario);
-			header('Location: ./login.php');
+			header('Location: ../perfil/login.php');
 		}
 	}
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="estilos.css" />
+<link rel="stylesheet" type="text/css" href="../comun/estilos.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Login</title>
 </head>
@@ -9,7 +9,7 @@
 
 <div id="contenedor">
 <?php
-		require 'menuGeneral.php';
+		require '../comun/menuPrincipal.php';
 ?>
 <main id="contenido">
 
@@ -17,7 +17,7 @@
 			
 		<h2> Iniciar sesión </h2>
 		
-		<form method="POST" action="procesarLogin.php"> 
+		<form method="POST" action="../perfil/procesarLogin.php"> 
 		
 		<p> 
 		Usuario:
@@ -34,7 +34,7 @@
 		</form>
 
 		<p>
-			Si no estás registrado, puedes registrarte en el siguiente link: <a href="registrar.php">Registrarse</a>
+			Si no estás registrado, puedes registrarte en el siguiente link: <a href="../perfil/registrar.php">Registrarse</a>
 		</p>
 		
 		
@@ -45,7 +45,7 @@
 
 <?php 
 
-require 'pie.php';
+require '../comun/pie.php';
 
 ?>
 

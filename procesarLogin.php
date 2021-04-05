@@ -1,6 +1,6 @@
 <?php
 	
-	require 'BD.php';
+	require '../comun/BD.php';
 
 	//Se hace siempre
 	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
@@ -23,16 +23,16 @@
 				$_SESSION["usuario"] = $fila["usuario"];
 				$_SESSION["id_usuario"] = $fila["id_usuario"];
 
-				header('Location: ./index.php');
+				header('Location: ../comun/index.php');
 			}
     	}
     	if($_SESSION["login"] === false){
-    		header('Location: ./login.php');
+    		header('Location: ../perfil/login.php');
     		//echo "No existe el usuario ".$username;
     	}
     }
 	else{
-		header('Location: ./login.php');
+		header('Location: ../perfil/login.php');
 		//echo "No hay ningún usuario registrado.";
 	}
     
