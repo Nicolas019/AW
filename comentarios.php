@@ -45,9 +45,10 @@ class comentarios{
 		echo $comentario."</br>"; 
 	}
 
-	public function add_comentario($comentario, $id_libro, $id_usuario){
-		$sql = "INSERT INTO comentario C VALUES (NULL, '$id_libro', '$id_usuario', '$comentario')";
+	public function add_comentario($descripcion, $id_Libro, $id_usuario){
+		$sql = "INSERT INTO comentario VALUES (NULL, '$id_Libro', '$id_usuario', '$descripcion')";
 		return $this->BaseDatos->query($sql);
+
 	}
 
 }
