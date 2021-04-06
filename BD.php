@@ -5,12 +5,13 @@
 class BD 
 {	
 	
+    private static $singletonBD = null;
 	private $host;
 	private $usuario;
 	private $contrasenia;
 	private $nombreBD;
 	
-	public function __construct($host, $usuario, $contrasenia, $nombreBD){
+	private function __construct($host, $usuario, $contrasenia, $nombreBD){
 		$this->host =$host;
 		$this->usuario =$usuario;
 		$this->contrasenia =$contrasenia;
@@ -54,6 +55,12 @@ class BD
             }
     }
 
+    public static function getInstance($host, $usuario, $contrasenia, $nombreBD){
+        if(self::$singletonBD == null){
+            self::$singletonBD = new self($host, $usuario, $contrasenia, $nombreBD);
+        }
+        return self::$singletonBD;
+    }
 
 }
  ?>

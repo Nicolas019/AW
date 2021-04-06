@@ -1,7 +1,7 @@
 	<header id="menuPrincipal">
 		
 		<ul id="NavHorizontal">
-			<li><a href="../comun/index.php"><img src="../comun/imagenes/logo.png" align ="center" width="50" height="50" /> </a></li>
+			<li><a href="../comun/index.php"><img src="../comun/imagenes/logo.png" align="center", width="50", height="50" /> </a></li>
 			<li> <a href="../catalogo/biblioteca.php">Biblioteca </a> </li> 
 			<li> <a href="../foro/foro.php">Foro </a> </li> 
 			<li> <a href="../venta/venta.php">Venta</a> </li>
@@ -16,7 +16,7 @@
 					echo "<li id=\"alinearDerecha\"><a href='../perfil/perfil.php'><img src='../comun/imagenes/icono_perfil.png'/></a> </li>";
 				}
 			?>
-			<li id="alinearDerecha"> <a href='../compra/carrito.php'><img src='../comun/imagenes/icono_carrito.png'/></a> </li>
+			<li id="alinearDerecha"> <a href='../compra/verCarrito.php'><img src='../comun/imagenes/icono_carrito.png'/></a> </li>
 
 			<li id="alinearDerecha"> 
 

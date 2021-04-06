@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-04-2021 a las 19:21:01
+-- Tiempo de generación: 06-04-2021 a las 17:19:50
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -95,7 +95,12 @@ CREATE TABLE `comentario` (
 --
 
 INSERT INTO `comentario` (`id_Comentario`, `id_Libro`, `id_usuario`, `descripcionC`) VALUES
-(4, 3, 2, 'Todo el mundo debería leer este libro.');
+(1, 4, 9, 'Un libro muy fácil de leer, te enganchas a la trama sin darte cuenta!'),
+(2, 5, 8, 'Es un libro muy largo y muy lento, merece más la pena ver las películas.'),
+(3, 1, 6, 'Este libro fue un regalo de cumpleaños y gracias a él me reenganché a la lectura. Maravilloso.'),
+(4, 3, 2, 'Todo el mundo debería leer este libro.'),
+(5, 3, 10, 'Es un libro lleno de magia.'),
+(6, 6, 5, 'Este libro no sirve para nada, un día me quedé sin papel en el baño y me limpié el culo con una de sus páginas.');
 
 -- --------------------------------------------------------
 
@@ -142,6 +147,21 @@ INSERT INTO `genero` (`id_Genero`, `descripcionG`) VALUES
 (5, 'TERROR'),
 (6, 'NOVELA'),
 (7, 'NOVELA HISTORICA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `info_usuarios`
+--
+
+CREATE TABLE `info_usuarios` (
+  `id_usuario` int(10) UNSIGNED NOT NULL,
+  `foto_perfil` varchar(11) NOT NULL,
+  `direccion` varchar(11) NOT NULL,
+  `biografia` text NOT NULL,
+  `email` varchar(11) NOT NULL,
+  `fecha_nacimiento` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -253,6 +273,12 @@ ALTER TABLE `genero`
   ADD PRIMARY KEY (`id_Genero`);
 
 --
+-- Indices de la tabla `info_usuarios`
+--
+ALTER TABLE `info_usuarios`
+  ADD PRIMARY KEY (`id_usuario`);
+
+--
 -- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
@@ -287,7 +313,7 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `editorial`
@@ -336,6 +362,12 @@ ALTER TABLE `carrito`
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_Libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `info_usuarios`
+--
+ALTER TABLE `info_usuarios`
+  ADD CONSTRAINT `info_usuarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `libro`

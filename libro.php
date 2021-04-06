@@ -2,6 +2,7 @@
 
 class libro{
 	
+	private $BaseDatos;
 	private $autor;
 	private $titulo;
 	private $valoracion;
@@ -14,19 +15,28 @@ class libro{
 	private $numVentas;
 	private $fecha;
 
-	public function __construct($titulo, $autor, $genero, $editorial, $precio, $numPag, $sinopsis, $valoracion, $ruta_img, $numVentas, $fecha){
-		//$opcionesPorDefecto = array()
-		$this->titulo = $titulo;
-		$this->autor = $autor;
-		$this->valoracion = $valoracion;
-		$this->genero = $genero;
-		$this->editorial= $editorial;
-		$this->precio = $precio;
-		$this->numPag = $numPag;
-		$this->sinopsis = $sinopsis;
-		$this->ruta_img = $ruta_img;
-		$this->numVentas = $numVentas;
-		$this->fecha = $fecha;	
+	public function __construct($id){
+		
+		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $db->conectar();
+		$sql = "SELECT L.*, A.descripcionA, G.descripcionG, E.descripcionE FROM libro L JOIN autor A ON L.id_Autor=A.id_Autor JOIN genero G ON G.id_Genero=L.id_Genero JOIN editorial E ON L.id_Editorial=E.id_Editorial WHERE L.id_Libro=$id";
+    	$consulta = $this->BaseDatos->query($sql);
+    	if($consulta->num_rows > 0){
+        	while($fila = mysqli_fetch_assoc($consulta)){
+				$this->titulo = $fila['titulo'];
+				$this->autor = $fila['descripcionA'];
+				$this->valoracion = $fila['valoracion'];
+				$this->genero = $fila['descripcionG'];
+				$this->editorial= $fila['descripcionE'];
+				$this->precio = $fila['precio'];
+				$this->numPag = $fila['numero_Paginas'];
+				$this->sinopsis = $fila['sinopsis'];
+				$this->ruta_img = $fila['ruta_imagen'];
+				$this->numVentas = $fila['NumVentas'];
+				$this->fecha = $fila['fecha_Lanzamiento'];	
+        	}
+        }
+
 	}
 
 	public function __get($property){
@@ -93,10 +103,6 @@ class libro{
     	echo "<br>Sinopsis: ".$this->sinopsis."</br>";
 	}
 
-	public function ver_comentario($usuario, $tipo_usuario, $descripcion){
-		echo "<br>@".$usuario." (".$tipo_usuario."): ";
-		echo $descripcion."</br>";
-	}
 
 }
 

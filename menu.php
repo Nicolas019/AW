@@ -16,7 +16,7 @@
 					echo "<li id=\"alinearDerecha\"><a href='../perfil/perfil.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>";
 				}
 			?>
-			<li id="alinearDerecha"> <a href='../compra/carrito.php'><img src='../comun/imagenes/icono_carrito.png' /></a> </li>
+			<li id="alinearDerecha"> <a href='../compra/verCarrito.php'><img src='../comun/imagenes/icono_carrito.png' /></a> </li>
 
 			<li id="alinearDerecha"> 
 
