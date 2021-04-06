@@ -10,23 +10,19 @@ class catalogo{
 
 	private function __construct(){
 		
-
 		//echo "Entro en el constructor de catalogo";
-		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
-		$this->BaseDatos = $BD->conectar();
+		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $db->conectar();
 
 		$this->numeroLibros_A_Mostrar=5;
 		$this->arrayLibros = array();
 		$sql = "SELECT * FROM libro";
         $consulta = $this->BaseDatos->query($sql);
-
-
+        
         if($consulta->num_rows > 0){
 	        while ($fila = mysqli_fetch_assoc($consulta)) {
-	        	
-	        	$libro = new libro($fila['titulo'], $fila['id_Autor'], $fila['id_Genero'],  $fila['id_Editorial'],  $fila['precio'],  $fila['numero_Paginas'], $fila['sinopsis'], $fila['valoracion'], $fila['ruta_imagen'], $fila['NumVentas'], $fila['fecha_Lanzamiento']);
+	        	$libro = new libro($fila['id_Libro']);
 	            $this->arrayLibros[$fila['id_Libro']]= $libro;
-	            
 	        }
     	}
     	else{
