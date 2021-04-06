@@ -9,8 +9,8 @@ class carrito{
 	private $BaseDatos;
 
 	private function __construct($id_usuario, $id_libro, $precio){
-		$BD = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->BaseDatos = $BD->conectar();
+		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $db->conectar();
 		$this->id_usuario = $id_usuario;
 		$this->id_libro = $id_libro;
 		$this->precio = $precio;
