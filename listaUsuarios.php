@@ -44,7 +44,7 @@ class listaUsuarios{
 
 	public function add_usuario($usuario,$email,$contrasenia,$nombre,$apellidos,$tipo_usuario){
 		$sql = "INSERT INTO usuarios VALUES (NULL, '$username', '$email', '$password', '$name', '$surname', '$tipo_usuario')";
-		if($BaseDatos->query($sql) == true){
+		if($this->BaseDatos->query($sql) == true){
 			$user = new usuario($usuario, $email, $contrasenia, $nombre, $apellidos, $tipo_usuario);
 			$this->arrayUsuarios[count($this->arrayUsuarios)]= $user; 
 		}		

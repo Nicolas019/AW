@@ -3,8 +3,8 @@
 	require '../comun/BD.php';
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
-	$db = $BD->conectar();
+	$BaseDatos = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+	$db = $BaseDatos->conectar();
 
 	$sql = "SELECT id_usuario, usuario, contrasenia, tipo_usuario FROM usuarios";
     $consulta = $db->query($sql);

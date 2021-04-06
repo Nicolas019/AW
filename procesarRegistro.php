@@ -5,8 +5,8 @@
 	require '../perfil/usuario.php';
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
-	$db = $BD->conectar();
+	$BaseDatos = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+	$db = $BaseDatos->conectar();
 
 	$listaUsuarios = new listaUsuarios($db);
 
