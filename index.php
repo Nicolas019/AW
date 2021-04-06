@@ -30,6 +30,8 @@
 
 		echo "<h3>  ULTIMAS NOVEDADES</h3>";
 		$catalogo->mostrarNovedades($num);
+
+		$catalogo->desconectarBD();
 	?>
 </main>
 
