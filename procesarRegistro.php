@@ -1,7 +1,6 @@
 <?php
 	
 	require '../comun/BD.php';
-	require '../perfil/listaUsuarios.php';
 	require '../perfil/usuario.php';
 
 	//Se hace siempre
@@ -17,6 +16,7 @@
 	$email = $_POST["email"];
 	$name = $_POST["nombre"];
 	$surname = $_POST["apellidos"];
+	$cumple = $_POST["bday"];
 	$tipo_usuario = "lector novato";
 
 	$sql = "SELECT * FROM usuarios";
@@ -43,7 +43,8 @@
 		}
 		else{
 		    // registrar usuario
-		    $listaUsuarios->add_usuario($username,$email,$password,$name,$surname,$tipo_usuario);
+		    $user = new usuario();
+		    $user->add_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
 			header('Location: ../perfil/login.php');
 		}
 	}

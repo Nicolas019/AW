@@ -30,11 +30,6 @@
 		</p>
 
 		<p> 
-		Correo electrónico:
-		<input type="text" name="email" />
-		</p>
-
-		<p> 
 		Usuario:
 		<input type="text" name="usuario" />
 		</p>
@@ -47,6 +42,16 @@
 		<p>
 		Confirmar Contraseña:
 		<input type="password" name="contrasenia2" />
+		</p>
+
+		<p> 
+		Correo electrónico:
+		<input type="text" name="email" />
+		</p>
+
+		<p> 
+		Fecha de nacimiento:
+		<input type="date" name="bday" />
 		</p>
 		
 		<input type="submit" value="Registrar" />

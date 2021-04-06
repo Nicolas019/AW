@@ -10,6 +10,8 @@
 <div id="contenedor">
 <?php
 		require '../comun/menuPrincipal.php';
+		require '../comun/BD.php';
+		require '../perfil/usuario.php';
 ?>
 <main id="contenido">
 
@@ -17,8 +19,15 @@
 			
 		<h2> Ver perfil </h2>
 		
+		<?php 
+
+		$user = new usuario();
+		$user->ver_usuario($_SESSION["id_usuario"]);
+
+		?>
+
 		<p>
-			Cerrar sesión aquí: <a href="../perfil/logout.php">Logout</a>
+		Cerrar sesión: <a href="../perfil/logout.php">Logout</a>
 		</p>
 		
 		
