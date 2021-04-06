@@ -11,5 +11,5 @@ NOTAS:
 - Hay que desconectar la base de datos.
 - Sólo hay que conectar la base de datos una vez.
 - Crear relaciones de la base de datos.
-- Hacer la base de datos tipo Singleton.
+- La base de datos es tipo Singleton.
 - ¡OJO! Mucho cuidado con las rutas, poner siempre ../nombre_carpeta/nombre_archivo.lo_q_sea
