@@ -3,8 +3,8 @@
 	require '../comun/BD.php';
 
 	//Se hace siempre
-	$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
-	$db = $BD->conectar();
+	$BaseDatos = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+	$db = $BaseDatos->conectar();
 
 	$id_usuario = $_POST['id_usuario'];
 	$id_libro = $_POST['id_libro'];

@@ -9,7 +9,7 @@ class carrito{
 	private $BaseDatos;
 
 	private function __construct($id_usuario, $id_libro, $precio){
-		$BD = new BD('localhost', 'athenea', 'athenea', 'libreria');
+		$BD = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$this->BaseDatos = $BD->conectar();
 		$this->id_usuario = $id_usuario;
 		$this->id_libro = $id_libro;
@@ -30,7 +30,7 @@ class carrito{
 
 	public function add_carrito($id_usuario, $id_libro, $precio){
 		$sql = "INSERT INTO carrito VALUES ('$id_usuario', '$id_libro', '$precio')";
-		$db->query($sql);
+		$this->BaseDatos->query($sql);
 	}
 
 }
