@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-04-2021 a las 17:19:50
+-- Tiempo de generación: 06-04-2021 a las 18:35:32
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -100,7 +100,10 @@ INSERT INTO `comentario` (`id_Comentario`, `id_Libro`, `id_usuario`, `descripcio
 (3, 1, 6, 'Este libro fue un regalo de cumpleaños y gracias a él me reenganché a la lectura. Maravilloso.'),
 (4, 3, 2, 'Todo el mundo debería leer este libro.'),
 (5, 3, 10, 'Es un libro lleno de magia.'),
-(6, 6, 5, 'Este libro no sirve para nada, un día me quedé sin papel en el baño y me limpié el culo con una de sus páginas.');
+(6, 6, 5, 'Este libro no sirve para nada, un día me quedé sin papel en el baño y me limpié el culo con una de sus páginas.'),
+(7, 3, 7, 'Este libro me ha gustado mucho.'),
+(8, 3, 3, 'Muy buena lectura.'),
+(9, 3, 6, '¿quién no conoce este libro?');
 
 -- --------------------------------------------------------
 
@@ -156,12 +159,27 @@ INSERT INTO `genero` (`id_Genero`, `descripcionG`) VALUES
 
 CREATE TABLE `info_usuarios` (
   `id_usuario` int(10) UNSIGNED NOT NULL,
-  `foto_perfil` varchar(11) NOT NULL,
+  `foto_perfil` varchar(60) NOT NULL,
   `direccion` varchar(11) NOT NULL,
   `biografia` text NOT NULL,
-  `email` varchar(11) NOT NULL,
   `fecha_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `info_usuarios`
+--
+
+INSERT INTO `info_usuarios` (`id_usuario`, `foto_perfil`, `direccion`, `biografia`, `fecha_nacimiento`) VALUES
+(1, '', '', '', '0000-00-00'),
+(2, 'nuriacarrascosa.jpg', '', '', '1999-12-25'),
+(3, 'sergiofrutos.jpg', '', '', '1998-11-25'),
+(4, 'patrilla.jpg', '', '', '1999-07-17'),
+(5, 'carlosram.jpg', '', '', '1999-02-13'),
+(6, 'nicobeni.jpg', '', '', '1999-12-13'),
+(7, 'semuñoz.jpg', '', '', '1999-04-02'),
+(8, '', '', '', '1999-11-08'),
+(9, '', '', '', '1999-04-22'),
+(10, '', '', '', '1999-07-07');
 
 -- --------------------------------------------------------
 
@@ -313,7 +331,7 @@ ALTER TABLE `carrito`
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `editorial`
