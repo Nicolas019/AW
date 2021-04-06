@@ -29,7 +29,7 @@
 
 			$catalogo = catalogo::getInstance();
 			
-			$pagina = isset($_GET["btnPag"]) ? $_GET["btnPag"] : null;
+			$pagina = isset($_GET["pasarPagina"]) ? $_GET["pasarPagina"] : null;
 			$orden = isset($_GET["orden"]) ? $_GET["orden"] : "titulo";
 			$sentido = isset($_GET["sentido"]) ? $_GET["sentido"] : null;
 
@@ -91,7 +91,9 @@
 			}
 
 
-			//require 'pasoPagina.php'
+			//require 'pasoPagina.php';
+
+			$catalogo->desconectarBD();
 		 ?>
 		
 	</main>

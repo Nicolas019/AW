@@ -4,6 +4,7 @@ class catalogo{
 	
 	private static $singletonCatalogo = null;
 	private $arrayLibros;
+	private $conexion; // Necesario para después poder desconectar la BD
 	private $BaseDatos;
 	private $numeroLibros_A_Mostrar; //Numeros de libros que queremos mostrar en una página
 	private $posicionArray;
@@ -12,7 +13,9 @@ class catalogo{
 		
 		//echo "Entro en el constructor de catalogo";
 		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->conexion = $db;
 		$this->BaseDatos = $db->conectar();
+
 
 		$this->numeroLibros_A_Mostrar=5;
 		$this->arrayLibros = array();
@@ -24,6 +27,7 @@ class catalogo{
 	        	$libro = new libro($fila['id_Libro']);
 	            $this->arrayLibros[$fila['id_Libro']]= $libro;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -41,6 +45,10 @@ class catalogo{
 	    if(property_exists($this, $property)) {
 	        $this->$property = $value;
 	    }
+	}
+
+	public function desconectarBD(){
+		$this->conexion->desconectar($this->BaseDatos);
 	}
 
 	public static function getInstance(){
@@ -68,6 +76,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "<h3> Ningun libro cumple con los requisitos seleccionados :(</h3>";
@@ -93,6 +102,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -106,7 +116,7 @@ class catalogo{
 		$sql = ($sentido == TRUE) ?  "SELECT L.* FROM libro L ORDER BY titulo DESC" : "SELECT L.* FROM libro L ORDER BY titulo ASC";
         $consulta = $this->BaseDatos->query($sql);
 
-        $this->guardaArray($consulta);
+        //$this->guardaArray($consulta); Intento de pasar de página
         $numero = $this->numeroLibros_A_Mostrar;
         $i = 0;
 
@@ -118,6 +128,7 @@ class catalogo{
 	        	echo $this->arrayLibros[$i]->titulo, "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -139,6 +150,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -160,6 +172,7 @@ class catalogo{
 	        	//echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -180,6 +193,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -202,6 +216,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -225,6 +240,7 @@ class catalogo{
 		  	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 		       
 		  }
+		  $consulta->free();
 	    }
     	else{
     		echo "No hay ningún libro";
@@ -248,6 +264,7 @@ class catalogo{
 	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -267,6 +284,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -277,7 +295,7 @@ class catalogo{
 
 
 
-	public function mostrarPorAutor($Autor){
+	public function mostrarPorAutor($Autor){//Deprecated function
 
 		foreach ($this->arrayLibros as $key => $value) {
 			if($value->autor == $Autor){
@@ -287,7 +305,7 @@ class catalogo{
 
 	}
 
-	public function mostrarPorGenero($Genero){
+	public function mostrarPorGenero($Genero){//Deprecated function
 
 		foreach ($this->arrayLibros as $key => $value) {
 			if($value->genero == $Genero){
@@ -298,7 +316,7 @@ class catalogo{
 	}
 
 
-		public function buscarGenero($genero){
+	public function buscarGenero($genero){
 
 		$sql = "SELECT id_Libro, titulo, ruta_imagen FROM libro L JOIN genero G ON L.id_Genero = G.id_Genero WHERE G.id_Genero = $genero";
         $consulta = $this->BaseDatos->query($sql);
@@ -311,6 +329,7 @@ class catalogo{
 	        	echo $fila['titulo'], "</br>";
 	            
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -329,6 +348,7 @@ class catalogo{
 	        	echo "<a href=\"../compra/verLibro.php?id_Libro=",$fila['id_Libro'],"\"> <img id=\"libro\" src=\"../comun/imagenes","/",$fila['ruta_imagen'],"\"> </a>";
 	            $numero--;
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -354,6 +374,7 @@ class catalogo{
 	            
 	            
 	        }
+	        $consulta->free();
     	}
     	else{
     		echo "No hay ningún libro";
@@ -362,7 +383,7 @@ class catalogo{
 	}
 
 
-	public function mostrarArray(){
+	public function mostrarArray(){//Deprecated function
 
 		foreach ($this->arrayLibros as $clave => $valor) {
 			echo $valor->valoracion," ", $valor->titulo, " </br>";
