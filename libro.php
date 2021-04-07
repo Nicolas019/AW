@@ -51,7 +51,7 @@ class libro{
 	}
 
 	public function suma_ventas($num){
-		$this->ventas = $this->ventas + $num;
+		$this->numVentas = $this->numVentas + $num;
 	}
 
 	public function valorar($valoracion){
