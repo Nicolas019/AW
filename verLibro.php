@@ -43,8 +43,8 @@
 
     ?>
 
-    <br>Precios:</br>
-    <form action ="../compra/verCarrito.php" method="POST">
+        <br>Precios:</br>
+        <form action ="../compra/verCarrito.php" method="POST">
 					
 		<select name="precio_libro"> 
 		<?php
@@ -75,7 +75,7 @@
 
 		<button type="submit" name ="submit" value ="add_carrito">Añadir al carrito</button>
             
-	</form>
+	   </form>
 
 
     <?php
