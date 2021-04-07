@@ -1,3 +1,11 @@
+<?php 
+
+	$user = new usuario($_SESSION["id_usuario"]);
+	$nombre = $user->_get($nombre);
+	$user->desconectarBD();	
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,24 +23,19 @@
 ?>
 <main id="contenido">
 
-		<article>
+	<article>
 			
 		<h2> Ver perfil </h2>
-		
-		<?php 
 
-		$user = new usuario();
-		$user->ver_usuario($_SESSION["id_usuario"]);
-
-		?>
+		<p>
+		<?php echo "$nombre"; ?>
+		</p>
 
 		<p>
 		Cerrar sesión: <a href="../perfil/logout.php">Logout</a>
-		</p>
+		</p>	
 		
-		
-		
-</article>
+	</article>
 
 </main>
 
