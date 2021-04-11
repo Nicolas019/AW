@@ -105,6 +105,15 @@ class libroEnVenta extends libro{
 		return $num;
 	}
 
+	public function add_comentario_libroEnVenta($id_usuario, $descripcion){
+		$this->comentarios = new comentarios($this->id_Libro);
+
+		$this->comentarios->add_comentario($id_usuario, $descripcion);
+
+		$this->comentarios->desconectarBD();
+		$this->comentarios = null;
+	}
+
 	/* OTRAS FUNCIONES */
 
 

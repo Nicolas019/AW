@@ -1,5 +1,7 @@
 <?php 
 
+require_once '../perfil/usuario.php';
+
 class comentarios{
 	
 	private $BaseDatos;
@@ -48,7 +50,7 @@ class comentarios{
 			while($fila = mysqli_fetch_assoc($consulta_comentarios)){
 				$user = new usuario($fila['id_usuario']);
 
-				$this->arrayUsuarios[$this->num_comentarios] = $user->__get($usuario);
+				$this->arrayUsuarios[$this->num_comentarios] = $user->usuario;
 				$this->arrayComentarios[$this->num_comentarios] = $fila['descripcionC'];			
 				$this->num_comentarios++;
 
@@ -70,7 +72,7 @@ class comentarios{
 
 		$user = new usuario($id_usuario);
 		
-		$this->arrayUsuarios[$this->num_comentarios] = $user->__get($usuario);
+		$this->arrayUsuarios[$this->num_comentarios] = $user->usuario;
 		$this->arrayComentarios[$this->num_comentarios] = $descripcion;			
 		$this->num_comentarios++;
 
