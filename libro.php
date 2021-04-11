@@ -9,19 +9,19 @@ class libro{
 	private $BaseDatos;
 	private $conexion;
 
-	private $id_Libro;
-	private $autor;
-	private $titulo;
-	private $valoracion;
-	private $genero;
-	private $editorial;
-	private $precio;
-	private $numPag;
-	private $sinopsis;
-	private $ruta_imagen;
-	private $numVentas;
-	private $fecha;
-	private $numStars;
+	protected $id_Libro;
+	protected $autor;
+	protected $titulo;
+	protected $valoracion;
+	protected $genero;
+	protected $editorial;
+	protected $precio;
+	protected $numPag;
+	protected $sinopsis;
+	protected $ruta_imagen;
+	protected $numVentas;
+	protected $fecha;
+	protected $numStars;
 
 	/* CONSTRUCTOR */
 	public function __construct($id){
@@ -54,6 +54,9 @@ class libro{
 			//Obtener Editorial
 			$editorial = new editorial($fila['id_Editorial']);
 			$this->editorial = $editorial->descripcionE;
+
+			//Inicializar numStars
+			$this->estrellas_valoracion();
 		
         }
         $consulta->free();
@@ -183,7 +186,7 @@ class libro{
     		$this->numStars = 0;
     	}
 
-    	return $this->numStars;
+    	
 	}
 
 }

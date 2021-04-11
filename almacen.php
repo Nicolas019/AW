@@ -15,7 +15,7 @@ class almacen{
 	public function __construct($id_libro, $precio){
 		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$this->BaseDatos = $this->conexion->conectar();
-
+		
 		$this->id_libro = $id_libro;
 		$this->vaciar_arrays();
 		$this->llenar_arrays($precio);
@@ -37,12 +37,12 @@ class almacen{
 	}
 
 	public function vaciar_arrays(){
-		$this->arrayStock = array($NUM_ESTADOS);
-		$this->arrayEstado = array($NUM_ESTADOS);
-		$this->arrayPrecios = array($NUM_ESTADOS);
+		$this->arrayStock = array(almacen::$NUM_ESTADOS);
+		$this->arrayEstado = array(almacen::$NUM_ESTADOS);
+		$this->arrayPrecios = array(almacen::$NUM_ESTADOS);
 
 		$n = 0;
-		while($n < $NUM_ESTADOS){
+		while($n < almacen::$NUM_ESTADOS){
 			$this->arrayEstado[$n] = null;
 			$this->arrayStock[$n] = 0;
 			$this->arrayPrecios[$n] = 0;
@@ -52,6 +52,7 @@ class almacen{
 
 	public function llenar_arrays($precio){
 		$sql_almacen = "SELECT A.estado, A.stock FROM almacen A WHERE A.id_libro=$this->id_libro";
+		
 		$cosulta_almacen = $this->BaseDatos->query($sql_almacen);
 
 		$this->num_estados_stock = 0;
