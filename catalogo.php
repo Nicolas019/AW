@@ -1,6 +1,6 @@
 <?php 
 
-class catalogo{
+class catalogo{//CLASS DEPRECATED
 	
 	private static $singletonCatalogo = null;
 	private $arrayLibros;
@@ -14,7 +14,7 @@ class catalogo{
 		//echo "Entro en el constructor de catalogo";
 		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$this->conexion = $db;
-		$this->BaseDatos = $db->conectar();
+		$this->BaseDatos = $db->conectar(); 
 
 
 		$this->numeroLibros_A_Mostrar=5;
