@@ -1,8 +1,14 @@
 <?php 
 
+require_once '../comun/autor.php';
+require_once '../comun/genero.php';
+require_once '../comun/editorial.php';
+
 class libro{
 	
 	private $BaseDatos;
+	private $conexion;
+	private $id_Libro;
 	private $autor;
 	private $titulo;
 	private $valoracion;
@@ -11,31 +17,43 @@ class libro{
 	private $precio;
 	private $numPag;
 	private $sinopsis;
-	private $ruta_img;
+	private $ruta_imagen;
 	private $numVentas;
 	private $fecha;
 
 	public function __construct($id){
 		
-		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->BaseDatos = $db->conectar();
-		$sql = "SELECT L.*, A.descripcionA, G.descripcionG, E.descripcionE FROM libro L JOIN autor A ON L.id_Autor=A.id_Autor JOIN genero G ON G.id_Genero=L.id_Genero JOIN editorial E ON L.id_Editorial=E.id_Editorial WHERE L.id_Libro=$id";
+		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $this->conexion->conectar();
+		$sql = "SELECT L.* FROM libro L WHERE L.id_Libro=$id";
     	$consulta = $this->BaseDatos->query($sql);
     	if($consulta->num_rows > 0){
-        	while($fila = mysqli_fetch_assoc($consulta)){
-				$this->titulo = $fila['titulo'];
-				$this->autor = $fila['descripcionA'];
-				$this->valoracion = $fila['valoracion'];
-				$this->genero = $fila['descripcionG'];
-				$this->editorial= $fila['descripcionE'];
-				$this->precio = $fila['precio'];
-				$this->numPag = $fila['numero_Paginas'];
-				$this->sinopsis = $fila['sinopsis'];
-				$this->ruta_img = $fila['ruta_imagen'];
-				$this->numVentas = $fila['NumVentas'];
-				$this->fecha = $fila['fecha_Lanzamiento'];	
-        	}
+
+    		$fila = mysqli_fetch_assoc($consulta);
+			$this->titulo = $fila['titulo'];
+			$this->valoracion = $fila['valoracion'];
+			$this->precio = $fila['precio'];
+			$this->numPag = $fila['numero_Paginas'];
+			$this->sinopsis = $fila['sinopsis'];
+			$this->ruta_imagen = $fila['ruta_imagen'];
+			$this->numVentas = $fila['NumVentas'];
+			$this->fecha = $fila['fecha_Lanzamiento'];
+			$this->id_Libro = $id;
+
+			//Obtener Autor
+			$autor = new autor($fila['id_Autor']);
+			$this->autor = $autor->descripcionA;
+
+			//Obtener Genero
+			$genero = new genero($fila['id_Genero']);
+			$this->genero = $genero->descripcionG;
+
+			//Obtener Editorial
+			$editorial = new editorial($fila['id_Editorial']);
+			$this->editorial = $editorial->descripcionE;
+		
         }
+        $consulta->free();
 
 	}
 
@@ -48,6 +66,82 @@ class libro{
 	    if(property_exists($this, $property)) {
 	        $this->$property = $value;
 	    }
+	}
+
+	public function desconectarBD(){
+		$this->conexion->desconectar($this->BaseDatos);
+	}
+
+	static public function filtros($arrayGeneros,$sentido,$orden,$precioMin,$precioMax, $numero){
+
+		$arrayLibros = array();
+		$consultaGeneros = join($arrayGeneros, ",");
+
+		$sql = ($sentido == TRUE) ?  "SELECT * FROM libro L  WHERE L.id_Genero IN ($consultaGeneros)  AND L.precio BETWEEN $precioMin AND  $precioMax ORDER BY $orden ASC" :  "SELECT * FROM libro L WHERE L.id_Genero IN ($consultaGeneros)  AND L.precio BETWEEN $precioMin AND  $precioMax ORDER BY $orden DESC ";
+	
+
+		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+		$consulta = $BaseDatos->query($sql);
+
+       if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	
+	        	$arrayLibros[]= new libro($fila['id_Libro']);
+	            $numero--;
+	        }
+	        $consulta->free();
+    	}
+
+    	$conexion->desconectar($BaseDatos);
+
+    	return $arrayLibros;
+	}
+
+	static public function buscar($busqueda, $numero){ //Ordena por nº paginas el numero es para sacar x libros
+
+ 		$arrayAutores = autor::buscar($busqueda);
+ 		$consultaAutores=0;
+ 		if(!empty($arrayAutores)){
+ 			$consultaAutores=join($arrayAutores, ",");
+ 		}
+
+		$sql = "SELECT * FROM libro L  WHERE L.titulo LIKE \"%$busqueda%\" OR L.id_Autor IN ($consultaAutores)";
+		
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+		$consulta = $BaseDatos->query($sql);
+		$arrayLibros=array();
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	$arrayLibros[]= new libro($fila['id_Libro']);
+	            $numero--;
+	        }
+	        $consulta->free();
+    	}
+
+    	$conexion->desconectar($BaseDatos);
+    	return $arrayLibros;
+	}
+
+	static public function ordenarPor($ordenar, $numero){ //Ordena por nº de ventas 
+
+		$sql = "SELECT * FROM libro L ORDER BY $ordenar DESC";
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+		$consulta = $BaseDatos->query($sql);
+		$arrayLibros=array();
+
+        if($consulta->num_rows > 0){
+	        while ($numero > 0 && $fila = mysqli_fetch_assoc($consulta)) {
+	        	$arrayLibros[]= new libro($fila['id_Libro']);
+	            $numero--;
+	        }
+	        $consulta->free();
+    	}
+    	$conexion->desconectar($BaseDatos);
+    	return $arrayLibros;
 	}
 
 	public function suma_ventas($num){
