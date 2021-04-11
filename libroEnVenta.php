@@ -37,7 +37,7 @@ class libroEnVenta extends libro{
 
 	/* ALMACEN */
 	public function hay_stock_libroEnVenta(){
-		$this->almacen = new almacen($id, parent::__get($precio));
+		$this->almacen = new almacen(parent::__get($id_Libro), parent::__get($precio));
 
 		$hay_stock = $this->almacen->hay_stock_libro();
 
@@ -47,8 +47,18 @@ class libroEnVenta extends libro{
 		return $hay_stock;
 	}
 
+	public function restar_stock_libroEnVenta($precio){
+		$this->almacen = new almacen(parent::__get($id_Libro), parent::__get($precio));
+
+		$this->almacen->restar_stock_libro($precio);
+
+		$this->almacen->desconectarBD();
+		$this->almacen = null;
+
+	}
+
 	public function precio_libroEnVenta($estado){
-		$this->almacen = new almacen(parent::__get($id), parent::__get($precio));
+		$this->almacen = new almacen(parent::__get($id_Libro), parent::__get($precio));
 
 		$precio_libro = $this->almacen->precio_libro($estado); //con esta función sabmemos también si hay stock para este estado (nuevo), ya que si no hay stock entonces $precio_libro será 0.
 
@@ -60,7 +70,7 @@ class libroEnVenta extends libro{
 
 	/* COMENTARIOS */
 	public function descripcion_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id));
+		$this->comentarios = new comentarios(parent::__get($id_libro));
 
 		$array = $this->comentarios->__get($arrayComentarios);
 
@@ -71,7 +81,7 @@ class libroEnVenta extends libro{
 	}
 
 	public function usuarios_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id));
+		$this->comentarios = new comentarios(parent::__get($id_libro));
 
 		$array = $this->comentarios->__get($arrayUsuarios);
 
@@ -82,7 +92,7 @@ class libroEnVenta extends libro{
 	}
 
 	public function num_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id));
+		$this->comentarios = new comentarios(parent::__get($id_libro));
 
 		$num = $this->comentarios->__get($num_comentarios);
 

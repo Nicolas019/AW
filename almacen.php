@@ -105,11 +105,38 @@ class almacen{
 		else if($estado === 'buen estado'){
 			return $this->arrayPrecios[2];			
 		}
-		else if($estado === 3){
+		else if($estado === 'aceptable'){
 			return $this->arrayPrecios[3];
 		}
 
 	}
+
+    public function restar_stock_libro($precio){
+        $stock_libro = 0;
+        $estado_libro;
+        if($precio === $this->arrayPrecios[0]){
+           $stock_libro = $this->arrayStock[0]--;
+           $estado_libro = $this->arrayEstado[0];
+        }
+        else if($estado === $this->arrayPrecios[1]){
+            $stock_libro = $this->arrayStock[1]--;
+            $estado_libro = $this->arrayEstado[1];
+        }
+        else if($estado === $this->arrayPrecios[2]){
+            $stock_libro = $this->$arrayStock[2]--;
+            $estado_libro = $this->arrayEstado[2];
+        }
+        else if($estado === $this->arrayPrecios[3]){
+            $stock_libro = $this->$arrayStock[3]--;
+            $estado_libro = $this->arrayEstado[3];
+        }
+
+        $sql_almacen = "UPDATE almacen A SET A.stock=$stock_libro WHERE A.id_libro=$this->id_libro, A.estado=$estado_libro";
+        $cosulta_almacen = $this->BaseDatos->query($sql_almacen);
+
+        $cosulta_almacen->free();
+
+    }
 
 }
 
