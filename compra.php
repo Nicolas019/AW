@@ -9,7 +9,7 @@
 
 <div id="contenedor">
 <?php
-	require '../comun/menuPrincipal.php';
+	require_once '../comun/menuPrincipal.php';
 ?>
 <main id="contenido">
 
@@ -44,7 +44,7 @@
 
 <?php
 
-require '../comun/pie.php';
+require_once '../comun/pie.php';
 
 ?>
 
