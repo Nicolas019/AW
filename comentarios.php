@@ -11,9 +11,8 @@ class comentarios{
 	private $num_comentarios;
 
 	public function __construct($id_libro){
-		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->conexion = $db;
-		$this->BaseDatos = $db->conectar();
+		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $this->conexion->conectar();
 		
 		$this->id_libro = $id_libro;
 		$this->vaciar_arrays();

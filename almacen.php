@@ -10,12 +10,11 @@ class almacen{
 	private $arrayEstado;
 	private $arrayPrecios;
 	private $num_estados_stock;
-	private static final $NUM_ESTADOS = 4;
+	private static $NUM_ESTADOS = 4;
 
 	public function __construct($id_libro, $precio){
-		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->conexion = $db;
-		$this->BaseDatos = $db->conectar();
+		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $this->conexion->conectar();
 
 		$this->id_libro = $id_libro;
 		$this->vaciar_arrays();

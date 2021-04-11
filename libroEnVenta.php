@@ -1,4 +1,7 @@
 <?php 
+require_once '../comun/libro.php';
+require_once '../comun/almacen.php';
+require_once '../comun/comentarios.php';
 
 class libroEnVenta extends libro{
 	
@@ -12,8 +15,8 @@ class libroEnVenta extends libro{
 	public function __construct($id){
 		parent::__construct($id);
 
-		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->BaseDatos = $db->conectar();
+		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $this->conexion->conectar();
 
 		$this->almacen = null;
 		$this->comentarios = null;
@@ -70,9 +73,10 @@ class libroEnVenta extends libro{
 
 	/* COMENTARIOS */
 	public function descripcion_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id_libro));
+		$this->comentarios = new comentarios(parent::__get($id_Libro));
 
-		$array = $this->comentarios->__get($arrayComentarios);
+		$array = array();
+		$array = $this->comentarios->$arrayComentarios;
 
 		$this->comentarios->desconectarBD();
 		$this->comentarios = null;
@@ -81,9 +85,9 @@ class libroEnVenta extends libro{
 	}
 
 	public function usuarios_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id_libro));
+		$this->comentarios = new comentarios(parent::__get($id_Libro));
 
-		$array = $this->comentarios->__get($arrayUsuarios);
+		$array = $this->comentarios->$arrayUsuarios;
 
 		$this->comentarios->desconectarBD();
 		$this->comentarios = null;
@@ -92,9 +96,9 @@ class libroEnVenta extends libro{
 	}
 
 	public function num_comentarios_libroEnVenta(){
-		$this->comentarios = new comentarios(parent::__get($id_libro));
+		$this->comentarios = new comentarios(parent::__get($id_Libro));
 
-		$num = $this->comentarios->__get($num_comentarios);
+		$num = $this->comentarios->$num_comentarios;
 
 		$this->comentarios->desconectarBD();
 		$this->comentarios = null;
@@ -103,30 +107,7 @@ class libroEnVenta extends libro{
 	}
 
 	/* OTRAS FUNCIONES */
-	// esta función podría estar mejor en libro.php
-	public function estrellas_valoracion(){
-		$numStars = 0;
-    	if(parent::__get($valoracion) <= 2){
-    		$numStars = 1;
-    	}
-    	else if(parent::__get($valoracion) > 2 && parent::__get($valoracion) <= 4){
-    		$numStars = 2;
-    	}
-    	else if(parent::__get($valoracion) > 4 && parent::__get($valoracion) <= 6){
-    		$numStars = 3;
-    	}
-    	else if(parent::__get($valoracion) > 6 && parent::__get($valoracion) <= 8){
-    		$numStars = 4;
-    	}
-    	else if(parent::__get($valoracion)> 8 && parent::__get($valoracion) <= 10){
-    		$numStars = 5;
-    	}
-    	else{
-    		$numStars = 0;
-    	}
 
-    	return $numStars;
-	}
 
 	/*
 	public function ver_libro(){
