@@ -7,16 +7,16 @@
     //Libro en venta
     $id_Libro = isset($_GET["id_Libro"]) ? htmlspecialchars(trim(strip_tags($_GET["id_Libro"]))) : 0;
     $book = new libroEnVenta($id_Libro);
-    $titulo = $book->$titulo;
-    $autor = $book->$autor;
-    $genero = $book->$genero;
-    $editorial = $book->$editorial;
-    $ruta_imagen = $book->$ruta_imagen;
-    $valoracion = $book->$valoracion;
-    $num_stars = $book->$numStars;
-    $num_pags = $book->$numPag;
-    $sinopsis = $book->$sinopsis;
-    $fecha_lanzamiento = $book->$fecha;
+    $titulo = $book->titulo;
+    $autor = $book->autor;
+    $genero = $book->genero;
+    $editorial = $book->editorial;
+    $ruta_imagen = $book->ruta_imagen;
+    $valoracion = $book->valoracion;
+    $numStars = $book->numStars;
+    $num_pags = $book->numPag;
+    $sinopsis = $book->sinopsis;
+    $fecha_lanzamiento = $book->fecha;
 
     //Almacen
     $hay_stock = $book->hay_stock_libroEnVenta();
@@ -66,7 +66,7 @@
         if($fecha_lanzamiento != NULL){
             echo "<br>Fecha de lanzamiento: ".$fecha_lanzamiento."</br>";
         }
-        echo "<br><img id=\"ver_libro\" src=\"../comun/imagenes","/",$ruta_img,"\"></br>";
+        echo "<br><img id=\"ver_libro\" src=\"../comun/imagenes","/",$ruta_imagen,"\"></br>";
         echo "<br>Sinopsis: ".$sinopsis."</br>";
     ?>
 
