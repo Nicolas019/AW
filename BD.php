@@ -38,7 +38,7 @@ class BD
             if ($conexion) {
                 $ok = mysqli_close($conexion) ;
                 if ( $ok ) {
-                    echo 'Desconexion realizada correctamente <br></br> ' ;
+                    //echo 'Desconexion realizada correctamente <br></br> ' ;
                 } 
                 else {
                     echo 'Fallo en la desconexion. <b r /> ' ;
