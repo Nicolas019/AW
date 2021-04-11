@@ -20,19 +20,19 @@
 		<form method="POST" action="procesarCompra.php">
 
         <h4> Información general </h4>
-            <p>	Nombre: <input type="text" name="nombre" /></p>
-            <p>	Apellidos: <input type="text" name="apellidos" /></p>
+            <p>	Nombre: <input type="text" name="nombre" required minlenght="2"/></p>
+            <p>	Apellidos: <input type="text" name="apellidos" pattern=".{2,20}" required title="Introduzca un nombre válido"/></p>
         <h4> Información de envío general </h4>
-            <p>	Dirección: <input type="text" name="direccion" /></p>
+            <p>	Dirección: <input type="text" name="direccion" pattern=".{2,20}" required title="Introduzca unos apellidos válido"/></p>
             <p>	Piso: <input type="text" name="piso" /></p>
             <p>	Letra: <input type="text" name="letra" /></p>
-            <p>	Código Postal: <input type="text" name="cp" /></p>
-            <p>	Ciudad: <input type="text" name="ciudad" /></p>
-            <p>	Comunidad Autónoma: <input type="text" name="ca" /></p>
+            <p>	Código Postal: <input type="text" name="cp" pattern=".{5}" required title="El código postal es obligatorio"/></p>
+            <p>	Ciudad: <input type="text" name="ciudad" required lenght="5" pattern=".{2,20}" required title="Introduzca una ciudad válido"/></p>
+            <p>	Comunidad Autónoma: <input type="text" name="ca" pattern=".{2,30}" required title="Introduzca unos apellidos válido" /></p>
         <h4> Método de pago </h4>
-            <p>	Número de tarjeta: <input type="text" name="numero_tarjeta" /></p>
-            <p>	Fecha de caducidad: <input type="text" name="caducidad" /></p>
-            <p>	CVV: <input type="text" name="cvv" /></p>
+            <p>	Número de tarjeta: <input type="text" name="numero_tarjeta" pattern=".{16}" required title="La longitud de la tarjeta de crédito es inválida, introduzca 16 caracteres"/></p>
+            <p>	Fecha de caducidad: <input type="month" name="caducidad" required min="2021-04"/></p>
+            <p>	CVV: <input type="text" name="cvv" pattern=".{3}" required title="La longitud es inválida, por favor introduzca 3 caracteres"/></p>
 		<input type="submit" value="Enviar" />
 
 		</form>
