@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2021 a las 15:04:34
--- Versión del servidor: 10.4.18-MariaDB
--- Versión de PHP: 8.0.3
+-- Tiempo de generación: 12-04-2021 a las 15:14:26
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `libreria2`
+-- Base de datos: `libreria`
 --
 
 -- --------------------------------------------------------
@@ -252,7 +252,7 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(10) UNSIGNED NOT NULL,
   `usuario` varchar(15) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `contrasenia` varchar(20) NOT NULL,
+  `contrasenia` varchar(255) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellidos` varchar(40) NOT NULL,
   `tipo_usuario` enum('superlector','lector aficionado','lector novato','lector errante','administrador') NOT NULL
@@ -263,15 +263,15 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasenia`, `nombre`, `apellidos`, `tipo_usuario`) VALUES
-(1, 'admin', 'admin@athenea.com', 'admin', 'Administrador', 'Athenea', 'administrador'),
-(2, 'nuriacarrascosa', 'nucarr02@ucm.es', 'nuriacarrascosa', 'Nuria', 'Carrascosa Cascajo', 'superlector'),
+(1, 'admin', 'admin@athenea.com', '1234', 'Administrador', 'Athenea', 'administrador'),
+(2, 'nuriacarrascosa', 'nucarr02@ucm.es', '1234', 'Nuria', 'Carrascosa Cascajo', 'superlector'),
 (3, 'sergiofrutos', 'sefrutos@ucm.es', '1234', 'Sergio', 'Frutos Serrano', 'lector novato'),
-(4, 'patrilla', 'patrilla@ucm.es', '9876', 'Patricia', 'Llamas Roque', 'lector aficionado'),
-(5, 'carlosram', 'carami02@ucm.es', 'qwerty', 'Carlos', 'Ramírez Martínez', 'lector errante'),
-(6, 'nicobeni', 'nicobeni@ucm.es', '123456', 'Nicolás', 'Benito', 'lector novato'),
-(7, 'semuñoz', 'semuñoz@ucm.es', '123456', 'Sergio', 'Muñoz', 'lector novato'),
-(8, 'froiz', 'ofroiz@ucm.es', 'froiz', 'Óscar', 'Froiz', 'lector novato'),
-(9, 'davicillo', 'ddoming@ucm.es', '98765', 'David', 'Dominguez', 'lector novato'),
+(4, 'patrilla', 'patrilla@ucm.es', '1234', 'Patricia', 'Llamas Roque', 'lector aficionado'),
+(5, 'carlosram', 'carami02@ucm.es', '1234', 'Carlos', 'Ramírez Martínez', 'lector errante'),
+(6, 'nicobeni', 'nicobeni@ucm.es', '$2y$10$ud3djOTbBH8nh9Z.ipMBcOlPViduOf7uo776Yl/M3RDHg9RJMxHeO', 'Nicolás', 'Benito', 'lector novato'),
+(7, 'semuñoz', 'semuñoz@ucm.es', '1234', 'Sergio', 'Muñoz', 'lector novato'),
+(8, 'froiz', 'ofroiz@ucm.es', '1234', 'Óscar', 'Froiz', 'lector novato'),
+(9, 'davicillo', 'ddoming@ucm.es', '1234', 'David', 'Dominguez', 'lector novato'),
 (10, 'paula', 'paulalopez@ucm.es', '1234', 'Paula', 'López', 'lector novato');
 
 --
