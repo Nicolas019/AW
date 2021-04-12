@@ -7,10 +7,8 @@
 	$BaseDatos = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 	$db = $BaseDatos->conectar();
 
-	$listaUsuarios = new listaUsuarios($db);
-
     //formulario registrar
-	$username = $_POST["usuario"];
+	$username = isset($_POST["usuario"]) ? htmlspecialchars(trim(strip_tags($_POST["usuario"]))) : null;
 	$password = $_POST["contrasenia"];
 	$password2 = $_POST["contrasenia2"];
 	$email = $_POST["email"];
@@ -36,15 +34,16 @@
     }
     
     if($existe_user === false){
-		// contraseña coincide
 		if($password2 !== $password){
-		  	//la contraseña no es la misma
+		  	// la contraseña no es la misma
 		   	header('Location: ../perfil/registrar.php');
 		}
 		else{
+			// contraseña coincide
 		    // registrar usuario
-		    $user = new usuario();
-		    $user->add_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
+		    $user = new usuario(0);
+		    $user->registrar_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
+		    $user->desconectarBD();
 			header('Location: ../perfil/login.php');
 		}
 	}

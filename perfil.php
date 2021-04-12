@@ -1,11 +1,3 @@
-<?php 
-
-	$user = new usuario($_SESSION["id_usuario"]);
-	$nombre = $user->_get($nombre);
-	$user->desconectarBD();	
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +9,8 @@
 <body>
 <div id="contenedor">
 <?php
-		require '../comun/menuPrincipal.php';
-		require '../comun/BD.php';
-		require '../perfil/usuario.php';
+		require_once '../comun/menuPrincipal.php'; 
+		require_once '../perfil/infoPerfil.php'; 
 ?>
 <main id="contenido">
 
@@ -28,8 +19,18 @@
 		<h2> Ver perfil </h2>
 
 		<p>
-		<?php echo "$nombre"; ?>
+		<?php echo $nombre; ?>
 		</p>
+
+		<form method="POST" action="../perfil/perfil.php"> 
+		
+		<p>
+		Nueva contraseña:
+		<input type="password" name="nuevaPassword" />
+		<input type="submit" value="Enviar" />
+		</p>
+		
+		</form>
 
 		<p>
 		Cerrar sesión: <a href="../perfil/logout.php">Logout</a>

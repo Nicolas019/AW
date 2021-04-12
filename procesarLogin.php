@@ -1,39 +1,20 @@
 <?php
 	
-	require '../comun/BD.php';
-
-	//Se hace siempre
-	$BaseDatos = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-	$db = $BaseDatos->conectar();
-
-	$sql = "SELECT id_usuario, usuario, contrasenia, tipo_usuario FROM usuarios";
-    $consulta = $db->query($sql);
+	require_once '../comun/BD.php';
+	require_once '../perfil/usuario.php';
 
 	session_start();
-	$username = $_POST["usuario"];
-	$password = $_POST["contrasenia"];
-	$_SESSION["login"] = false;
+	$username = isset($_POST["usuario"]) ? htmlspecialchars(trim(strip_tags($_POST["usuario"]))) : null;
+	$password = isset($_POST["contrasenia"]) ? htmlspecialchars(trim(strip_tags($_POST["contrasenia"]))) : null;
 
-    if($consulta->num_rows > 0){
-    	while($fila = mysqli_fetch_assoc($consulta)){
-    		if($username === $fila["usuario"] && $password === $fila["contrasenia"]){	
-				$_SESSION["login"] = true;
+	$usuario = new usuario(0);
+	$existe_usuario = $usuario->login($username, $password);
 
-				$_SESSION["tipo_usuario"] = $fila["tipo_usuario"];
-				$_SESSION["usuario"] = $fila["usuario"];
-				$_SESSION["id_usuario"] = $fila["id_usuario"];
-
-				header('Location: ../comun/index.php');
-			}
-    	}
-    	if($_SESSION["login"] === false){
-    		header('Location: ../perfil/login.php');
-    		//echo "No existe el usuario ".$username;
-    	}
-    }
+	if($existe_usuario){
+		header('Location: ../comun/index.php');
+	}
 	else{
 		header('Location: ../perfil/login.php');
-		//echo "No hay ningún usuario registrado.";
 	}
     
 ?>

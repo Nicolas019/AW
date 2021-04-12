@@ -7,6 +7,7 @@ class usuario{
 
 	private $existe_usuario;
 
+	private $id_usuario;
 	private $usuario;
 	private $email;
 	private $contrasenia;
@@ -20,49 +21,21 @@ class usuario{
 	private $direccion;
 	
 	/* CONSTRUCTOR */
-	public function __construct($id_usuario){
-		$db = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
-		$this->conexion = $db;
-		$this->BaseDatos = $db->conectar();
+	public function __construct($id){
+		$this->conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$this->BaseDatos = $this->conexion->conectar();
 
-		$sql_usuario = "SELECT * FROM usuario U JOIN info_usuarios I ON U.id_usuario=I.id_usuario WHERE U.id_usuario=$id_usuario";
+		$this->id_usuario = $id;
+		$sql_usuario = "SELECT * FROM usuarios U JOIN info_usuarios I ON U.id_usuario=I.id_usuario WHERE U.id_usuario=$this->id_usuario";
 		$consulta_usuario = $this->BaseDatos->query($sql_usuario);
 		if($consulta_usuario->num_rows > 0){
-			$this->existe_usuario = true;
-
-			while($fila_usuario = mysql_fetch_assoc($consulta_usuario)){
-				//Tabla Usuario
-				$this->usuario = $fila_usuario['usuario'];
-				$this->email = $fila_usuario['email'];
-				$this->contrasenia = $fila_usuario['contrasenia'];
-				$this->nombre = $fila_usuario['nombre'];
-				$this->apellidos = $fila_usuario['apellidos'];
-				$this->tipo_usuario = $fila_usuario['tipo_usuario'];
-
-				//Tabla Info_usuario
-				$this->fecha_nacimiento = $fila_usuario['fecha_nacimiento'];
-				$this->biografia = $fila_usuario['biografia'];
-				$this->foto_perfil = $fila_usuario['foto_perfil'];
-				$this->direccion = $fila_usuario['direccion'];
+			while($fila_usuario = mysqli_fetch_assoc($consulta_usuario)){
+				$this->completarAtributos(true, $fila_usuario['usuario'], $fila_usuario['email'], $fila_usuario['contrasenia'], $fila_usuario['nombre'], $fila_usuario['apellidos'], $fila_usuario['tipo_usuario'], $fila_usuario['fecha_nacimiento'], $fila_usuario['biografia'], $fila_usuario['foto_perfil'], $fila_usuario['direccion']);
 			}
 
 		}	
 		else{
-			$this->existe_usuario = false;
-
-			//Tabla Usuario
-			$this->usuario = null;
-			$this->email = null;
-			$this->contrasenia = null;
-			$this->nombre = null;
-			$this->apellidos = null;
-			$this->tipo_usuario = null;
-
-			//Tabla Info_usuario
-			$this->fecha_nacimiento = null;
-			$this->biografia = null;
-			$this->foto_perfil = null;
-			$this->direccion = null;
+			$this->completarAtributos(false, null, null, null, null, null, null, null, null, null, null);
 		}
 		$consulta_usuario->free();
 
@@ -86,10 +59,10 @@ class usuario{
 	}
 
 	/* OTRAS FUNCIONES */
-	public function add_usuario($usuario, $email, $contrasenia, $nombre, $apellidos, $tipo_usuario, $fecha_nacimiento){
+	public function registrar_usuario($usuario, $email, $contrasenia, $nombre, $apellidos, $tipo_usuario, $fecha_nacimiento){
 		$this->usuario = $usuario;
 		$this->email = $email;
-		$this->contrasenia = $contrasenia;
+		$this->contrasenia = password_hash($contrasenia, PASSWORD_DEFAULT);
 		$this->nombre = $nombre;
 		$this->apellidos = $apellidos;
 		$this->tipo_usuario = $tipo_usuario;
@@ -99,21 +72,80 @@ class usuario{
 		$sql2 = "INSERT INTO info_usuarios VALUES (NULL, NULL, NULL, NULL, $this->fecha_nacimiento)";
 		$consulta1 = $this->BaseDatos->query($sql);
 		$consulta2 = $this->BaseDatos->query($sql2);
-		$consulta1->free();
 		$consulta2->free();	
+		$consulta1->free();
 	}
 
-	/*
-	public function ver_usuario($id_usuario){
-		$sql = "SELECT * FROM info_usuarios I WHERE I.id_usuario=$id_usuario";
-		$consulta = $this->BaseDatos->query($sql);
-		if($consulta->num_rows > 0){
-	    	while($fila = mysqli_fetch_assoc($consulta)){
-	    		echo "<br><img id=\"ver_libro\" src=\"../comun/imagenes","/",$fila['foto_perfil'],"\"></br>";
-	    	}
-	    }
+	public function compruebaPassword($password){
+    	return password_verify($password, $this->contrasenia);
+  	}
+
+  	public function cambiaPassword($nuevoPassword){
+    	$this->contrasenia = password_hash($nuevoPassword, PASSWORD_DEFAULT);
+    	$sql_password = "UPDATE usuarios SET contrasenia='$this->contrasenia' WHERE id_usuario=$this->id_usuario";
+    	$consulta_password = $this->BaseDatos->query($sql_password);
+    	$consulta_password->free();
+  	}
+
+  	public function logout(){
+	  //Doble seguridad: unset + destroy
+	  unset($_SESSION["tipo_usuario"]);
+	  unset($_SESSION["usuario"]);
+	  unset($_SESSION["id_usuario"]);
+	  unset($_SESSION["login"]);
+
+	  session_destroy();
+	  session_start();
 	}
-	*/
+
+	public function login($user, $password){
+		$this->buscarUsuario($user, $password);
+
+		if($this->existe_usuario === true){
+			session_start();
+			$_SESSION["login"] = true;
+			$_SESSION["tipo_usuario"] = $this->tipo_usuario;
+			$_SESSION["usuario"] = $this->usuario;
+			$_SESSION["id_usuario"] = $this->id_usuario;
+		}
+		else{
+			$_SESSION["login"] = false;
+		}
+
+		return $this->existe_usuario;
+	}
+
+	public function buscarUsuario($user, $password){
+		$sql_buscar = "SELECT id_usuario, usuario, contrasenia, tipo_usuario FROM usuarios";
+    	$consulta_buscar = $this->BaseDatos->query($sql_buscar);
+	    if($consulta_buscar->num_rows > 0){
+	    	while($fila = mysqli_fetch_assoc($consulta_buscar)){
+	    		if($user === $fila["usuario"] && password_verify($password, $fila['contrasenia'])){
+	    			$this->id_usuario = $fila["id_usuario"];
+	    			$this->completarAtributos(true, $fila['usuario'], $fila['email'], $fila['contrasenia'], $fila['nombre'], $fila['apellidos'], $fila['tipo_usuario'], $fila['fecha_nacimiento'], $fila['biografia'], $fila['foto_perfil'], $fila['direccion']);
+	    		}
+	    	}
+	    }	
+    	$consulta_buscar->free();
+	}
+
+	public function completarAtributos($existe, $usuario, $email, $contrasenia, $nombre, $apellidos, $tipo_usuario, $fecha_nacimiento, $biografia, $foto, $direccion){
+			$this->existe_usuario = $existe;
+
+			//Tabla Usuario
+			$this->usuario = $usuario;
+			$this->email = $email;
+			$this->contrasenia = $contrasenia;
+			$this->nombre = $nombre;
+			$this->apellidos = $apellidos;
+			$this->tipo_usuario = $tipo_usuario;
+
+			//Tabla Info_usuario
+			$this->fecha_nacimiento = $fecha_nacimiento;
+			$this->biografia = $biografia;
+			$this->foto_perfil = $foto;
+			$this->direccion = $direccion;
+	}
 
 }
 
