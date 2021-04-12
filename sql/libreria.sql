@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2021 a las 15:14:26
+-- Tiempo de generación: 12-04-2021 a las 15:59:07
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -184,7 +184,8 @@ INSERT INTO `info_usuarios` (`id_usuario`, `foto_perfil`, `direccion`, `biografi
 (7, 'semuñoz.jpg', '', '', '1999-04-02'),
 (8, '', '', '', '1999-11-08'),
 (9, '', '', '', '1999-04-22'),
-(10, '', '', '', '1999-07-07');
+(10, '', '', '', '1999-07-07'),
+(11, '', '', '', '1999-01-18');
 
 -- --------------------------------------------------------
 
@@ -272,7 +273,8 @@ INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasenia`, `nombre
 (7, 'semuñoz', 'semuñoz@ucm.es', '1234', 'Sergio', 'Muñoz', 'lector novato'),
 (8, 'froiz', 'ofroiz@ucm.es', '1234', 'Óscar', 'Froiz', 'lector novato'),
 (9, 'davicillo', 'ddoming@ucm.es', '1234', 'David', 'Dominguez', 'lector novato'),
-(10, 'paula', 'paulalopez@ucm.es', '1234', 'Paula', 'López', 'lector novato');
+(10, 'paula', 'paulalopez@ucm.es', '1234', 'Paula', 'López', 'lector novato'),
+(11, 'iris', 'irissaenz@gmail.com', '$2y$10$c2SSa.JmtdOROGQWN1kFh.znfdcSsZ03EflTddLN4sSxCN/ruewni', 'Iris', 'Sáenz de Miera', 'lector novato');
 
 --
 -- Índices para tablas volcadas
@@ -383,7 +385,7 @@ ALTER TABLE `libro`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
