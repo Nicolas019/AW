@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2021 a las 15:59:07
+-- Tiempo de generación: 13-04-2021 a las 11:03:41
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -38,7 +38,11 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`id_libro`, `estado`, `stock`) VALUES
-(3, 'nuevo', 2);
+(3, 'nuevo', 2),
+(3, 'como nuevo', 1),
+(3, 'buen estado', 3),
+(3, 'aceptable', 1),
+(6, 'aceptable', 5);
 
 -- --------------------------------------------------------
 
@@ -80,6 +84,13 @@ CREATE TABLE `carrito` (
   `id_libro` int(11) NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `carrito`
+--
+
+INSERT INTO `carrito` (`id_carrito`, `id_usuario`, `id_libro`, `precio`) VALUES
+(1, 6, 3, 11.4);
 
 -- --------------------------------------------------------
 
@@ -355,7 +366,7 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
