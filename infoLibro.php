@@ -45,7 +45,7 @@
         $print_precios .= "<option value=$precio_nuevo> Nuevo ($precio_nuevo) </option>";
     }                
     if($precio_como_nuevo != 0){
-        $print_precios .= "<option value=$precio_como_nuevo Como nuevo ($precio_como_nuevo) </option>";
+        $print_precios .= "<option value=$precio_como_nuevo> Como nuevo ($precio_como_nuevo) </option>";
     }    
     if($precio_buen_estado != 0){
         $print_precios .= "<option value=$precio_buen_estado> Buen estado ($precio_buen_estado) </option>";
