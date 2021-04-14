@@ -145,9 +145,6 @@ class almacen{
 
         $sql_almacen = "UPDATE almacen A SET A.stock=$stock_libro WHERE A.id_libro=$this->id_libro, A.estado=$estado_libro";
         $cosulta_almacen = $this->BaseDatos->query($sql_almacen);
-
-        $cosulta_almacen->free();
-
     }
 
 }
