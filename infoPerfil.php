@@ -9,8 +9,10 @@
 	$id_user = isset($_SESSION['id_usuario']) ? $_SESSION["id_usuario"] : 0;
 	$user = new usuario($id_user);
 
+	$print_nueva_password = "";
 	if($nuevaPassword != null){
 		$user->cambiaPassword($nuevaPassword);
+		$print_nueva_password = "<p>Contraseña cambiada con éxito.</p>";
 	} 
 
 	$nombre = $user->nombre;

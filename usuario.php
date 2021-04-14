@@ -68,12 +68,13 @@ class usuario{
 		$this->tipo_usuario = $tipo_usuario;
 		$this->fecha_nacimiento = $fecha_nacimiento;
 
-		$sql = "INSERT INTO usuarios VALUES (NULL, '$this->usuario', '$this->email', '$this->contrasenia', '$this->nombre', '$this->apellidos', '$this->tipo_usuario')";
-		$sql2 = "INSERT INTO info_usuarios VALUES (NULL, NULL, NULL, NULL, $this->fecha_nacimiento)";
-		$consulta1 = $this->BaseDatos->query($sql);
-		$consulta2 = $this->BaseDatos->query($sql2);
-		$consulta2->free();	
-		$consulta1->free();
+		$sql1 = "INSERT INTO usuarios VALUES (NULL, '$this->usuario', '$this->email', '$this->contrasenia', '$this->nombre', '$this->apellidos', '$this->tipo_usuario')";
+		//$consulta1 = $this->BaseDatos->query($sql1);
+
+		//como obtener el $id_user del último INSERT
+
+		$sql2 = "INSERT INTO info_usuarios VALUES ($id_user, NULL, NULL, NULL, $this->fecha_nacimiento)";
+		//$consulta2 = $this->BaseDatos->query($sql2);
 	}
 
 	public function compruebaPassword($password){
@@ -84,7 +85,6 @@ class usuario{
     	$this->contrasenia = password_hash($nuevoPassword, PASSWORD_DEFAULT);
     	$sql_password = "UPDATE usuarios SET contrasenia='$this->contrasenia' WHERE id_usuario=$this->id_usuario";
     	$consulta_password = $this->BaseDatos->query($sql_password);
-    	$consulta_password->free();
   	}
 
   	public function logout(){

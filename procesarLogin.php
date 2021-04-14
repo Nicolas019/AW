@@ -9,6 +9,7 @@
 
 	$usuario = new usuario(0);
 	$existe_usuario = $usuario->login($username, $password);
+	$usuario->desconectarBD();
 
 	if($existe_usuario){
 		header('Location: ../comun/index.php');

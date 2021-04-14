@@ -30,6 +30,8 @@
 		<input type="submit" value="Enviar" />
 		</p>
 		
+		<?php echo $print_nueva_password; ?>
+
 		</form>
 
 		<p>
