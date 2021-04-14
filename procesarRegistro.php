@@ -9,13 +9,13 @@
 
     //formulario registrar
 	$username = isset($_POST["usuario"]) ? htmlspecialchars(trim(strip_tags($_POST["usuario"]))) : null;
-	$password = $_POST["contrasenia"];
-	$password2 = $_POST["contrasenia2"];
-	$email = $_POST["email"];
-	$name = $_POST["nombre"];
-	$surname = $_POST["apellidos"];
-	$cumple = $_POST["bday"];
-	$tipo_usuario = "lector novato";
+    $password = isset($_POST["contrasenia"]) ? htmlspecialchars(trim(strip_tags($_POST["contrasenia"]))) : null;
+    $password2 = isset($_POST["contrasenia2"]) ? htmlspecialchars(trim(strip_tags($_POST["contrasenia2"]))) : null;
+    $email = isset($_POST["email"]) ? htmlspecialchars(trim(strip_tags($_POST["email"]))) : null;
+    $name = isset($_POST["nombre"]) ? htmlspecialchars(trim(strip_tags($_POST["nombre"]))) : null;
+    $surname = isset($_POST["apellidos"]) ? htmlspecialchars(trim(strip_tags($_POST["apellidos"]))) : null;
+    $cumple = isset($_POST["bday"]) ? htmlspecialchars(trim(strip_tags($_POST["bday"]))) : null;
+    $tipo_usuario = "lector novato";
 
 	$sql = "SELECT * FROM usuarios";
     $consulta = $db->query($sql);
@@ -44,7 +44,7 @@
 		    $user = new usuario(0);
 		    $user->registrar_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
 		    $user->desconectarBD();
-			header('Location: ../perfil/login.php');
+			//header('Location: ../perfil/login.php');
 		}
 	}
 	
