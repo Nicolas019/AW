@@ -48,6 +48,17 @@ class libroEnVenta extends libro{
 
 		return $hay_stock;
 	}
+    
+    	public function hay_stock_libroEnVenta_Carrito($price){
+		$this->almacen = new almacen($this->id_Libro, $this->precio);
+		$hay_stock = $this->almacen->hay_stock_libro_Carrito($price);
+
+		$this->almacen->desconectarBD();
+		$this->almacen = null;
+
+		return $hay_stock;
+	}
+    
 
 	public function restar_stock_libroEnVenta($precio){
 		$this->almacen = new almacen($this->id_Libro, $this->precio);

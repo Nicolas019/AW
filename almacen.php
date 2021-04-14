@@ -93,6 +93,18 @@ class almacen{
 	public function hay_stock_libro(){
 		return ($this->num_estados_stock != 0);
 	}
+    
+    public function hay_stock_libro_Carrito($price){
+        $hayStock = false;
+        $i = 0;
+		while (!$hayStock && $i < almacen::$NUM_ESTADOS){
+            if ((string) $this->arrayPrecios[$i] === (string) $price){
+                $hayStock = true;
+            }
+            $i++;
+        }
+        return $hayStock;
+	}
 
 	public function precio_libro($estado){
 
