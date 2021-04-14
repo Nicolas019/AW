@@ -24,15 +24,16 @@
 
     
     $id_usuario = isset($_SESSION["id_usuario"]) ? $_SESSION["id_usuario"] : null;
+
     $carrito = new carrito($id_usuario);
     $array_id = $carrito->array_id_libro;
     $array_precios = $carrito->array_precio;
-    $numElems = $carrito->numElems;
+    $numElems = $carrito->num_libros;
 
     for($i=0;$i < $numElems;$i++){
         $libroEnVenta = new libroEnVenta($array_id[$i]);
 
-        $libroEnVenta->sumaVentas(1);
+        $libroEnVenta->suma_ventas(1);
         $libroEnVenta->restar_stock_libroEnVenta($array_precios[$i]);
         $carrito->eliminar_de_Carrito($array_id[$i],$array_precios[$i]);
 
