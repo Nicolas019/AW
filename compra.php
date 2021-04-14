@@ -23,7 +23,7 @@
             <p>	Nombre: <input type="text" name="nombre" required minlenght="2" required title="Introduzca un nombre válido"/></p>
             <p>	Apellidos: <input type="text" name="apellidos" pattern=".{2,20}" required title="Introduzca unos apellidos válidos"/></p>
             <p> Email: <input type="email" name="email" required/> </p>
-        <h4> Información de envío general </h4>
+        <h4> Información de envío </h4>
             <p>	Dirección: <input type="text" name="direccion" pattern=".{2,20}" required title="Introduzca una dirección válida"/></p>
             <p>	Piso: <input type="text" name="piso" /></p>
             <p>	Letra: <input type="text" name="letra" /></p>
