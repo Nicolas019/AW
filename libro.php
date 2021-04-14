@@ -155,7 +155,7 @@ class libro{
 	/* COMPRAR */
 	public function suma_ventas($num){
 		$this->numVentas = $this->numVentas + $num;
-		$sql = "UPDATE libro L SET L.NumVentas=$this->numVentas WHERE L.id_libro=$this->id_libro";
+		$sql = "UPDATE libro L SET L.NumVentas=$this->numVentas WHERE L.id_libro=$this->id_Libro";
         $cosulta = $this->BaseDatos->query($sql);
 	}
 
