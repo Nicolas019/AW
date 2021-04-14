@@ -1,6 +1,7 @@
 <?php
 
 require_once "../comun/libroEnVenta.php";
+require_once "../comun/BD.php";
 
 class carrito{
 
@@ -56,10 +57,16 @@ class carrito{
 	}
     
     // Añadir algo al carrito
-	public function add_carrito($id_libro, $precio){
-		$sql = "INSERT INTO carrito VALUES ('$this->id_usuario', '$id_libro', '$precio')";
-		$consulta = $this->BaseDatos->query($sql);
-        $consulta->free();
+	static public function add_carrito($id_usuario, $id_libro, $precio){
+		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+        
+		$sql = "INSERT INTO carrito VALUES (null, '$id_usuario', '$id_libro', '$precio')";
+        echo $sql;
+		$consulta = $BaseDatos->query($sql);
+        //$consulta->free();
+        
+    	$conexion->desconectar($BaseDatos);
         
 	}
     
@@ -83,6 +90,8 @@ class carrito{
         //$consulta->free();
         
         //edito los arrays del objeto
+        
+        $this->num_libros = 0;
         
         $sql2 = "SELECT * FROM carrito WHERE carrito.id_usuario=$this->id_usuario";
 

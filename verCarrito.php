@@ -22,24 +22,11 @@
             
             <p> <?php echo $mostrar_carrito; ?> </p>
             
-          
-            <h3> No hay stock de los libros: </h3>
+            <p> <?php if ($stock !== "No hay stock de los libros: ") echo $stock; ?> </p>
             
-            <p> <?php if ($stock !== "") echo $stock; ?> </p>
-           
-         <!--   Eliminar del carrito:
-            <form action="pagina.php" method="post"> 
-
-                <select name="eliminar"> 
-                    <option value="1">1</option> 
-                    <option value="2">2</option> 
-                </select> 
-                <input type="submit" name="eliminar">
-                
-            </form> 
-          -->
-            
-            <a href='../compra/compra.php'>Comprar</a>
+            <?php if ($stock === "No hay stock de los libros: "){?>
+                <a href='../compra/compra.php'>Comprar</a>
+            <?php } ?>
             <a href='../catalogo/biblioteca.php'>Seguir mirando</a>
 
 

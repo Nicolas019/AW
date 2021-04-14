@@ -5,7 +5,13 @@
 
     $debe_registrar=""; // Para mostrar mensaje de es necesario registrarse, en su caso
     $mostrar_carrito =""; // Para mostrar el carrito
-    $stock =""; // Para mostrar mensaje de que no hay stock de algun libro, en su caso
+    $stock ="No hay stock de los libros: "; // Para mostrar mensaje de que no hay stock de algun libro, en su caso
+
+    if(isset($_GET['id_usuario']) && isset($_GET['id_libro']) && isset($_GET['precio_libro'])){
+
+      carrito::add_carrito($_GET['id_usuario'], $_GET['id_libro'], $_GET['precio_libro']);
+        
+    }
 
     if(!isset($_SESSION['login']) || $_SESSION['login'] === false){
         $debe_registrar = "Debe registrarse para ver el carrito";
@@ -56,6 +62,8 @@
             if(!$carro->array_stock[$i]){
                 $stock = $stock."<p>".$libro->titulo." - ".$carro->array_precio[$i]."</p>";
             }
+            $libro->desconectarBD();
+            $libro = null;
             $i++;
         }
         
