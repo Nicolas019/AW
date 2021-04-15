@@ -16,26 +16,28 @@
     $caducidad = isset($_POST["nombre"]) ? htmlspecialchars(trim(strip_tags($_POST["caducidad"]))) : null;
     $cvv = isset($_POST["cvv"]) ? htmlspecialchars(trim(strip_tags($_POST["cvv"]))) : null;
 
-    // 1. new carrito(idUsuario)
-    // 2. llamar a la funcion de carrito que devuelva un array de libros y de precios precios (numElems o devolver o .size())
-    // 3. bucle por numElems para llamar a cada libro hacer un new de libroEnVenta con el id (que me da Sergio en el array)
-    // en ese bucle llamo a restar_stock_libroEnVenta y sumaVentas
-    // 4. llamar a funcion Sergio vaciarCarrito
-
-    
+    //variable id_usuario
     $id_usuario = isset($_SESSION["id_usuario"]) ? $_SESSION["id_usuario"] : null;
 
+    //crear carrito
     $carrito = new carrito($id_usuario);
     $array_id = $carrito->array_id_libro;
-    $array_precios = $carrito->array_precio;
+    $array_estado = $carrito->array_estado;
+    $array_cantidad = $carrito->array_cantidad;
     $numElems = $carrito->num_libros;
 
+    //crear pedido
+    //$pedido = new pedido($id_usuario);
+    //$pedido->add_pedido($id_usuario, $nombre, $apellidos, $email, $direccion, $piso, $letra, $cp, $ciudad,$ca );
+
+    //actualizar ventas, restar Stock y eliminar libros del carrito
     for($i=0;$i < $numElems;$i++){
         $libroEnVenta = new libroEnVenta($array_id[$i]);
 
-        $libroEnVenta->suma_ventas(1);
-        $libroEnVenta->restar_stock_libroEnVenta($array_precios[$i]);
-        $carrito->eliminar_de_Carrito($array_id[$i],$array_precios[$i]);
+        $libroEnVenta->suma_ventas($array_cantidad[$i]);
+        $precioL = $carrito->calcula_precio($array_id[$i], $array_estado[$i]);
+        $libroEnVenta->restar_stock_libroEnVenta($precioL, $array_cantidad[$i]);
+        $carrito->eliminar_de_Carrito($array_id[$i], $array_estado[$i]);
 
         $libroEnVenta->desconectarBD();
     }

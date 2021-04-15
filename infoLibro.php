@@ -21,6 +21,7 @@
 
     //Almacen
     $hay_stock = $book->hay_stock_libroEnVenta();
+   
     $precio_nuevo = ($book->precio_libroEnVenta('nuevo') != 0) ? $book->precio_libroEnVenta('nuevo') : 0;
     $precio_como_nuevo = ($book->precio_libroEnVenta('como nuevo') != 0) ? $book->precio_libroEnVenta('como nuevo') : 0;
     $precio_buen_estado = ($book->precio_libroEnVenta('buen estado') != 0) ? $book->precio_libroEnVenta('buen estado') : 0;
@@ -42,23 +43,28 @@
     //Imprime los precios del libro según el stock
     $print_precios = "";
     if($precio_nuevo != 0){
-        $print_precios .= "<option value=$precio_nuevo> Nuevo ($precio_nuevo) </option>";
+        $print_precios .= "<option value='nuevo'> Nuevo ($precio_nuevo) </option>";
     }                
     if($precio_como_nuevo != 0){
-        $print_precios .= "<option value=$precio_como_nuevo> Como nuevo ($precio_como_nuevo) </option>";
+        $print_precios .= "<option value='como nuevo'> Como nuevo ($precio_como_nuevo) </option>";
     }    
     if($precio_buen_estado != 0){
-        $print_precios .= "<option value=$precio_buen_estado> Buen estado ($precio_buen_estado) </option>";
+        $print_precios .= "<option value='buen estado'> Buen estado ($precio_buen_estado) </option>";
     }
     if($precio_aceptable != 0){
-        $print_precios .= "<option value=$precio_aceptable> Aceptable ($precio_aceptable) </option>";
+        $print_precios .= "<option value='aceptable'> Aceptable ($precio_aceptable) </option>";
     }    
 
     //Imprime el botón de "Añadir al carrito" si ha iniciado sesión
     $print_input_and_submit = "";
     if($init_sesion){
-        $id_user = $_SESSION['id_usuario'];
-        $print_input_and_submit .= "<input type=\"hidden\" name=\"id_usuario\" value=\"$id_user\";>"."<input type=\"hidden\" name=\"id_libro\" value=\"$id_Libro\";>"."<button type=\"submit\" name=\"submit\" value =\"add_carrito\">Añadir al carrito</button>";
+        if($hay_stock){
+            $id_user = $_SESSION['id_usuario'];
+            $print_input_and_submit .= "<input type=\"hidden\" name=\"id_usuario\" value=\"$id_user\";>"."<input type=\"hidden\" name=\"id_libro\" value=\"$id_Libro\";>"."<button type=\"submit\" name=\"submit\" value =\"add_carrito\">Añadir al carrito</button>";
+        }
+        else{
+            $print_input_and_submit .= "<p>No hay stock disponible para comprar.</p>";
+        }
     }
     else{
         $print_input_and_submit .= "<p>Hay que iniciar sesión para comprar.</p>";

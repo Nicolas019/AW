@@ -21,7 +21,7 @@
     <br>Precios:</br>
     <form action ="../compra/verCarrito.php" method="GET">
 					
-		<select name="precio_libro"> 
+		<select name="estado_libro"> 
 		<?php
 			echo $print_precios;
 		?>
