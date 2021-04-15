@@ -22,30 +22,39 @@ require_once '../comun/libro.php';
 		$nombre_imagen = $_FILES['imagen']['name'];
 		$tipo_imagen = $_FILES['imagen']['type'];
 		$tamaño_imagen = $_FILES['imagen']['size'];
+		echo $nombre_imagen;
 		echo $tipo_imagen;
-		/*if(!((strpos($tipo_imagen,"image/jpg"))) || !((strpos($tipo_imagen,"image/jpeg"))) ){
-			echo "El fichero seleccionado tiene que ser de tipo jpg.";
-		}else */
+		echo $tamaño_imagen;
+		if($tamaño_imagen > 8388608){//8388608 = 8GB
+			header('Location: ../comun/crearLibro.php');
+		} 
+		if(strpos($nombre_imagen,'jpg') === false && strpos($tipo_imagen,'jpeg') === false ){
+			//"El fichero seleccionado tiene que ser de tipo jpg.";
+			header('Location: ../comun/crearLibro.php');
+		}
 		$echo ="";
-		if($intPrecio <0 || $intPaginas<0){//>0 comprobación parametros
+		if($intPrecio <=0 || $intPaginas<=0){//>0 comprobación parametros
 			
-			//$echo .="Algun parametro del formulario no es valido";
+			//"Algun parametro del formulario no es valido";
 			header('Location: ../comun/crearLibro.php');
 		}else{
 			$name = basename($_FILES['imagen']['name']);
 			if (move_uploaded_file($_FILES['imagen']['tmp_name'], "../comun/imagenes/$name")){
-				echo "Imagen guardada";
+				//"Imagen guardada";
+
 			}else{
-				echo "NO se pudo guardar";
+				header('Location: ../comun/crearLibro.php');
+				//"NO se pudo guardar";
 			}
 			
-			echo libro::crearLibro($titulo,$autor,$genero,$editorial,$intPrecio,$intPaginas,$fecha_Lanzamiento,$sinopsis,$nombre_imagen);
+			echo libro::crearLibro($titulo,$autor,$genero,$editorial,$intPrecio,$fecha_Lanzamiento,$intPaginas,$sinopsis,$nombre_imagen);
+			header('Location: ../comun/index.php');
 		}
 
 
 	}else{
 		
-		//$echo .="Faltan campos por rellenar en el formulario";
+		//"Faltan campos por rellenar en el formulario";
 		header('Location: ../comun/crearLibro.php');
 	}
 

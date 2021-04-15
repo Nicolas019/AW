@@ -47,15 +47,15 @@
 						Nuevo Libro:
 					</h4>
 
-					<p> Titulo <input type="text" name="titulo" value=""> </p>
+					<p> Titulo <input type="text" name="titulo" value="" required> </p>
 					<p> Autor <?php echo $selectAutores ?>				</p>
 					<p> Genero <?php echo $selectGenero ?> </p>
-					<p> Precio <input type="text" name="precio" value=""> </p>
+					<p> Precio <input type="text" name="precio" value="" required title="Introduzca un precio válido"> </p>
 					<p> Editorial  <?php echo $selectEditorial ?></p>
-					<p> Fecha Lanzamiento <input type="date" name="fecha_Lanzamiento" value=""> </p>
-					<p> Numero de páginas <input type="text" name="numero_Paginas" value=""> </p>
-					<p> Sinopsis <input type="textarea" name="sinopsis" value=""> </p>
-					<p>Fichero: <input type= "file" name="imagen"/></p>
+					<p> Fecha Lanzamiento <input type="date" name="fecha_Lanzamiento" value="" required> </p>
+					<p> Numero de páginas <input type="text" name="numero_Paginas" value="" required> </p>
+					<p> Sinopsis <input type="textarea" name="sinopsis" value="" required> </p>
+					<p>Fichero: <input type= "file" name="imagen" required/></p>
 					
 
 					<button type="submit" name ="submit" value ="Enviar_form">

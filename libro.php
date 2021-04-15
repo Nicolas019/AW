@@ -139,7 +139,9 @@ class libro{
 		$numVentas = 0;
 		$sql= "INSERT INTO Libro (titulo,id_Autor,id_Genero,id_Editorial,precio,numero_Paginas,sinopsis,valoracion,ruta_imagen,NumVentas,fecha_Lanzamiento) VALUES ('$titulo','$autor','$genero','$editorial','$precio','$numero_Paginas','$sinopsis','$valoracion','$ruta_imagen','$numVentas','$fecha_Lanzamiento' )";
 
-		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		echo $sql;
+
+		/*$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$BaseDatos = $conexion->conectar();
 		 $echo="";
 		if($BaseDatos->query($sql) === TRUE){
@@ -150,7 +152,7 @@ class libro{
 
 		$conexion->desconectar($BaseDatos);
 
-		return $echo;
+		return $echo;*/
 	}
 
 	static public function ordenarPor($ordenar, $numero){ //Ordena por nº de ventas 
