@@ -3,7 +3,7 @@
 require_once '../comun/BD.php';
 require_once '../comun/libro.php';
 
-$car_imagenes = '/comun/imagenes/';
+
 
 	if(isset ($_POST["titulo"]) && isset ($_POST["precio"]) && isset ($_POST["fecha_Lanzamiento"]) && isset ($_POST["numero_Paginas"]) &&  isset ($_POST["sinopsis"])){
 
@@ -26,8 +26,11 @@ $car_imagenes = '/comun/imagenes/';
 		/*if(!((strpos($tipo_imagen,"image/jpg"))) || !((strpos($tipo_imagen,"image/jpeg"))) ){
 			echo "El fichero seleccionado tiene que ser de tipo jpg.";
 		}else */
-		if($intPrecio<0 || $intPaginas<0){//>0 comprobación parametros
-			echo "Algun parametro del formulario no es valido";
+		$echo ="";
+		if($intPrecio <0 || $intPaginas<0){//>0 comprobación parametros
+			
+			//$echo .="Algun parametro del formulario no es valido";
+			header('Location: ../comun/crearLibro.php');
 		}else{
 			$name = basename($_FILES['imagen']['name']);
 			if (move_uploaded_file($_FILES['imagen']['tmp_name'], "../comun/imagenes/$name")){
@@ -41,8 +44,9 @@ $car_imagenes = '/comun/imagenes/';
 
 
 	}else{
-
-		echo "Faltan campos por rellenar en el formulario";
+		
+		//$echo .="Faltan campos por rellenar en el formulario";
+		header('Location: ../comun/crearLibro.php');
 	}
 
 	
