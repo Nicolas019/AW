@@ -22,9 +22,11 @@
             
             <p> <?php echo $mostrar_carrito; ?> </p>
             
-            <p> <?php if ($stock !== "No hay stock de los libros: ") echo $stock; ?> </p>
+            <p> <?php echo "Precio total: ".$precio_carrito." euros"; ?> </p>
             
-            <?php if ($stock === "No hay stock de los libros: "){?>
+            <p> <?php if (!$hay_stock) echo $stock; ?> </p>
+            
+            <?php if ($hay_stock && !$carrito_vacio){?>
                 <a href='../compra/compra.php'>Comprar</a>
             <?php } ?>
             <a href='../catalogo/biblioteca.php'>Seguir mirando</a>
