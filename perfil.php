@@ -19,7 +19,12 @@
 		<h2> Ver perfil </h2>
 
 		<p>
-		<?php echo $nombre; ?>
+		<?php 
+
+		echo $nombre;
+		echo $foto;
+
+		?>
 		</p>
 
 		<form method="POST" action="../perfil/perfil.php"> 

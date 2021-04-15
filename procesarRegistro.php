@@ -14,7 +14,7 @@
     $email = isset($_POST["email"]) ? htmlspecialchars(trim(strip_tags($_POST["email"]))) : null;
     $name = isset($_POST["nombre"]) ? htmlspecialchars(trim(strip_tags($_POST["nombre"]))) : null;
     $surname = isset($_POST["apellidos"]) ? htmlspecialchars(trim(strip_tags($_POST["apellidos"]))) : null;
-    $cumple = isset($_POST["bday"]) ? htmlspecialchars(trim(strip_tags($_POST["bday"]))) : null;
+    $cumple = isset($_POST["bday"]) ? ($_POST["bday"]) : null;
     $tipo_usuario = "lector novato";
 
 	$sql = "SELECT * FROM usuarios";
@@ -44,7 +44,7 @@
 		    $user = new usuario(0);
 		    $user->registrar_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
 		    $user->desconectarBD();
-			//header('Location: ../perfil/login.php');
+			header('Location: ../perfil/login.php');
 		}
 	}
 	

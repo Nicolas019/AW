@@ -15,8 +15,8 @@
 		$print_nueva_password = "<p>Contraseña cambiada con éxito.</p>";
 	} 
 
-	$nombre = $user->nombre;
-	$foto = $user->foto_perfil;
+	$nombre = "<p>".$user->nombre."</p>";
+	$foto = "<p><img id=\"libro\" src=\"../comun/imagenes/$user->foto_perfil\"></p>";
 	$user->desconectarBD();	
 
 ?>

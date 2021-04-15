@@ -26,7 +26,7 @@ class usuario{
 		$this->BaseDatos = $this->conexion->conectar();
 
 		$this->id_usuario = $id;
-		$sql_usuario = "SELECT * FROM usuarios U JOIN info_usuarios I ON U.id_usuario=I.id_usuario WHERE U.id_usuario=$this->id_usuario";
+		$sql_usuario = "SELECT * FROM usuarios U WHERE U.id_usuario=$this->id_usuario";
 		$consulta_usuario = $this->BaseDatos->query($sql_usuario);
 		if($consulta_usuario->num_rows > 0){
 			while($fila_usuario = mysqli_fetch_assoc($consulta_usuario)){
@@ -66,15 +66,11 @@ class usuario{
 		$this->nombre = $nombre;
 		$this->apellidos = $apellidos;
 		$this->tipo_usuario = $tipo_usuario;
+		$this->foto_perfil = "fotoperfil.jpg";
 		$this->fecha_nacimiento = $fecha_nacimiento;
 
-		$sql1 = "INSERT INTO usuarios VALUES (NULL, '$this->usuario', '$this->email', '$this->contrasenia', '$this->nombre', '$this->apellidos', '$this->tipo_usuario')";
-		//$consulta1 = $this->BaseDatos->query($sql1);
-
-		//como obtener el $id_user del último INSERT
-
-		$sql2 = "INSERT INTO info_usuarios VALUES ($id_user, NULL, NULL, NULL, $this->fecha_nacimiento)";
-		//$consulta2 = $this->BaseDatos->query($sql2);
+		$sql = "INSERT INTO usuarios VALUES (NULL, '$this->usuario', '$this->email', '$this->contrasenia', '$this->nombre', '$this->apellidos', '$this->tipo_usuario', '$this->foto_perfil', NULL, NULL, '$this->fecha_nacimiento')";
+		$consulta = $this->BaseDatos->query($sql);
 	}
 
 	public function compruebaPassword($password){
@@ -140,7 +136,6 @@ class usuario{
 			$this->apellidos = $apellidos;
 			$this->tipo_usuario = $tipo_usuario;
 
-			//Tabla Info_usuario
 			$this->fecha_nacimiento = $fecha_nacimiento;
 			$this->biografia = $biografia;
 			$this->foto_perfil = $foto;
