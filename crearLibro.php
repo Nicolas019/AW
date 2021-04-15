@@ -1,24 +1,3 @@
-<?php 
-
-
-//comprobar si es admin
-//mostrar formulario
-
-	require_once '../comun/BD.php';
-	require_once '../perfil/usuario.php';
-	//$echo ="";
-	/*if(isset($_SESSION['login'])  && $_SESSION['login'] == true && isset($_SESSION['tipo_usuario']) &&  $_SESSION['tipo_usuario'] = "administrador"){
-
-					
-		}else{
-			$echo.= "NECESITAS SER ADMINISTRADOR.";
-		}*/
-		//require_once '../comun/formularioCrearLibro.php';
-	
-
-
- ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +16,10 @@
 
 		<main id="contenido">
 			<?php 
-				require_once '../comun/formularioCrearLibro.php';
+				
+				require_once'../comun/comprobarAdmin.php';
+				echo $echo;
+				
 			?>
 		</main>
 

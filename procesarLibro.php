@@ -28,7 +28,7 @@ require_once '../comun/libro.php';
 		if($tamaño_imagen > 8388608){//8388608 = 8GB
 			header('Location: ../comun/crearLibro.php');
 		} 
-		if(strpos($nombre_imagen,'jpg') === false && strpos($tipo_imagen,'jpeg') === false ){
+		if(strpos($tipo_imagen,'jpg') === false && strpos($tipo_imagen,'jpeg') === false ){
 			//"El fichero seleccionado tiene que ser de tipo jpg.";
 			header('Location: ../comun/crearLibro.php');
 		}
