@@ -37,6 +37,29 @@ class genero{
 	public function desconectarBD(){
 		$this->conexion->desconectar($this->BaseDatos);
 	}
+public static function getGeneros(){
+
+        $sql = "SELECT * FROM genero";
+
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+        $BaseDatos = $conexion->conectar();
+        $consulta = $BaseDatos->query($sql);
+
+        $arrayGeneros = array();
+
+        if($consulta->num_rows > 0){
+            while ($fila = mysqli_fetch_assoc($consulta)) {
+
+                $arrayGeneros[$fila['id_Genero']] = $fila['descripcionG'];
+
+            }
+            $consulta->free();
+        }
+
+        $conexion->desconectar($BaseDatos);
+
+        return $arrayGeneros;
+    }
 }
 
  ?>

@@ -67,7 +67,30 @@ class autor{
 
 	}
 
+public static function getAutores(){
 
+        $sql = "SELECT * FROM autor";
+
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+        $BaseDatos = $conexion->conectar();
+        $consulta = $BaseDatos->query($sql);
+
+        $arrayAutores = array();
+
+        if($consulta->num_rows > 0){
+            while ($fila = mysqli_fetch_assoc($consulta)) {
+
+                $arrayAutores[$fila['id_Autor']] = $fila['descripcionA'];
+
+            }
+            $consulta->free();
+        }
+
+        $conexion->desconectar($BaseDatos);
+
+        return $arrayAutores;
+    }
 }
+
 
  ?>

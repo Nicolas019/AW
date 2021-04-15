@@ -6,6 +6,9 @@
 			<li> <a href="../foro/foro.php">Foro </a> </li> 
 			<li> <a href="../venta/venta.php">Venta</a> </li>
 			<li> <a href="../retos/retos.php">Retos</a>  </li>
+			<li> <a href='../comun/crearLibro.php'>Crear Libro</a>
+			</li>
+
 			<?php
 				session_start();
 
@@ -31,5 +34,6 @@
 
 				
 			</li>
+
 		</ul>   
 	</nav>

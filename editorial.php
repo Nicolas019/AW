@@ -37,6 +37,30 @@ class editorial{
 	public function desconectarBD(){
 		$this->conexion->desconectar($this->BaseDatos);
 	}
+public static function getEditoriales(){
+
+        $sql = "SELECT * FROM editorial";
+
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+        $BaseDatos = $conexion->conectar();
+        $consulta = $BaseDatos->query($sql);
+
+        $arrayEditoriales = array();
+
+        if($consulta->num_rows > 0){
+            while ($fila = mysqli_fetch_assoc($consulta)) {
+
+                $arrayEditoriales[$fila['id_Editorial']] = $fila['descripcionE'];
+
+            }
+            $consulta->free();
+        }
+
+        $conexion->desconectar($BaseDatos);
+
+        return $arrayEditoriales;
+    }
+
 }
 
  ?>
