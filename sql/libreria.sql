@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2021 a las 11:03:41
+-- Tiempo de generación: 15-04-2021 a las 11:28:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -84,13 +84,6 @@ CREATE TABLE `carrito` (
   `id_libro` int(11) NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id_carrito`, `id_usuario`, `id_libro`, `precio`) VALUES
-(1, 6, 3, 11.4);
 
 -- --------------------------------------------------------
 
@@ -196,7 +189,9 @@ INSERT INTO `info_usuarios` (`id_usuario`, `foto_perfil`, `direccion`, `biografi
 (8, '', '', '', '1999-11-08'),
 (9, '', '', '', '1999-04-22'),
 (10, '', '', '', '1999-07-07'),
-(11, '', '', '', '1999-01-18');
+(11, '', '', '', '1999-01-18'),
+(12, '', '', '', '1980-05-13'),
+(13, '', '', '', '1992-05-01');
 
 -- --------------------------------------------------------
 
@@ -226,7 +221,7 @@ CREATE TABLE `libro` (
 INSERT INTO `libro` (`id_Libro`, `titulo`, `id_Autor`, `id_Genero`, `id_Editorial`, `precio`, `numero_Paginas`, `sinopsis`, `valoracion`, `ruta_imagen`, `NumVentas`, `fecha_Lanzamiento`) VALUES
 (1, 'El camino de los reyes (Saga del archivo de las tormentas 1)', 3, 2, 5, 34.9, 1200, 'El camino de los reyes es el primer volumen de «El Archivo de las Tormentas», el resultado de más de una década de construcción y escritura de universos, convertido en una obra maestra de la fantasía contemporánea en diez volúmenes. Con ella, Brandon Sanderson se postula como el autor del género que más lectores está ganando en todo el mundo.', 9.9, 'ElCaminoDeLosReyes.jpg', 1000000, '2010-10-31'),
 (2, 'IT (ESO)', 4, 5, 2, 12.95, 1503, '¿Quién o qué mutila y mata a los niños de un pequeño pueblo norteamericano?\r\n¿Por qué llega cíclicamente el horror a Derry en forma de un payaso siniestro que va sembrando la destrucción a su paso?\r\n\r\nEsto es lo que se proponen averiguar los protagonistas de esta novela. Tras veintisiete años de tranquilidad y lejanía, una antigua promesa infantil les hace volver al lugar en el que vivieron su infancia y juventud como una terrible pesadilla. Regresan a Derry para enfrentarse con su pasado y enterrar definitivamente la amenaza que los amargó durante su niñez.\r\n\r\nSaben que pueden morir, pero son conscientes de que no conocerán la paz hasta que aquella cosa sea destruida para siempre.', 7.9, 'It.jpg', 0, NULL),
-(3, 'Harry Potter y la Piedra Filosofal: 1', 1, 2, 2, 14.25, 223, 'Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.\r\n\r\n«Con las manos temblorosas, Harry le dio la vuelta al sobre y vio un sello de lacre púrpura con un escudo de armas: un león, un águila, un tejón y una serpiente, que rodeaban una gran letra H.»\r\n\r\nHarry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería. ¡Está a punto de comenzar una aventura increíble!', 8.6, 'HarryPotter1.jpg', 200, NULL),
+(3, 'Harry Potter y la Piedra Filosofal: 1', 1, 2, 2, 14.25, 223, 'Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.\r\n\r\n«Con las manos temblorosas, Harry le dio la vuelta al sobre y vio un sello de lacre púrpura con un escudo de armas: un león, un águila, un tejón y una serpiente, que rodeaban una gran letra H.»\r\n\r\nHarry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería. ¡Está a punto de comenzar una aventura increíble!', 8.6, 'HarryPotter1.jpg', 201, NULL),
 (4, 'Rebelión en la granja', 7, 6, 2, 8.5, 126, 'Un rotundo alegato a favor de la libertad y en contra del totalitarismo que se ha convertido en un clásico de la literatura del siglo XX.\r\n\r\nEsta sátira de la Revolución rusa y el triunfo del estalinismo, escrita en 1945, se ha convertido por derechos propio en un hito de la cultura contemporánea y en uno de los libros más mordaces de todos los tiempos. Ante el auge de los animales de la Granja Solariega, pronto detectamos las semillas de totalitarismo en una organización aparentemente ideal; y en nuestros líderes más carismáticos, la sombra de los opresores más crueles.\r\nLa presente edición, avalada por The Orwell Foundation, sigue fielmente el texto definitivo de las obras completas del autor, fijado por el profesor Peter Davison. Incluye un epílogo del periodista y ensayista Christopher Hitchens, que pone de relieve la importancia del autor en nuestro tiempo. Marcial Souto firma la estupenda traducción, que se publicó por primera vez en 2013 y es la más reciente de la obra.', 9, 'RebelionEnLaGranja.jpg', 200, NULL),
 (5, 'El señor de los anillos I: La comunidad del anillo', 5, 2, 2, 20.95, 488, 'En la adormecida e idílica Comarca, un joven hobbit recibe un encargo: custodiar el Anillo Único y emprender el viaje para su destrucción en la Grieta del Destino. Acompañado por magos, hombres, elfos y enanos, atravesará la Tierra Media y se internará en las sombras de Mordor, perseguido siempre por las huestes de Sauron, el Señor Oscuro, dispuesto a recuperar su creación para establecer el dominio definitivo del Mal.', 8.5, 'ElSenorDeLosAnillos1.jpg', 10, NULL),
 (6, 'Cien años de soledad', 6, 6, 2, 9.5, 471, '«Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo. Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río de aguas diáfanas que se precipitaban por un lecho de piedras pulidas, blancas y enormes como huevos prehistóricos. El mundo era tan reciente, que muchas cosas carecían de nombre, y para mencionarlas había que señalarlas con el dedo.»', 10, 'CienAnosDeSoledad.jpg', 50, NULL),
@@ -275,17 +270,19 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasenia`, `nombre`, `apellidos`, `tipo_usuario`) VALUES
-(1, 'admin', 'admin@athenea.com', '1234', 'Administrador', 'Athenea', 'administrador'),
-(2, 'nuriacarrascosa', 'nucarr02@ucm.es', '1234', 'Nuria', 'Carrascosa Cascajo', 'superlector'),
-(3, 'sergiofrutos', 'sefrutos@ucm.es', '1234', 'Sergio', 'Frutos Serrano', 'lector novato'),
-(4, 'patrilla', 'patrilla@ucm.es', '1234', 'Patricia', 'Llamas Roque', 'lector aficionado'),
-(5, 'carlosram', 'carami02@ucm.es', '1234', 'Carlos', 'Ramírez Martínez', 'lector errante'),
+(1, 'admin', 'admin@athenea.com', '$2y$10$dplBacz2NuNio1iiW1JAneJ9G4FqNWeq9/rbT8CdIwLy11oWGmFxy', 'Administrador', 'Athenea', 'administrador'),
+(2, 'nuriacarrascosa', 'nucarr02@ucm.es', '$2y$10$WIk4WV5LkZb/TlYJ4cyvfe7wWG3QNNq0OocJhWfUA22GgjprStahK', 'Nuria', 'Carrascosa Cascajo', 'superlector'),
+(3, 'sergiofrutos', 'sefrutos@ucm.es', '$2y$10$xc0ljXTONTh7MT1qEIOK8eOFKCXA8zqIuBF5M7Ha2kN6Bx.zUNhGm', 'Sergio', 'Frutos Serrano', 'lector novato'),
+(4, 'patrilla', 'patrilla@ucm.es', '$2y$10$AF/8yEeQ/dFTOvla2lHPsehjh102ZF/Ij.I/oWivoOUPY8fkAxr/C', 'Patricia', 'Llamas Roque', 'lector aficionado'),
+(5, 'carlosram', 'carami02@ucm.es', '$2y$10$5RBymNB4kpEEhAd81VwxIeRb0rIXIpne5G1E5bCeWc18IhjHmb3/i', 'Carlos', 'Ramírez Martínez', 'lector errante'),
 (6, 'nicobeni', 'nicobeni@ucm.es', '$2y$10$ud3djOTbBH8nh9Z.ipMBcOlPViduOf7uo776Yl/M3RDHg9RJMxHeO', 'Nicolás', 'Benito', 'lector novato'),
-(7, 'semuñoz', 'semuñoz@ucm.es', '1234', 'Sergio', 'Muñoz', 'lector novato'),
-(8, 'froiz', 'ofroiz@ucm.es', '1234', 'Óscar', 'Froiz', 'lector novato'),
-(9, 'davicillo', 'ddoming@ucm.es', '1234', 'David', 'Dominguez', 'lector novato'),
-(10, 'paula', 'paulalopez@ucm.es', '1234', 'Paula', 'López', 'lector novato'),
-(11, 'iris', 'irissaenz@gmail.com', '$2y$10$c2SSa.JmtdOROGQWN1kFh.znfdcSsZ03EflTddLN4sSxCN/ruewni', 'Iris', 'Sáenz de Miera', 'lector novato');
+(7, 'semuñoz', 'semuñoz@ucm.es', '$2y$10$CeC2AKTE9ZfH3VaZaa7DjudA.eQdVQYvB066ImQQ/4eptQm/kTpHe', 'Sergio', 'Muñoz', 'lector novato'),
+(8, 'froiz', 'ofroiz@ucm.es', '$2y$10$SkSKo.VBInuKl6gjvxF7hu22vSSupiVT8XBLtOwXar5pFtvQGKKqO', 'Óscar', 'Froiz', 'lector novato'),
+(9, 'davicillo', 'ddoming@ucm.es', '$2y$10$ikCT/3acT3Uk6h.yP.Ycx.P6WNTCqrPBLmAuIKp96w1pLCIjYoLoq', 'David', 'Dominguez', 'lector novato'),
+(10, 'paula', 'paulalopez@ucm.es', '$2y$10$kBXui9O2bulgQVtUkTweaOR5jZWaCfeSEn2VPU07LhioT6eBxaj2O', 'Paula', 'López', 'lector novato'),
+(11, 'iris', 'irissaenz@gmail.com', '$2y$10$c2SSa.JmtdOROGQWN1kFh.znfdcSsZ03EflTddLN4sSxCN/ruewni', 'Iris', 'Sáenz de Miera', 'lector novato'),
+(12, 'sandalioGS', 'sandaliogs@gmail.com', '$2y$10$W5XzlR/FkF7QGZeC9wNp0ex73q0CP6PkwcMAOYLjhN1F.GOiltAI6', 'Sandalio', 'García Sotomontes', 'lector novato'),
+(13, 'lauracc', 'lauracc@gmail.com', '$2y$10$j9rRzrMo7yvFY6LecRY1geOEZ23iLLE6ANgKgA8xTo5JLnrfX61zm', 'Laura', 'Carrascosa', 'lector novato');
 
 --
 -- Índices para tablas volcadas
@@ -366,7 +363,7 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
@@ -396,7 +393,7 @@ ALTER TABLE `libro`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
