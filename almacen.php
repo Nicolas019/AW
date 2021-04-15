@@ -95,11 +95,11 @@ class almacen{
 	}
     
     public function hay_stock_libro_Carrito($price){
-        $hayStock = false;
+        $hayStock = 0;
         $i = 0;
 		while (!$hayStock && $i < almacen::$NUM_ESTADOS){
             if ((string) $this->arrayPrecios[$i] === (string) $price){
-                $hayStock = true;
+                $hayStock = $this->arrayStock[$i];
             }
             $i++;
         }
@@ -123,27 +123,27 @@ class almacen{
 
 	}
 
-    public function restar_stock_libro($precio){
+    public function restar_stock_libro($precio, $cantidad){
         $stock_libro = 0;
         $estado_libro;
         if($precio === $this->arrayPrecios[0]){
-           $stock_libro = $this->arrayStock[0]--;
+           $stock_libro = $this->arrayStock[0]-$cantidad;
            $estado_libro = $this->arrayEstado[0];
         }
-        else if($estado === $this->arrayPrecios[1]){
-            $stock_libro = $this->arrayStock[1]--;
+        else if($precio === $this->arrayPrecios[1]){
+            $stock_libro = $this->arrayStock[1]-$cantidad;
             $estado_libro = $this->arrayEstado[1];
         }
-        else if($estado === $this->arrayPrecios[2]){
-            $stock_libro = $this->$arrayStock[2]--;
+        else if($precio === $this->arrayPrecios[2]){
+            $stock_libro = $this->arrayStock[2]-$cantidad;
             $estado_libro = $this->arrayEstado[2];
         }
-        else if($estado === $this->arrayPrecios[3]){
-            $stock_libro = $this->$arrayStock[3]--;
+        else if($precio === $this->arrayPrecios[3]){
+            $stock_libro = $this->arrayStock[3]-$cantidad;
             $estado_libro = $this->arrayEstado[3];
         }
 
-        $sql_almacen = "UPDATE almacen A SET A.stock=$stock_libro WHERE A.id_libro=$this->id_libro, A.estado=$estado_libro";
+        $sql_almacen = "UPDATE almacen A SET A.stock=$stock_libro WHERE A.id_libro=$this->id_libro AND A.estado='$estado_libro'";
         $cosulta_almacen = $this->BaseDatos->query($sql_almacen);
     }
 

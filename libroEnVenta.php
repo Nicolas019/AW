@@ -9,7 +9,7 @@ class libroEnVenta extends libro{
 	private $conexion; // Necesario para después poder desconectar la BD
 
 	private $almacen;
-	private $comentarios;
+	// private $comentarios;
 	
 	/* CONSTRUCTOR */
 	public function __construct($id){
@@ -19,7 +19,7 @@ class libroEnVenta extends libro{
 		$this->BaseDatos = $this->conexion->conectar();
 
 		$this->almacen = null;
-		$this->comentarios = null;
+		// $this->comentarios = null;
 	}
 
 	/* FUNCIONES GENERALES */
@@ -60,10 +60,10 @@ class libroEnVenta extends libro{
 	}
     
 
-	public function restar_stock_libroEnVenta($precio){
+	public function restar_stock_libroEnVenta($precio, $cantidad){
 		$this->almacen = new almacen($this->id_Libro, $this->precio);
 
-		$this->almacen->restar_stock_libro($precio);
+		$this->almacen->restar_stock_libro($precio, $cantidad);
 
 		$this->almacen->desconectarBD();
 		$this->almacen = null;
@@ -81,7 +81,10 @@ class libroEnVenta extends libro{
 		return $precio_libro;
 	}
 
-	/* COMENTARIOS */
+    /* COMENTARIOS */
+    
+    /*
+    
 	public function descripcion_comentarios_libroEnVenta(){
 		$this->comentarios = new comentarios($this->id_Libro);
 
@@ -124,6 +127,8 @@ class libroEnVenta extends libro{
 		$this->comentarios->desconectarBD();
 		$this->comentarios = null;
 	}
+    
+    */
 
 	/* OTRAS FUNCIONES */
 
