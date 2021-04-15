@@ -18,7 +18,7 @@
 				}
 				else{
 					if(isset($_SESSION['login'])  && $_SESSION['login'] == true && isset($_SESSION['tipo_usuario']) &&  $_SESSION['tipo_usuario'] == "administrador"){
-						echo "<li> <a href='../comun/crearLibro.php'>Crear Libro</a></li>";
+						echo "<li> <a href='../comun/panelAdmin.php'>Panel Administrador</a></li>";
 					}
 					echo "<li id=\"alinearDerecha\"><a href='../perfil/perfil.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>";
 				}

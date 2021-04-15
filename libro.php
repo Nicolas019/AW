@@ -134,14 +134,14 @@ class libro{
 	}
 		static public function crearLibro($titulo,$autor,$genero,$editorial,$precio,$fecha_Lanzamiento,$numero_Paginas,$sinopsis,$ruta_imagen){
 
-		//$ruta_imagen = "it.jpg";
+		
 		$valoracion = 0;//valoración y ventas se crean a cero porque recogen los datos de los libros vendidos por la pagina y las opiniones de los usuarios 
 		$numVentas = 0;
-		$sql= "INSERT INTO Libro (titulo,id_Autor,id_Genero,id_Editorial,precio,numero_Paginas,sinopsis,valoracion,ruta_imagen,NumVentas,fecha_Lanzamiento) VALUES ('$titulo','$autor','$genero','$editorial','$precio','$numero_Paginas','$sinopsis','$valoracion','$ruta_imagen','$numVentas','$fecha_Lanzamiento' )";
+		$sql= "INSERT INTO libro (titulo,id_Autor,id_Genero,id_Editorial,precio,numero_Paginas,sinopsis,valoracion,ruta_imagen,NumVentas,fecha_Lanzamiento) VALUES ('$titulo','$autor','$genero','$editorial','$precio','$numero_Paginas','$sinopsis','$valoracion','$ruta_imagen','$numVentas','$fecha_Lanzamiento' )";
 
 		echo $sql;
 
-		/*$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$BaseDatos = $conexion->conectar();
 		 $echo="";
 		if($BaseDatos->query($sql) === TRUE){
@@ -152,7 +152,7 @@ class libro{
 
 		$conexion->desconectar($BaseDatos);
 
-		return $echo;*/
+		return $echo;
 	}
 
 	static public function ordenarPor($ordenar, $numero){ //Ordena por nº de ventas 

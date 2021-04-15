@@ -66,6 +66,25 @@ class autor{
     	return $arrayAutores;
 
 	}
+public static function crearAutor($nombreAutor){
+
+		$sql= "INSERT INTO autor (descripcionA) VALUES ('$nombreAutor')";
+
+		echo $sql;
+
+		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+		 $echo="";
+		if($BaseDatos->query($sql) === TRUE){
+			$echo .="Nuevo autor creado";
+		}else{
+			$echo .="ERROR al crear el libro";
+		}
+
+		$conexion->desconectar($BaseDatos);
+
+		return $echo;
+}
 
 public static function getAutores(){
 
