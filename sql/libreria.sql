@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-04-2021 a las 11:28:02
+-- Tiempo de generación: 16-04-2021 a las 01:49:29
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.4
 
@@ -38,11 +38,11 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`id_libro`, `estado`, `stock`) VALUES
-(3, 'nuevo', 2),
-(3, 'como nuevo', 1),
-(3, 'buen estado', 3),
+(3, 'nuevo', 0),
+(3, 'como nuevo', 3),
+(3, 'buen estado', 0),
 (3, 'aceptable', 1),
-(6, 'aceptable', 5);
+(6, 'aceptable', 3);
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,8 @@ CREATE TABLE `carrito` (
   `id_carrito` int(11) NOT NULL,
   `id_usuario` int(10) UNSIGNED NOT NULL,
   `id_libro` int(11) NOT NULL,
-  `precio` double NOT NULL
+  `estado` enum('nuevo','como nuevo','buen estado','aceptable') NOT NULL,
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -163,39 +164,6 @@ INSERT INTO `genero` (`id_Genero`, `descripcionG`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `info_usuarios`
---
-
-CREATE TABLE `info_usuarios` (
-  `id_usuario` int(10) UNSIGNED NOT NULL,
-  `foto_perfil` varchar(60) NOT NULL,
-  `direccion` varchar(11) NOT NULL,
-  `biografia` text NOT NULL,
-  `fecha_nacimiento` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `info_usuarios`
---
-
-INSERT INTO `info_usuarios` (`id_usuario`, `foto_perfil`, `direccion`, `biografia`, `fecha_nacimiento`) VALUES
-(1, '', '', '', '0000-00-00'),
-(2, 'nuriacarrascosa.jpg', '', '', '1999-12-25'),
-(3, 'sergiofrutos.jpg', '', '', '1998-11-25'),
-(4, 'patrilla.jpg', '', '', '1999-07-17'),
-(5, 'carlosram.jpg', '', '', '1999-02-13'),
-(6, 'nicobeni.jpg', '', '', '1999-12-13'),
-(7, 'semuñoz.jpg', '', '', '1999-04-02'),
-(8, '', '', '', '1999-11-08'),
-(9, '', '', '', '1999-04-22'),
-(10, '', '', '', '1999-07-07'),
-(11, '', '', '', '1999-01-18'),
-(12, '', '', '', '1980-05-13'),
-(13, '', '', '', '1992-05-01');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `libro`
 --
 
@@ -221,10 +189,10 @@ CREATE TABLE `libro` (
 INSERT INTO `libro` (`id_Libro`, `titulo`, `id_Autor`, `id_Genero`, `id_Editorial`, `precio`, `numero_Paginas`, `sinopsis`, `valoracion`, `ruta_imagen`, `NumVentas`, `fecha_Lanzamiento`) VALUES
 (1, 'El camino de los reyes (Saga del archivo de las tormentas 1)', 3, 2, 5, 34.9, 1200, 'El camino de los reyes es el primer volumen de «El Archivo de las Tormentas», el resultado de más de una década de construcción y escritura de universos, convertido en una obra maestra de la fantasía contemporánea en diez volúmenes. Con ella, Brandon Sanderson se postula como el autor del género que más lectores está ganando en todo el mundo.', 9.9, 'ElCaminoDeLosReyes.jpg', 1000000, '2010-10-31'),
 (2, 'IT (ESO)', 4, 5, 2, 12.95, 1503, '¿Quién o qué mutila y mata a los niños de un pequeño pueblo norteamericano?\r\n¿Por qué llega cíclicamente el horror a Derry en forma de un payaso siniestro que va sembrando la destrucción a su paso?\r\n\r\nEsto es lo que se proponen averiguar los protagonistas de esta novela. Tras veintisiete años de tranquilidad y lejanía, una antigua promesa infantil les hace volver al lugar en el que vivieron su infancia y juventud como una terrible pesadilla. Regresan a Derry para enfrentarse con su pasado y enterrar definitivamente la amenaza que los amargó durante su niñez.\r\n\r\nSaben que pueden morir, pero son conscientes de que no conocerán la paz hasta que aquella cosa sea destruida para siempre.', 7.9, 'It.jpg', 0, NULL),
-(3, 'Harry Potter y la Piedra Filosofal: 1', 1, 2, 2, 14.25, 223, 'Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.\r\n\r\n«Con las manos temblorosas, Harry le dio la vuelta al sobre y vio un sello de lacre púrpura con un escudo de armas: un león, un águila, un tejón y una serpiente, que rodeaban una gran letra H.»\r\n\r\nHarry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería. ¡Está a punto de comenzar una aventura increíble!', 8.6, 'HarryPotter1.jpg', 201, NULL),
+(3, 'Harry Potter y la Piedra Filosofal: 1', 1, 2, 2, 14.25, 223, 'Harry Potter y la piedra filosofal es el primer volumen de la ya clásica serie de novelas fantásticas de la autora británica J.K. Rowling.\r\n\r\n«Con las manos temblorosas, Harry le dio la vuelta al sobre y vio un sello de lacre púrpura con un escudo de armas: un león, un águila, un tejón y una serpiente, que rodeaban una gran letra H.»\r\n\r\nHarry Potter nunca ha oído hablar de Hogwarts hasta que empiezan a caer cartas en el felpudo del número 4 de Privet Drive. Llevan la dirección escrita con tinta verde en un sobre de pergamino amarillento con un sello de lacre púrpura, y sus horripilantes tíos se apresuran a confiscarlas. Más tarde, el día que Harry cumple once años, Rubeus Hagrid, un hombre gigantesco cuyos ojos brillan como escarabajos negros, irrumpe con una noticia extraordinaria: Harry Potter es un mago, y le han concedido una plaza en el Colegio Hogwarts de Magia y Hechicería. ¡Está a punto de comenzar una aventura increíble!', 8.6, 'HarryPotter1.jpg', 213, NULL),
 (4, 'Rebelión en la granja', 7, 6, 2, 8.5, 126, 'Un rotundo alegato a favor de la libertad y en contra del totalitarismo que se ha convertido en un clásico de la literatura del siglo XX.\r\n\r\nEsta sátira de la Revolución rusa y el triunfo del estalinismo, escrita en 1945, se ha convertido por derechos propio en un hito de la cultura contemporánea y en uno de los libros más mordaces de todos los tiempos. Ante el auge de los animales de la Granja Solariega, pronto detectamos las semillas de totalitarismo en una organización aparentemente ideal; y en nuestros líderes más carismáticos, la sombra de los opresores más crueles.\r\nLa presente edición, avalada por The Orwell Foundation, sigue fielmente el texto definitivo de las obras completas del autor, fijado por el profesor Peter Davison. Incluye un epílogo del periodista y ensayista Christopher Hitchens, que pone de relieve la importancia del autor en nuestro tiempo. Marcial Souto firma la estupenda traducción, que se publicó por primera vez en 2013 y es la más reciente de la obra.', 9, 'RebelionEnLaGranja.jpg', 200, NULL),
 (5, 'El señor de los anillos I: La comunidad del anillo', 5, 2, 2, 20.95, 488, 'En la adormecida e idílica Comarca, un joven hobbit recibe un encargo: custodiar el Anillo Único y emprender el viaje para su destrucción en la Grieta del Destino. Acompañado por magos, hombres, elfos y enanos, atravesará la Tierra Media y se internará en las sombras de Mordor, perseguido siempre por las huestes de Sauron, el Señor Oscuro, dispuesto a recuperar su creación para establecer el dominio definitivo del Mal.', 8.5, 'ElSenorDeLosAnillos1.jpg', 10, NULL),
-(6, 'Cien años de soledad', 6, 6, 2, 9.5, 471, '«Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo. Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río de aguas diáfanas que se precipitaban por un lecho de piedras pulidas, blancas y enormes como huevos prehistóricos. El mundo era tan reciente, que muchas cosas carecían de nombre, y para mencionarlas había que señalarlas con el dedo.»', 10, 'CienAnosDeSoledad.jpg', 50, NULL),
+(6, 'Cien años de soledad', 6, 6, 2, 9.5, 471, '«Muchos años después, frente al pelotón de fusilamiento, el coronel Aureliano Buendía había de recordar aquella tarde remota en que su padre lo llevó a conocer el hielo. Macondo era entonces una aldea de veinte casas de barro y cañabrava construidas a la orilla de un río de aguas diáfanas que se precipitaban por un lecho de piedras pulidas, blancas y enormes como huevos prehistóricos. El mundo era tan reciente, que muchas cosas carecían de nombre, y para mencionarlas había que señalarlas con el dedo.»', 10, 'CienAnosDeSoledad.jpg', 52, NULL),
 (7, 'Palabras Radiantes (Saga del archivo de las tormentas 2)', 3, 2, 5, 30, 1087, 'Los Caballeros Radiantes deben volver a alzarse.\r\n\r\nLos antiguos juramentos por fin se han pronunciado. Los hombres buscan lo que se perdió. Temo que la búsqueda los destruya.\r\n\r\nEs la naturaleza de la magia. Un alma rota tiene grietas donde puede colarse algo más. Las potencias, los poderes de la creación misma, pueden abrazar un alma rota, pero también pueden ampliar sus fisuras.\r\n\r\nEl Corredor del Viento está perdido en una tierra quebrada, en equilibro entre la venganza y el honor. La Tejedora de Luz, lentamente consumida por su pasado, busca la mentira en la que debe convertirse. El Forjador de Vínculos, nacido en la sangre y la muerte, se esfuerza ahora por reconstruir lo que fue destruido. La Exploradora, a caballo entre los destinos de dos pueblos, se ve obligada a elegir entre una muerte lenta y una terrible traición a todo en lo que cree.', 9.3, 'PalabrasRadiantes.jpg', 0, '2014-03-04'),
 (8, 'Juramentada (El Archivo de las Tormentas 3)', 3, 2, 5, 33.15, 1408, 'La humanidad se enfrenta a una nueva Desolación con el regreso de los Portadores del Vacío, un enemigo tan grande en número como en sed de venganza. La victoria fugaz de los ejércitos alezi de Dalinar Kholin ha tenido consecuencias: el enemigo parshendi ha convocado la violenta tormenta eterna, que arrasa el mundo y hace que los hasta ahora pacíficos parshmenios descubran con horror que llevan un milenio esclavizados por los humanos. Al mismo tiempo, en una desesperada huida para alertar a su familia de la amenaza, Kaladin se pregunta si la repentina ira de los parshmenios está justificada.\r\n\r\nEntretanto, en la torre de la ciudad de Urithiru, a salvo de la tormenta, Shallan Davar investiga las maravillas de la antigua fortaleza de los Caballeros Radiantes y desentierra oscuros secretos que acechan en las profundidades. Dalinar descubre entonces que su sagrada misión de unificar su tierra natal de Alezkar era corta de miras. A menos que todas las naciones sean capaces de unirse y dejar ', 10, 'Juramentada.jpg', 0, '2018-04-05'),
 (17, 'El Ritmo de la Guerra (El Archivo de las Tormentas 4)', 3, 2, 5, 34.9, 1408, 'La esperada continuación de Juramentada. Brandon Sanderson, en la cima de su carrera. Tras forjar una coalición de resistencia humana contra la invasión enemiga, Dalinar Kholin y sus Caballeros Radiantes llevan un año librando una guerra brutal. Ningún bando tiene ventaja. Mientras los nuevos descubrimientos tecnológicos cambian la contienda, el enemigo prepara una operación peligrosa. La carrera armamentística resultante desafiará el núcleo de los ideales Radiantes y quizá revele los secretos de la antiquísima torre en la que una vez residió toda su fuerza.\r\n\r\nTras forjar una coalición de resistencia humana contra la invasión enemiga, Dalinar Kholin y sus Caballeros Radiantes llevan un año librando una guerra prolongada y brutal. Ningún bando ha logrado obtener ventaja. Mientras los nuevos descubrimientos tecnológicos cambian el trasfondo de la contienda, el enemigo prepara una operación audaz y peligrosa. La carrera armamentística resultante desafiará el mismo núcleo de los ideales R', 9.6, 'ElRitmoDeLaGuerra.jpg', 0, '2020-11-19'),
@@ -262,27 +230,32 @@ CREATE TABLE `usuarios` (
   `contrasenia` varchar(255) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellidos` varchar(40) NOT NULL,
-  `tipo_usuario` enum('superlector','lector aficionado','lector novato','lector errante','administrador') NOT NULL
+  `tipo_usuario` enum('superlector','lector aficionado','lector novato','lector errante','administrador') NOT NULL,
+  `foto_perfil` varchar(60) NOT NULL,
+  `direccion` varchar(60) DEFAULT NULL,
+  `biografia` text DEFAULT NULL,
+  `fecha_nacimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasenia`, `nombre`, `apellidos`, `tipo_usuario`) VALUES
-(1, 'admin', 'admin@athenea.com', '$2y$10$dplBacz2NuNio1iiW1JAneJ9G4FqNWeq9/rbT8CdIwLy11oWGmFxy', 'Administrador', 'Athenea', 'administrador'),
-(2, 'nuriacarrascosa', 'nucarr02@ucm.es', '$2y$10$WIk4WV5LkZb/TlYJ4cyvfe7wWG3QNNq0OocJhWfUA22GgjprStahK', 'Nuria', 'Carrascosa Cascajo', 'superlector'),
-(3, 'sergiofrutos', 'sefrutos@ucm.es', '$2y$10$xc0ljXTONTh7MT1qEIOK8eOFKCXA8zqIuBF5M7Ha2kN6Bx.zUNhGm', 'Sergio', 'Frutos Serrano', 'lector novato'),
-(4, 'patrilla', 'patrilla@ucm.es', '$2y$10$AF/8yEeQ/dFTOvla2lHPsehjh102ZF/Ij.I/oWivoOUPY8fkAxr/C', 'Patricia', 'Llamas Roque', 'lector aficionado'),
-(5, 'carlosram', 'carami02@ucm.es', '$2y$10$5RBymNB4kpEEhAd81VwxIeRb0rIXIpne5G1E5bCeWc18IhjHmb3/i', 'Carlos', 'Ramírez Martínez', 'lector errante'),
-(6, 'nicobeni', 'nicobeni@ucm.es', '$2y$10$ud3djOTbBH8nh9Z.ipMBcOlPViduOf7uo776Yl/M3RDHg9RJMxHeO', 'Nicolás', 'Benito', 'lector novato'),
-(7, 'semuñoz', 'semuñoz@ucm.es', '$2y$10$CeC2AKTE9ZfH3VaZaa7DjudA.eQdVQYvB066ImQQ/4eptQm/kTpHe', 'Sergio', 'Muñoz', 'lector novato'),
-(8, 'froiz', 'ofroiz@ucm.es', '$2y$10$SkSKo.VBInuKl6gjvxF7hu22vSSupiVT8XBLtOwXar5pFtvQGKKqO', 'Óscar', 'Froiz', 'lector novato'),
-(9, 'davicillo', 'ddoming@ucm.es', '$2y$10$ikCT/3acT3Uk6h.yP.Ycx.P6WNTCqrPBLmAuIKp96w1pLCIjYoLoq', 'David', 'Dominguez', 'lector novato'),
-(10, 'paula', 'paulalopez@ucm.es', '$2y$10$kBXui9O2bulgQVtUkTweaOR5jZWaCfeSEn2VPU07LhioT6eBxaj2O', 'Paula', 'López', 'lector novato'),
-(11, 'iris', 'irissaenz@gmail.com', '$2y$10$c2SSa.JmtdOROGQWN1kFh.znfdcSsZ03EflTddLN4sSxCN/ruewni', 'Iris', 'Sáenz de Miera', 'lector novato'),
-(12, 'sandalioGS', 'sandaliogs@gmail.com', '$2y$10$W5XzlR/FkF7QGZeC9wNp0ex73q0CP6PkwcMAOYLjhN1F.GOiltAI6', 'Sandalio', 'García Sotomontes', 'lector novato'),
-(13, 'lauracc', 'lauracc@gmail.com', '$2y$10$j9rRzrMo7yvFY6LecRY1geOEZ23iLLE6ANgKgA8xTo5JLnrfX61zm', 'Laura', 'Carrascosa', 'lector novato');
+INSERT INTO `usuarios` (`id_usuario`, `usuario`, `email`, `contrasenia`, `nombre`, `apellidos`, `tipo_usuario`, `foto_perfil`, `direccion`, `biografia`, `fecha_nacimiento`) VALUES
+(1, 'admin', 'admin@athenea.com', '$2y$10$dplBacz2NuNio1iiW1JAneJ9G4FqNWeq9/rbT8CdIwLy11oWGmFxy', 'Administrador', 'Athenea', 'administrador', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(2, 'nuriacarrascosa', 'nucarr02@ucm.es', '$2y$10$WIk4WV5LkZb/TlYJ4cyvfe7wWG3QNNq0OocJhWfUA22GgjprStahK', 'Nuria', 'Carrascosa Cascajo', 'superlector', 'nuriacarrascosa.jpg', NULL, NULL, '1999-12-25'),
+(3, 'sergiofrutos', 'sefrutos@ucm.es', '$2y$10$xc0ljXTONTh7MT1qEIOK8eOFKCXA8zqIuBF5M7Ha2kN6Bx.zUNhGm', 'Sergio', 'Frutos Serrano', 'lector novato', 'sergiofrutos.jpg', NULL, NULL, '0000-00-00'),
+(4, 'patrilla', 'patrilla@ucm.es', '$2y$10$AF/8yEeQ/dFTOvla2lHPsehjh102ZF/Ij.I/oWivoOUPY8fkAxr/C', 'Patricia', 'Llamas Roque', 'lector aficionado', 'patrilla.jpg', NULL, NULL, '0000-00-00'),
+(5, 'carlosram', 'carami02@ucm.es', '$2y$10$5RBymNB4kpEEhAd81VwxIeRb0rIXIpne5G1E5bCeWc18IhjHmb3/i', 'Carlos', 'Ramírez Martínez', 'lector errante', 'carlosram.jpg', NULL, NULL, '0000-00-00'),
+(6, 'nicobeni', 'nicobeni@ucm.es', '$2y$10$ud3djOTbBH8nh9Z.ipMBcOlPViduOf7uo776Yl/M3RDHg9RJMxHeO', 'Nicolás', 'Benito', 'lector novato', 'nicobeni.jpg', NULL, NULL, '0000-00-00'),
+(7, 'semuñoz', 'semuñoz@ucm.es', '$2y$10$CeC2AKTE9ZfH3VaZaa7DjudA.eQdVQYvB066ImQQ/4eptQm/kTpHe', 'Sergio', 'Muñoz', 'lector novato', 'semuñoz.jpg', NULL, NULL, '0000-00-00'),
+(8, 'froiz', 'ofroiz@ucm.es', '$2y$10$SkSKo.VBInuKl6gjvxF7hu22vSSupiVT8XBLtOwXar5pFtvQGKKqO', 'Óscar', 'Froiz', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(9, 'davicillo', 'ddoming@ucm.es', '$2y$10$ikCT/3acT3Uk6h.yP.Ycx.P6WNTCqrPBLmAuIKp96w1pLCIjYoLoq', 'David', 'Dominguez', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(10, 'paula', 'paulalopez@ucm.es', '$2y$10$kBXui9O2bulgQVtUkTweaOR5jZWaCfeSEn2VPU07LhioT6eBxaj2O', 'Paula', 'López', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(11, 'iris', 'irissaenz@gmail.com', '$2y$10$c2SSa.JmtdOROGQWN1kFh.znfdcSsZ03EflTddLN4sSxCN/ruewni', 'Iris', 'Sáenz de Miera', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(12, 'sandalioGS', 'sandaliogs@gmail.com', '$2y$10$W5XzlR/FkF7QGZeC9wNp0ex73q0CP6PkwcMAOYLjhN1F.GOiltAI6', 'Sandalio', 'García Sotomontes', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(13, 'lauracc', 'lauracc@gmail.com', '$2y$10$j9rRzrMo7yvFY6LecRY1geOEZ23iLLE6ANgKgA8xTo5JLnrfX61zm', 'Laura', 'Carrascosa', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00'),
+(14, 'johndoe', 'johndoe@gmail.com', '$2y$10$ZbacBNXPD.Zp6NBi3zVpKe8N1xqUzkRwfUQCvjbtjrcDpxxmT/SXG', 'John', 'Doe', 'lector novato', 'fotoperfil.jpg', NULL, NULL, '0000-00-00');
 
 --
 -- Índices para tablas volcadas
@@ -329,12 +302,6 @@ ALTER TABLE `genero`
   ADD PRIMARY KEY (`id_Genero`);
 
 --
--- Indices de la tabla `info_usuarios`
---
-ALTER TABLE `info_usuarios`
-  ADD PRIMARY KEY (`id_usuario`);
-
---
 -- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
@@ -363,7 +330,7 @@ ALTER TABLE `autor`
 -- AUTO_INCREMENT de la tabla `carrito`
 --
 ALTER TABLE `carrito`
-  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_carrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
@@ -393,7 +360,7 @@ ALTER TABLE `libro`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_usuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas
@@ -418,12 +385,6 @@ ALTER TABLE `carrito`
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_Libro`) REFERENCES `libro` (`id_Libro`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `info_usuarios`
---
-ALTER TABLE `info_usuarios`
-  ADD CONSTRAINT `info_usuarios_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `libro`
