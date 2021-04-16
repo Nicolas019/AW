@@ -7,5 +7,5 @@
 	$usuario = new usuario($_SESSION['id_usuario']);
 	$usuario->logout();
 
-	header('Location: ../comun/index.php');
+	header('Location: ../vista/index.php');
 ?>

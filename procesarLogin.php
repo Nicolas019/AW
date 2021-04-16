@@ -12,7 +12,7 @@
 	$usuario->desconectarBD();
 
 	if($existe_usuario){
-		header('Location: ../comun/index.php');
+		header('Location: ../vista/index.php');
 	}
 	else{
 		header('Location: ../perfil/login.php');
