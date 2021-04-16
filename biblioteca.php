@@ -56,7 +56,7 @@
 		$arrayLibros = libro::buscar($buscar,5);
 		
 		foreach ($arrayLibros as $key => $value) {
-			$echo .= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo .= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 		if(empty($arrayLibros)){
 			$echo.= "<h3> Ningun libro cumple con los requisitos seleccionados :(</h3>";
@@ -68,7 +68,7 @@
 
 		$arrayLibros = libro::ordenarPor("NumVentas",5);
 		foreach ($arrayLibros as $key => $value) {
-			$echo.= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo.= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 
 
@@ -77,7 +77,7 @@
 
 		$arrayLibros = libro::filtros($arrayGeneros,$sen,$orden,$precioMin,$precioMax, 5);
 		foreach ($arrayLibros as $key => $value) {
-			$echo.= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo.= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 		if(empty($arrayLibros)){
 			$echo.= "<h3> Ningun libro cumple con los requisitos seleccionados :(</h3>";

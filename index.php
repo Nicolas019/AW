@@ -7,19 +7,19 @@
 	$echo.= "<h3>  LIBROS MEJOR VALORADOS DEL MOMENTO</h3>";	
 	$arrayLibros = libro::ordenarPor("valoracion",$num);
 		foreach ($arrayLibros as $key => $value) {
-			$echo.= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo.= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 
 	$echo.= "<h3>  LIBROS MAS VENDIDOS</h3>";
 	$arrayLibros = libro::ordenarPor("NumVentas",$num);
 		foreach ($arrayLibros as $key => $value) {
-			$echo.= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo.= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 	
 	$echo.=  "<h3>  ULTIMAS NOVEDADES</h3>";
 	$arrayLibros = libro::ordenarPor("fecha_Lanzamiento",$num);
 		foreach ($arrayLibros as $key => $value) {
-			$echo.= "<a href=\"../compra/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
+			$echo.= "<a href=\"../vista/verLibro.php?id_Libro=$value->id_Libro\"> <img id=\"libro\" src=\"../comun/imagenes/$value->ruta_imagen\"> </a>";
 		}
 			
 ?>
