@@ -1,0 +1,6 @@
+GRUPO 4 - Athenea
+
+Se implementan las siguientes funcionalidades:
+- Login, logout y registrar.
+- Catálogo (todos los libros) y la visualización de un libro.
+- Compra de libros (añadir un libro al carrito y proceso de compra).
