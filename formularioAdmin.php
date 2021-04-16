@@ -36,6 +36,16 @@
 		$selectGenero.="</select>";
 
 
+		$libros = libro::getLibros();
+
+		$selectLibros = "<select name=eliminarLibro>" ;
+			foreach ($libros as $key => $value) {
+				
+				$selectLibros.="<option value=$key> $value </option> ";
+
+		}
+		$selectLibros.="</select>";
+
 
  ?>
 	<form action ="../comun/procesarAdmin.php" method="post" enctype="multipart/form-data"> 
@@ -69,5 +79,18 @@
 
 					<button type="submit" name ="autorSubmit" value ="Enviar_form">
 						Crear 
+					</button>
+	</form>
+
+	
+		<form action ="../comun/procesarAdmin.php" method="get" > 
+					<h4>
+						Eliminar Libro:
+					</h4>
+
+						<p> Libro <?php echo $selectLibros ?>		</p>			
+
+					<button type="submit" name ="eliminarSubmit" value ="Enviar_form">
+						Eliminar 
 					</button>
 	</form>

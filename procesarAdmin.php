@@ -4,8 +4,22 @@ require_once '../comun/BD.php';
 require_once '../comun/libro.php';
 
 
+	if(isset($_GET["eliminarSubmit"])){ //OPCION PARA ELMINAR EL LIBRO SELECCIONADO
 
-	if(isset ($_POST["titulo"]) && isset ($_POST["precio"]) && isset ($_POST["fecha_Lanzamiento"]) && isset ($_POST["numero_Paginas"]) &&  isset ($_POST["sinopsis"])){
+		$eliminarLibro =  htmlspecialchars(trim(strip_tags($_GET["eliminarLibro"])));
+		
+		if (libro::eliminarLibro($eliminarLibro)==true){//LIBRO ELIMINADO CORRECTAMENTE
+			
+			header('Location: ../comun/index.php');
+
+		}else{//NO SE PUDO ELIMINAR EL LIBRO
+
+			header('Location: ../comun/panelAdmin.php');
+		}
+
+		
+	}//OPCION AÑADIR NUEVO LIBRO
+	else if(isset ($_POST["titulo"]) && isset ($_POST["precio"]) && isset ($_POST["fecha_Lanzamiento"]) && isset ($_POST["numero_Paginas"]) &&  isset ($_POST["sinopsis"])){
 
 		$titulo =  htmlspecialchars(trim(strip_tags($_POST["titulo"])));
 		$autor =  htmlspecialchars(trim(strip_tags($_POST["autor"])));
@@ -52,18 +66,20 @@ require_once '../comun/libro.php';
 		}
 
 
-	}else if(isset ($_GET["nombreAutor"])){
+	}else if(isset ($_GET["nombreAutor"])){//OPCION AÑADIR AUTOR
 
 		$nombreAutor =  htmlspecialchars(trim(strip_tags($_GET["nombreAutor"])));
 		
 		if(filter_var($nombreAutor,FILTER_SANITIZE_NUMBER_INT)!= NULL){
 			header('Location: ../comun/panelAdmin.php');
 		}else{
-			autor::crearAutor($nombreAutor);
-			header('Location: ../comun/index.php');
+			if (autor::crearAutor($nombreAutor)==true){
+				header('Location: ../comun/index.php');
+			}else{
+				header('Location: ../comun/panelAdmin.php');
+			}
 		}
 		
-
 	}
 	else{
 		

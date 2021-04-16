@@ -138,21 +138,38 @@ class libro{
 		$valoracion = 0;//valoración y ventas se crean a cero porque recogen los datos de los libros vendidos por la pagina y las opiniones de los usuarios 
 		$numVentas = 0;
 		$sql= "INSERT INTO libro (titulo,id_Autor,id_Genero,id_Editorial,precio,numero_Paginas,sinopsis,valoracion,ruta_imagen,NumVentas,fecha_Lanzamiento) VALUES ('$titulo','$autor','$genero','$editorial','$precio','$numero_Paginas','$sinopsis','$valoracion','$ruta_imagen','$numVentas','$fecha_Lanzamiento' )";
-
-		echo $sql;
+		$check=true;
 
 		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$BaseDatos = $conexion->conectar();
 		 $echo="";
 		if($BaseDatos->query($sql) === TRUE){
-			$echo .="Nuevo libro creado";
+			$check=true;
 		}else{
-			$echo .="ERROR al crear el libro";
+			$check=false;
 		}
 
 		$conexion->desconectar($BaseDatos);
 
-		return $echo;
+		return $check;
+	}
+	static public function eliminarLibro($titulo){
+		
+		$sql= "DELETE FROM libro WHERE id_Libro = $titulo";
+		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+		$BaseDatos = $conexion->conectar();
+		
+		$check =true;
+
+		if($BaseDatos->query($sql) === TRUE){
+			$check =true;
+		}else{
+			$check =false;
+		}
+
+		$conexion->desconectar($BaseDatos);
+
+		return $check;
 	}
 
 	static public function ordenarPor($ordenar, $numero){ //Ordena por nº de ventas 
@@ -212,6 +229,32 @@ class libro{
 
     	
 	}
+
+
+	public static function getLibros(){
+
+        $sql = "SELECT * FROM libro";
+
+        $conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
+        $BaseDatos = $conexion->conectar();
+        $consulta = $BaseDatos->query($sql);
+
+        $arrayLibros = array();
+
+        if($consulta->num_rows > 0){
+            while ($fila = mysqli_fetch_assoc($consulta)) {
+
+                $arrayLibros[$fila['id_Libro']] = $fila['titulo'];
+
+            }
+            $consulta->free();
+        }
+
+        $conexion->desconectar($BaseDatos);
+
+        return $arrayLibros;
+    }
+
 
 }
 

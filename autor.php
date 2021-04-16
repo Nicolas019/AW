@@ -70,20 +70,20 @@ public static function crearAutor($nombreAutor){
 
 		$sql= "INSERT INTO autor (descripcionA) VALUES ('$nombreAutor')";
 
-		echo $sql;
+		
 
 		$conexion = BD::getInstance('localhost', 'athenea', 'athenea', 'libreria');
 		$BaseDatos = $conexion->conectar();
-		 $echo="";
+		 $check=TRUE;
 		if($BaseDatos->query($sql) === TRUE){
-			$echo .="Nuevo autor creado";
+			 $check=TRUE;
 		}else{
-			$echo .="ERROR al crear el libro";
+			 $check=FALSE;
 		}
 
 		$conexion->desconectar($BaseDatos);
 
-		return $echo;
+		return $check;
 }
 
 public static function getAutores(){
