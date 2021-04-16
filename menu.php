@@ -14,16 +14,15 @@
 				if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
 					
 					
-					echo "<li id=\"alinearDerecha\"> <a href='../perfil/login.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>";
+					echo "<li id=\"alinearDerecha\"> <a href='../vista/login.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>";
 				}
 				else{
 					if(isset($_SESSION['login'])  && $_SESSION['login'] == true && isset($_SESSION['tipo_usuario']) &&  $_SESSION['tipo_usuario'] == "administrador"){
 						echo "<li> <a href='../vista/panelAdmin.php'>Panel Administrador</a></li>";
 					}
-					echo "<li id=\"alinearDerecha\"><a href='../perfil/perfil.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>";
-				}
+					echo "<li id=\"alinearDerecha\"><a href='../vista/perfil.php'><img src='../comun/imagenes/icono_perfil.png' /></a> </li>"; }
 			?>
-			<li id="alinearDerecha"> <a href='../compra/verCarrito.php'><img src='../comun/imagenes/icono_carrito.png' /></a> </li>
+			<li id="alinearDerecha"> <a href='../vista/verCarrito.php'><img src='../comun/imagenes/icono_carrito.png' /></a> </li>
 
 			<li id="alinearDerecha"> 
 
