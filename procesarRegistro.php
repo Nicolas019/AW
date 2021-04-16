@@ -28,7 +28,7 @@
     		if($username === $fila["usuario"] || $email === $fila["email"]){	
 				//usuario ya registrado
 				$existe_user = true;
-    			header('Location: ../perfil/registrar.php');
+    			header('Location: ../vista/registrar.php');
 			}
     	}
     }
@@ -36,7 +36,7 @@
     if($existe_user === false){
 		if($password2 !== $password){
 		  	// la contraseña no es la misma
-		   	header('Location: ../perfil/registrar.php');
+		   	header('Location: ../vista/registrar.php');
 		}
 		else{
 			// contraseña coincide
@@ -44,7 +44,7 @@
 		    $user = new usuario(0);
 		    $user->registrar_usuario($username, $email, $password, $name, $surname, $tipo_usuario, $cumple);
 		    $user->desconectarBD();
-			header('Location: ../perfil/login.php');
+			header('Location: ../vista/login.php');
 		}
 	}
 	

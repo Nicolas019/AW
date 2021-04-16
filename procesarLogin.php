@@ -15,7 +15,7 @@
 		header('Location: ../vista/index.php');
 	}
 	else{
-		header('Location: ../perfil/login.php');
+		header('Location: ../vista/login.php');
 	}
     
 ?>
