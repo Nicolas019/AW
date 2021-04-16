@@ -10,11 +10,11 @@ require_once '../comun/libro.php';
 		
 		if (libro::eliminarLibro($eliminarLibro)==true){//LIBRO ELIMINADO CORRECTAMENTE
 			
-			header('Location: ../comun/index.php');
+			header('Location: ../vista/index.php');
 
 		}else{//NO SE PUDO ELIMINAR EL LIBRO
 
-			header('Location: ../comun/panelAdmin.php');
+			header('Location: ../vista/panelAdmin.php');
 		}
 
 		
@@ -40,29 +40,29 @@ require_once '../comun/libro.php';
 		echo $tipo_imagen;
 		echo $tamaño_imagen;
 		if($tamaño_imagen > 8388608){//8388608 = 8GB
-			header('Location: ../comun/panelAdmin.php');
+			header('Location: ../vista/panelAdmin.php');
 		} 
 		if(strpos($tipo_imagen,'jpg') === false && strpos($tipo_imagen,'jpeg') === false ){
 			//"El fichero seleccionado tiene que ser de tipo jpg.";
-			header('Location: ../comun/panelAdmin.php');
+			header('Location: ../vista/panelAdmin.php');
 		}
 		$echo ="";
 		if($intPrecio <=0 || $intPaginas<=0){//>0 comprobación parametros
 			
 			//"Algun parametro del formulario no es valido";
-			header('Location: ../comun/panelAdmin.php');
+			header('Location: ../vista/panelAdmin.php');
 		}else{
 			$name = basename($_FILES['imagen']['name']);
 			if (move_uploaded_file($_FILES['imagen']['tmp_name'], "../comun/imagenes/$name")){
 				//"Imagen guardada";
 
 			}else{
-				header('Location: ../comun/panelAdmin.php');
+				header('Location: ../vista/panelAdmin.php');
 				//"NO se pudo guardar";
 			}
 			
 			echo libro::crearLibro($titulo,$autor,$genero,$editorial,$intPrecio,$fecha_Lanzamiento,$intPaginas,$sinopsis,$nombre_imagen);
-			header('Location: ../comun/index.php');
+			header('Location: ../vista/index.php');
 		}
 
 
@@ -71,12 +71,12 @@ require_once '../comun/libro.php';
 		$nombreAutor =  htmlspecialchars(trim(strip_tags($_GET["nombreAutor"])));
 		
 		if(filter_var($nombreAutor,FILTER_SANITIZE_NUMBER_INT)!= NULL){
-			header('Location: ../comun/panelAdmin.php');
+			header('Location: ../vista/panelAdmin.php');
 		}else{
 			if (autor::crearAutor($nombreAutor)==true){
-				header('Location: ../comun/index.php');
+				header('Location: ../vista/index.php');
 			}else{
-				header('Location: ../comun/panelAdmin.php');
+				header('Location: ../vista/panelAdmin.php');
 			}
 		}
 		
@@ -84,7 +84,7 @@ require_once '../comun/libro.php';
 	else{
 		
 		//"Faltan campos por rellenar en el formulario";
-		header('Location: ../comun/panelAdmin.php');
+		header('Location: ../vista/panelAdmin.php');
 	}
 
 	
