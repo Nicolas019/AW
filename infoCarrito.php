@@ -18,6 +18,7 @@
 
     if(!isset($_SESSION['login']) || $_SESSION['login'] === false){
         $debe_registrar = "Debe registrarse para ver el carrito";
+        $precio_carrito = "0";
     }
 
     else{ // Si hay un usuario con sesión inciada
@@ -58,8 +59,9 @@
         }
         
         // Calcular precio total carrito
-        
+
         $precio_carrito = $carro->calcula_precio_total();
+    
 
         // Comprobar que hay stock suficiente del carrito
 
