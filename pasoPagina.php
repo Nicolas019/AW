@@ -2,7 +2,7 @@
 
 <ul id="NavHorizontal">
 	<li>
-		<form action ="../catalogo/biblioteca.php" method="GET"> 
+		<form action ="../vista/biblioteca.php" method="GET"> 
 						
 			<select name="pasarPagina"> 
 				<option value="Siguiente"> Pagina Siguiente </option>  

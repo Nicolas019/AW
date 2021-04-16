@@ -1,5 +1,5 @@
 <aside id="filtrosCatalogo">
-	<form action ="../catalogo/biblioteca.php" method="GET">
+	<form action ="../vista/biblioteca.php" method="GET">
 					<h4>
 						Ordenar por:
 					</h4>
