@@ -1,0 +1,214 @@
+/* COMUN */
+body {
+	background-color: #CDCDCD;
+}
+
+div#contenedor {
+	width: 900px;
+	margin: auto;
+	border: 1px solid black;
+	background-color: #dab979;
+	margin-top: 30px;
+}
+
+div#displayFlex{
+	display: flex;
+}
+
+header {
+	padding: 30px;
+	height: 150px;
+	background-color: #303030;
+	color: white;
+}
+
+header#menuPrincipal{
+	height: 40px;
+	padding: 10px;
+	background-color: #303030;
+	display: flex;
+   align-items: center;
+
+}
+
+header a, header a:visited {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+ul#NavHorizontal li {
+  display: inline;
+  padding-right: 0.5em;
+}
+ul#NavHorizontal li form {
+	display: inline;
+  	width: 300px;
+}
+
+header a:hover {
+	color: #dab979;
+	font-weight: bold;
+	
+} 
+
+nav a, nav a:visited {
+	color: #303030;
+	font-weight: bold;
+	text-decoration: none;
+} 
+
+nav a:hover {
+	color: #303030;
+	text-decoration: none;
+} 
+
+aside {
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 2.5px;
+	float: left;
+	min-height: 600px;
+	width: 20%;
+	background-color: white;
+}
+
+main { /* El flex es para el display, ya que cuando hay un menú lateral que no ocupe el width entero */
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 2.5px;
+	margin-right: 5px;
+	float: left;
+	min-height: 600px;
+	width: 870px;
+	flex: 1;
+	background-color: white;
+}
+
+footer	 {
+	clear: both;
+	padding: 20px;
+	background-color: #303030;
+	color: white;
+	text-align: center;
+}
+
+div.saludo {
+	width: 100%;
+	text-align: right;
+}
+
+fieldset {
+	border: 1px solid black;
+	width: 15em;
+	margin: 0 auto;
+}
+
+legend {
+	color: #fff;
+	background: #303030;
+	border: 1px solid black;
+	padding: 2px 6px;
+} 
+
+label {
+	width: 4em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block;
+}
+
+/* Cabecera */
+
+titulo{
+	font-size: 50px;
+	text-align: center;
+}
+
+eslogan{
+	font-size: 20px;
+	font-style: italic;
+	float: right;
+}
+
+ul#NavHorizontal{
+	width: 95%;
+}
+
+li#alinearDerecha{
+	float: right;
+	text-align: center;
+}
+
+li#alinearDerecha button{
+	background-color: #dab979;
+}
+
+li#alinearDerecha img{
+	height: 20px;
+	width: 20px;
+	margin-top: 7px;
+
+}
+
+img#logo{
+	float: center;
+	width: 100px;
+	height: 100px; 
+}
+
+/* PORTADA */
+
+nav#menuPortada{
+	height: 30px;
+	background-color: #dab979;
+}
+
+/* Libro */
+
+img#ver_libro{
+	width: 285px;
+	height: 400px;
+	margin-right: 10px;
+}
+
+img#valor{
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+/* CATALOGO */
+
+img#libro{
+	width: 100px;
+	height:125px;
+	border:black 2px solid;
+	margin-right: 10px;
+}
+img#nofiltro{
+	width:30%;
+	height: 30%;
+	display: block;
+	margin:auto;
+}
+
+img#filtro{
+	width: 30px;
+	height: 30px; 
+	background-color: white;
+}
+
+/* PIE */
+
+img#pie{
+	float: right;
+	width: 30px;
+	height: 30px;
+}
